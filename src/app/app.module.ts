@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -8,6 +9,8 @@ import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { LeftPanelComponent } from './components/left-panel/left-panel.component';
+import { RightPanelComponent } from './components/right-panel/right-panel.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +18,9 @@ import { FooterComponent } from './components/footer/footer.component';
     LoginComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    LeftPanelComponent,
+    RightPanelComponent
   ],
   imports: [
     BrowserModule,

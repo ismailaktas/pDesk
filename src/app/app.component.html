@@ -1,6 +1,26 @@
-<app-header></app-header>
-<div class="container">
-    <router-outlet></router-outlet>
+
+<app-left-panel></app-left-panel>
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <app-header></app-header>
+    <!-- /#header -->
+    <!-- Content -->
+    <div class="content">
+        <!-- Animated -->
+        <div class="animated fadeIn">
+            <router-outlet></router-outlet>
+        </div>
+        <!-- .animated -->
+    </div>
+    <!-- /.content -->
+    <div class="clearfix"></div>
+    <!-- Footer -->
+    <app-footer></app-footer>
+    <!-- /.site-footer -->
 </div>
-<app-footer></app-footer>
+<!-- /#right-panel -->
+
+
+
 
