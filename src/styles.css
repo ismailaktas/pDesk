@@ -1,0 +1,22 @@
+.ticketNo{
+    color: #269a1a;    
+}
+.ticketContent{
+    font-size: 13px;
+    color: #505056;
+    margin-bottom: 10px;
+    margin-top: 10px;    
+}
+.ticketContent>i{
+    font-size: 25px;
+    color: #648eb5;    
+}
+.ticketDetail{
+    margin-bottom: 10px; border-bottom: 1px solid #c5c5c5; padding: 10px; padding-left: 0px;    
+}
+.ticketDetailSubTitle{
+    font-style: italic;
+    font-size: 12px;
+    color: #a5a5a5;
+}
+
