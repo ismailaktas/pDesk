@@ -1,24 +1,17 @@
 <?php
 require_once dirname ( dirname ( dirname ( __FILE__ ) ) ) . "/dl/dal.php";
 use data\TableItem;
-class tickets extends TableItem {
+class ticketStatus extends TableItem {
     
     // fields
     public $ID;
-    public $parentId;
-    public $subject;
-    public $description;
-    public $filePath;
-    public $organizationID;
-    public $status;
-    public $createdDate;
-    public $createdBy;
+    public $name;
         
     // Counctructor
     function __construct($ID = NULL) {
         parent::__construct ();
         $this->ID = $ID;
-        $this->settable ( "tickets" );
+        $this->settable ( "ticketStatus" );
         $this->refresh ( $ID );
     }
     function __set($property, $value) {
@@ -30,9 +23,9 @@ class tickets extends TableItem {
         }
     }
     
-    function getTickets()
+    function getTicketStatus()
     {
-        return $this->executenonquery("call prcAcademicCalendarMainPage();", true );
+        return $this->executenonquery("select ID, name from ticketStatus order by ID;", true );
     }
     
 }

@@ -1,3 +1,6 @@
+@import '~ngx-toastr/toastr.css';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 .ticketNo{
     color: #269a1a;    
 }
@@ -20,3 +23,10 @@
     color: #a5a5a5;
 }
 
+.ngx-editor-textarea{
+    height: 250px !important;
+}
+
+.marginTop15{
+    margin-top: 15px;
+}

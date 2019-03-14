@@ -11,12 +11,12 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LeftPanelComponent } from './components/left-panel/left-panel.component';
 import { RightPanelComponent } from './components/right-panel/right-panel.component';
 import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.component';
-import { EditorModule } from "primeng/components/editor/editor";
 import { FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ToastModule } from 'primeng/toast';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { ToastrModule } from 'ngx-toastr';
+import { NgxEditorModule } from 'ngx-editor';
+import { MatSelectModule } from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,12 +32,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    EditorModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    ToastModule,
-    BrowserAnimationsModule    
+    BrowserAnimationsModule,
+    ToastrModule.forRoot(),
+    NgxEditorModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

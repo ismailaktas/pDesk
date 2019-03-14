@@ -1,8 +1,11 @@
+import { ConstsService } from './../bl/consts/consts.service';
 import { DateFormatType } from './../classes/dateFormatType.enum';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { ToastrService } from 'ngx-toastr';
+import { MessageType } from '../classes/messageType.enum';
 
 
 @Injectable({
@@ -10,9 +13,29 @@ import { retry, catchError } from 'rxjs/operators';
 })
 export class GlobalService {
 
-  baseUrl = 'http://localhost/pDesk/pDesk/src/app/controllers/';
- 
-  constructor(private http: HttpClient) {
+  constructor(
+      private http: HttpClient,
+      private toastr: ToastrService,
+      private constsService: ConstsService
+  ) 
+  {
+  }
+
+  public apiUrl:string = this.constsService.appSettings.appApiUrl;
+
+  showMessage(strMessage:string, messageType:MessageType) {
+    let mTimeOut:number = 3000;
+    switch(messageType){
+      case MessageType.error:
+        this.toastr.error(strMessage, null, {timeOut: mTimeOut});
+        break;
+      case MessageType.warning:
+        this.toastr.warning(strMessage, null, {timeOut: mTimeOut});
+        break;
+      case MessageType.info:
+        this.toastr.info(strMessage, null, {timeOut: mTimeOut});
+        break;                
+    }
   }
 
   getDate(dateFormat: DateFormatType)
@@ -62,9 +85,18 @@ export class GlobalService {
   }
 
   sendData(strUrl:string, postData:any) {
-    return this.http.post(this.baseUrl + strUrl + '.php', postData);
+    return this.http.post(this.constsService.appSettings.appApiUrl + strUrl + '.php', postData);
+  }
+
+  getData(strUrl:string){
+    this.http.get(this.constsService.appSettings.appApiUrl + strUrl).subscribe((resp:any) => {
+      return resp;
+    });
+  }
+  
+
   }
   
 
 
-}
+
