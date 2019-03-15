@@ -19,7 +19,10 @@
     color: #697b8c;    
 }
 .ticketDetail{
-    margin-bottom: 10px; border-bottom: 1px solid #c5c5c5; padding: 10px; padding-left: 0px;    
+    margin-bottom: 10px; 
+    border-bottom: 1px solid #d4d4d4; 
+    padding: 10px; 
+    padding-left: 0px;    
 }
 .ticketDetailSubTitle{
     font-style: italic;
@@ -28,7 +31,7 @@
 }
 
 .ngx-editor-textarea{
-    height: 250px !important;
+    height: 200px !important;
 }
 
 .marginTop15{

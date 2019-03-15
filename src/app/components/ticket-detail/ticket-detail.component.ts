@@ -40,13 +40,14 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
     });
 
     //ticket Details
+    this.getTicketDetails();
+
+  }
+
+  getTicketDetails(){
     this.http.get(this.globalService.apiUrl + 'tickets.php?method=getTicketDetails&ticketID='+this.ticketID).subscribe((resp:any) => {
       this.ticketDetails = resp;
-
-      console.log(resp);
-
     });    
-
   }
 
   ngAfterViewInit(){
@@ -72,6 +73,7 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
     fd.append("ticketFile", this.fileToUpload);
 
     this.globalService.sendData('tickets', fd).subscribe((res)=>{
+      this.getTicketDetails();
       this.globalService.showMessage("İşlem başarıyla gerçekleşti", MessageType.info);
     });    
 
