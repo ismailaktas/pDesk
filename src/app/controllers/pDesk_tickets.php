@@ -7,7 +7,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 */
 
-require_once dirname ( dirname ( __FILE__ ) ) . "/bl/models/tickets.php";
+require_once dirname ( dirname ( __FILE__ ) ) . "/bl/models/pDesk_tickets.php";
 require_once dirname ( dirname ( __FILE__ ) ) . "/classes/globalFunctions.php";
 
 $_SESSION['userID'] = "1" ;
@@ -27,9 +27,10 @@ else {
 
 if ($strMethod == "" && $_GET['method'] != "" ) {
     $strMethod  = $_GET['method'];
+    $strID = $_GET['ID'];
 }
 
-$tickets = new tickets($strID);
+$tickets = new pDesk_tickets($strID);
 
 switch($strMethod) {
     case "ticketSave":
@@ -43,7 +44,7 @@ switch($strMethod) {
         $strID = $tickets->save();
 
         if ($_POST["parentTicketID"] != 0) {
-            $ticketsStatus = new tickets($_POST["parentTicketID"]);
+            $ticketsStatus = new pDesk_tickets($_POST["parentTicketID"]);
             $ticketsStatus->status = $_POST["ticketStatus"];
             $strID = $ticketsStatus->save();
         }
@@ -56,7 +57,12 @@ switch($strMethod) {
         $result = $tickets->toJson;
         echo $result;
         break;
-
+    case "ticketDelete":
+        $ticketID  = $_GET['ticketID'];
+        $result = $tickets->deleteTicketDetails($ticketID, $_SESSION['userID']);
+        $result = $tickets->toJson;
+        echo $result;
+        break;        
 }
 
 

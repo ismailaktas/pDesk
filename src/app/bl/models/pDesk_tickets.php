@@ -13,6 +13,8 @@ class pDesk_tickets extends TableItem {
     public $status;
     public $createdDate;
     public $createdBy;
+    public $isDeleted;
+    public $deletedDate;
         
     // Counctructor
     function __construct($ID = NULL) {
@@ -34,6 +36,11 @@ class pDesk_tickets extends TableItem {
     {
         return $this->executenonquery("call prcGetTicketDetail($prmTicketID);", true );
     }
+
+    function deleteTicketDetails($prmTicketID, $prmUserID)
+    {
+        return $this->executenonquery("update pDesk_tickets set isDeleted = 1, deletedDate = now(), createdBy = $prmUserID where pDesk_tickets.ID = $prmTicketID", false, true );
+    }    
     
 }
 ?>

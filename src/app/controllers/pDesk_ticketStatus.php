@@ -5,7 +5,7 @@ header('Access-Control-Allow-Origin: *');
 //ini_set('display_startup_errors', 1);
 //error_reporting(E_ALL);
 
-require_once dirname ( dirname ( __FILE__ ) ) . "/bl/models/ticketStatus.php";
+require_once dirname ( dirname ( __FILE__ ) ) . "/bl/models/pDesk_ticketStatus.php";
 require_once dirname ( dirname ( __FILE__ ) ) . "/classes/globalFunctions.php";
 
 $strMethod = "";
@@ -24,7 +24,7 @@ if ($strMethod == "" && $_GET['method'] != "" ) {
     $strMethod  = $_GET['method'];
 }
 
-$obj = new ticketStatus($strID);
+$obj = new pDesk_ticketStatus($strID);
 
 switch($strMethod) {
     case "getTicketStatus":

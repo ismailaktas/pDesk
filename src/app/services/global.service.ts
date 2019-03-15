@@ -23,6 +23,13 @@ export class GlobalService {
 
   public apiUrl:string = this.constsService.appSettings.appApiUrl;
 
+  public userInfo = {
+    userID : 1,
+    userType : 1,
+    userOrganizationID : 1,
+    userFullName : "Kullanıcı Adı Soyadı"
+  };
+
   showMessage(strMessage:string, messageType:MessageType) {
     let mTimeOut:number = 3000;
     switch(messageType){

@@ -10,21 +10,28 @@
       </div>
       <div class="card-body">
 
-        <div class="{{ticketDetail.parentId==0?'ticketDetail':'ticketDetail paddingLeft20'}}" *ngFor="let ticketDetail of ticketDetails" >
+        <div class="{{ticketDetail.parentId == 0?'ticketDetail':'ticketDetail paddingLeft20'}}" *ngFor="let ticketDetail of ticketDetails" >
           <div class="col-lg-12">
             {{ticketDetail.subject}}
           </div>
           <div class="col-lg-12 ticketContent">
-              <div [innerHTML]="ticketDetail.description"></div>
+              <div *ngIf="ticketDetail.isDeleted == 0" [innerHTML]="ticketDetail.description"></div>
+              <span *ngIf="ticketDetail.isDeleted == 1" class="text-danger ticketDetailSubTitle">Bu cevap {{ticketDetail.fullname}} tarafından {{ticketDetail.deletedDate}} tarihinde silindi.</span>
           </div>
           <div class="col-lg-12 ticketContent">
             <a *ngIf="ticketDetail.filePath" href="uploads/{{ticketDetail.filePath}}" target="_blank" title="Görüntülemek için tıklayınız"><i *ngIf="ticketDetail.filePath" class="fa fa-file-text"></i></a>
           </div>
           <div class="col-lg-12 ticketDetailSubTitle">
-              <span>{{ticketDetail.ticketDate}} - {{ticketDetail.fullname}}</span> - 
-              <span id="{{ticketDetail.parentId==0?'dvStat':ticketDetail.ID}}">{{ticketDetail.statusName}}</span>  
+              <div *ngIf="ticketDetail.isDeleted==0">
+                <span>{{ticketDetail.ticketDate}} - {{ticketDetail.fullname}}</span> - 
+                <span id="{{ticketDetail.parentId == 0 ? 'dvStat' : ticketDetail.ID}}">{{ticketDetail.statusName}}</span>  
+                 <button *ngIf="globalService.userInfo.userID == ticketDetail.userID" type="button" class="btn btn-dangerNew smallButton" (click)="openModal(template, ticketDetail.ID )">Sil</button>
+
+              </div>
           </div>
         </div>
+
+        {{message}}
 
       </div>
     </div>
@@ -74,7 +81,13 @@
     </div>
     <!-- Cevap Bitir -->
 
-
+    <ng-template #template>
+        <div class="modal-body text-center">
+          <p>İşlemi gerçekleştirmek istiyor musunuz?</p>
+          <button type="button" class="btn btn-default" (click)="confirm()" >Yes</button>
+          <button type="button" class="btn btn-primary" (click)="decline()" >No</button>
+        </div>
+      </ng-template>
 
   </div>
 </div>

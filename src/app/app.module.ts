@@ -17,6 +17,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxEditorModule } from 'ngx-editor';
 import { MatSelectModule } from '@angular/material/select';
+import { ModalModule } from 'ngx-bootstrap';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,8 @@ import { MatSelectModule } from '@angular/material/select';
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgxEditorModule,
-    MatSelectModule
+    MatSelectModule,
+    ModalModule
   ],
   providers: [],
   bootstrap: [AppComponent]
