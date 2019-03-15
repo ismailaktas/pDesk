@@ -1,7 +1,7 @@
 <?php
 require_once dirname ( dirname ( dirname ( __FILE__ ) ) ) . "/dl/dal.php";
 use data\TableItem;
-class ticketStatus extends TableItem {
+class pDesk_ticketStatus extends TableItem {
     
     // fields
     public $ID;
@@ -11,7 +11,7 @@ class ticketStatus extends TableItem {
     function __construct($ID = NULL) {
         parent::__construct ();
         $this->ID = $ID;
-        $this->settable ( "ticketStatus" );
+        $this->settable ( "pDesk_ticketStatus" );
         $this->refresh ( $ID );
     }
     function __set($property, $value) {
@@ -25,7 +25,7 @@ class ticketStatus extends TableItem {
     
     function getTicketStatus()
     {
-        return $this->executenonquery("select ID, name from ticketStatus order by ID;", true );
+        return $this->executenonquery("select ID, name from pDesk_ticketStatus order by ID;", true );
     }
     
 }

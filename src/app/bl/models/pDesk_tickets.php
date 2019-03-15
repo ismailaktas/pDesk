@@ -1,7 +1,7 @@
 <?php
 require_once dirname ( dirname ( dirname ( __FILE__ ) ) ) . "/dl/dal.php";
 use data\TableItem;
-class tickets extends TableItem {
+class pDesk_tickets extends TableItem {
     
     // fields
     public $ID;
@@ -18,7 +18,7 @@ class tickets extends TableItem {
     function __construct($ID = NULL) {
         parent::__construct ();
         $this->ID = $ID;
-        $this->settable ( "tickets" );
+        $this->settable ( "pDesk_tickets" );
         $this->refresh ( $ID );
     }
     function __set($property, $value) {

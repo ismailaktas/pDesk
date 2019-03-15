@@ -35,7 +35,7 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
     this.ticketID = this.activeRoute.snapshot.params['id'];
  
     //ticket Status
-    this.http.get(this.globalService.apiUrl + 'ticketStatus.php?method=getTicketStatus').subscribe((resp:any) => {
+    this.http.get(this.globalService.apiUrl + 'pDesk_ticketStatus.php?method=getTicketStatus').subscribe((resp:any) => {
       this.ticketStats = resp;
     });
 
@@ -45,7 +45,7 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
   }
 
   getTicketDetails(){
-    this.http.get(this.globalService.apiUrl + 'tickets.php?method=getTicketDetails&ticketID='+this.ticketID).subscribe((resp:any) => {
+    this.http.get(this.globalService.apiUrl + 'pDesk_tickets.php?method=getTicketDetails&ticketID='+this.ticketID).subscribe((resp:any) => {
       this.ticketDetails = resp;
     });    
   }
