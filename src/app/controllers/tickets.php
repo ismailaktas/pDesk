@@ -1,9 +1,12 @@
 <?php 
 
 header('Access-Control-Allow-Origin: *'); 
+/*
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
+*/
+
 require_once dirname ( dirname ( __FILE__ ) ) . "/bl/models/tickets.php";
 require_once dirname ( dirname ( __FILE__ ) ) . "/classes/globalFunctions.php";
 
@@ -33,20 +36,27 @@ switch($strMethod) {
         $tickets->parentId = $_POST["parentTicketID"];
         $tickets->subject = "";
         $tickets->description = $_POST["ticketResponse"];
-        if ($_POST["parentTicketID"] == 0) {
-            $tickets->status = 1;    
-        }
-        else {
-            $ticketsStatus = new tickets($strID);
-            $ticketsStatus->status = $_POST["ticketStatus"];
-            $ticketsStatus->save();
-        }
+        $tickets->status = $_POST["ticketStatus"];    
         $tickets->organizationID = $_SESSION['organizationID'];
         $tickets->createdBy = $_SESSION['userID'];
         $tickets->createdDate = globalFunctions::convertStringtoDate(globalFunctions::getDateOrTime("dateTime"), "dateTime");
         $strID = $tickets->save();
+
+        if ($_POST["parentTicketID"] != 0) {
+            $ticketsStatus = new tickets($_POST["parentTicketID"]);
+            $ticketsStatus->status = $_POST["ticketStatus"];
+            $strID = $ticketsStatus->save();
+        }
+
         echo $strID;
         break;
+    case "getTicketDetails":
+        $ticketID  = $_GET['ticketID'];
+        $result = $tickets->getTicketDetails($ticketID);
+        $result = $tickets->toJson;
+        echo $result;
+        break;
+
 }
 
 

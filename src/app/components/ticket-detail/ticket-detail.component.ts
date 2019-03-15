@@ -1,9 +1,9 @@
 import { MessageType } from './../../classes/messageType.enum';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/services/global.service';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -13,7 +13,7 @@ import { map } from 'rxjs/operators';
     GlobalService
   ]
 })
-export class TicketDetailComponent implements OnInit {
+export class TicketDetailComponent implements OnInit, AfterViewInit {
 
   ticketID:any = 0;
   ticketResponse: string = "ASDASD";
@@ -21,6 +21,7 @@ export class TicketDetailComponent implements OnInit {
   ticketSaveResult:string;
   ticketStats:any;
   ticketStatus: string = "1";
+  ticketDetails:any;
 
   constructor(
       private activeRoute:ActivatedRoute, 
@@ -30,11 +31,30 @@ export class TicketDetailComponent implements OnInit {
   }
 
   ngOnInit() {
+
     this.ticketID = this.activeRoute.snapshot.params['id'];
  
+    //ticket Status
     this.http.get(this.globalService.apiUrl + 'ticketStatus.php?method=getTicketStatus').subscribe((resp:any) => {
       this.ticketStats = resp;
     });
+
+    //ticket Details
+    this.http.get(this.globalService.apiUrl + 'tickets.php?method=getTicketDetails&ticketID='+this.ticketID).subscribe((resp:any) => {
+      this.ticketDetails = resp;
+
+      console.log(resp);
+
+    });    
+
+  }
+
+  ngAfterViewInit(){
+    
+    setTimeout(() => {
+      $('#spnStat').text($('#dvStat').html());
+    }, 500);
+
   }
 
   handleFileInput(files: FileList) {

@@ -6,43 +6,26 @@
     <div class="card">
       <div class="card-header">
         Talep <span class="ticketNo">#{{ticketID}}</span>
+        <div class="float-right"><span id="spnStat"></span></div>
       </div>
       <div class="card-body">
 
-        <div class="ticketDetail">
+        <div class="{{ticketDetail.parentId==0?'ticketDetail':'ticketDetail paddingLeft20'}}" *ngFor="let ticketDetail of ticketDetails" >
           <div class="col-lg-12">
-            Ticket başlığı buraya gelecek.
+            {{ticketDetail.subject}}
           </div>
           <div class="col-lg-12 ticketContent">
-            <strong>Lorem Ipsum</strong>, dizgi ve baskı endüstrisinde kullanılan mıgır metinlerdir. Lorem Ipsum, adı
-            bilinmeyen bir matbaacının bir hurufat numune kitabı oluşturmak üzere bir yazı galerisini alarak
-            karıştırdığı 1500'lerden beri endüstri standardı sahte metinler olarak kullanılmıştır. Beşyüz yıl boyunca
-            varlığını sürdürmekle kalmamış, aynı zamanda pek değişmeden elektronik dizgiye de sıçramıştır. 1960'larda
-            Lorem Ipsum pasajları da içeren Letraset yapraklarının yayınlanması ile ve yakın zamanda Aldus PageMaker
-            gibi Lorem Ipsum sürümleri içeren masaüstü yayıncılık yazılımları ile popüler olmuştur.
+              <div [innerHTML]="ticketDetail.description"></div>
           </div>
           <div class="col-lg-12 ticketContent">
-            <i class="fa fa-file-text"></i>
+            <a *ngIf="ticketDetail.filePath" href="uploads/{{ticketDetail.filePath}}" target="_blank" title="Görüntülemek için tıklayınız"><i *ngIf="ticketDetail.filePath" class="fa fa-file-text"></i></a>
           </div>
           <div class="col-lg-12 ticketDetailSubTitle">
-            12.12.2018 09:50 İsmail AKTAŞ
+              <span>{{ticketDetail.ticketDate}} - {{ticketDetail.fullname}}</span> - 
+              <span id="{{ticketDetail.parentId==0?'dvStat':ticketDetail.ID}}">{{ticketDetail.statusName}}</span>  
           </div>
         </div>
 
-        <div class="ticketDetail">
-          <div class="col-lg-12">
-            Düzenleme Yapılmıştır. Kontrol edilebilir.
-          </div>
-          <div class="col-lg-12 ticketContent">
-            Buraya cevap detayı yazılacak. varsa doküman eklenecek.
-          </div>
-          <div class="col-lg-12 ticketContent">
-            <i class="fa fa-file-text"></i>
-          </div>
-          <div class="col-lg-12 ticketDetailSubTitle">
-            11.08.2018 17:25 İsmail AKTAŞ
-          </div>
-        </div>
       </div>
     </div>
     <!-- Talep Bitir -->

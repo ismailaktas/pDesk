@@ -30,9 +30,9 @@ class tickets extends TableItem {
         }
     }
     
-    function getTickets()
+    function getTicketDetails($prmTicketID)
     {
-        return $this->executenonquery("call prcAcademicCalendarMainPage();", true );
+        return $this->executenonquery("call prcGetTicketDetail($prmTicketID);", true );
     }
     
 }
