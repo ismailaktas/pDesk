@@ -1,7 +1,30 @@
 <?php
 date_default_timezone_set('Europe/Istanbul');
+@session_start();
+
+$_SESSION['organizationID'] = 1;
+$_SESSION['userID'] = 1;
 
 class globalFunctions {
+	
+	public static function getOrganizationID() {
+	    if(isset($_SESSION['organizationID'])){
+			return $_SESSION['organizationID'];
+	    }
+	    else
+	    {
+	        return 0;
+		}
+	}
+	public static function getUserID() {
+	    if(isset($_SESSION['userID'])){
+			return $_SESSION['userID'];
+	    }
+	    else
+	    {
+	        return 0;
+		}
+	}
 
 	public static function convertStringtoDate ($strDate, $strType = "date") {
 		if ($strDate != "")
@@ -136,7 +159,7 @@ class globalFunctions {
 	    }
 	    return $strReturn;
 	}
-	
+
 	public static function isSuperAdmin () {
 	    if(isset($_SESSION['isSuperAdmin'])){
 	        if ($_SESSION['isSuperAdmin'] == 1)

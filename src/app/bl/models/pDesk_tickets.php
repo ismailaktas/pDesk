@@ -11,6 +11,7 @@ class pDesk_tickets extends TableItem {
     public $filePath;
     public $organizationID;
     public $status;
+    public $assignUserID;
     public $createdDate;
     public $createdBy;
     public $isDeleted;

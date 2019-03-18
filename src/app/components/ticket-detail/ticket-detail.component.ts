@@ -27,7 +27,9 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
   modalRef: BsModalRef;
   message: string;
   selectedTicketID:number;
-
+  ticketAssign:any;
+  users:any;
+  
   constructor(
       private activeRoute:ActivatedRoute, 
       private globalService:GlobalService, 
@@ -44,6 +46,11 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
     this.http.get(this.globalService.apiUrl + 'pDesk_ticketStatus.php?method=getTicketStatus').subscribe((resp:any) => {
       this.ticketStats = resp;
     });
+
+    //users
+    this.http.get(this.globalService.apiUrl + 'pDesk_users.php?method=getUsers').subscribe((resp:any) => {
+      this.users = resp;
+    });    
 
     //ticket Details
     this.getTicketDetails();
@@ -74,6 +81,7 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
     fd.append("parentTicketID", this.ticketID);
     fd.append("ticketResponse", this.ticketResponse);
     fd.append("ticketStatus", this.ticketStatus);
+    fd.append("ticketAssign", this.ticketAssign);
     fd.append("ticketFile", this.fileToUpload);
     this.globalService.sendData('pDesk_tickets', fd).subscribe((res)=>{
       this.getTicketDetails();
