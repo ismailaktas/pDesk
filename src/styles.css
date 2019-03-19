@@ -58,3 +58,8 @@
     background-color: #d67e87;
     border-color: #d67e87;
 }
+
+.rightPanelClose{
+    margin-left: 0px;
+    background: #fff;
+}

@@ -1,0 +1,22 @@
+
+<app-left-panel></app-left-panel>
+<!-- Right Panel -->
+<div id="right-panel" class="right-panel">
+    <!-- Header-->
+    <app-header *ngIf="isLogin == 0" ></app-header>
+    <!-- /#header -->
+    <!-- Content -->
+    <div class="content">
+        <!-- Animated -->
+        <div class="animated fadeIn">
+            <router-outlet></router-outlet>
+        </div>
+        <!-- .animated -->
+    </div>
+    <!-- /.content -->
+    <div class="clearfix"></div>
+    <!-- Footer -->
+    <app-footer ></app-footer>
+    <!-- /.site-footer -->
+</div>
+<!-- /#right-panel -->

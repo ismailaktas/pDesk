@@ -1,3 +1,6 @@
+import { SiteCompComponent } from './siteComp/siteComp.component';
+import { BlankCompComponent } from './blankComp/blankComp.component';
+import { AppComponent } from './app.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { HomeComponent } from './components/home/home.component';
 import { NgModule } from '@angular/core';
@@ -7,11 +10,30 @@ import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.
 
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },  
+  //{ path: 'home', component: HomeComponent },  
+  //{ path: '', pathMatch: 'full', redirectTo: 'home' },
+  //{ path: 'login', component: LoginComponent },
+  //{ path: 'ticketDetail/:id', component: TicketDetailComponent },
+  { 
+    path: '',
+    component: BlankCompComponent, 
+    children: [
+      { path: 'login', component: LoginComponent },
+    ]
+  },
+  { 
+    path: '',
+    component: SiteCompComponent, 
+    children: [
+      { path: 'home', component: HomeComponent },
+      { path: 'ticketDetail/:id', component: TicketDetailComponent }
+    ]
+  },  
   { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: 'login', component: LoginComponent },
-  { path: 'ticketDetail/:id', component: TicketDetailComponent }
+
 ];
+
+
 
 @NgModule({
   imports: [

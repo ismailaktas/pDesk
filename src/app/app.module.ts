@@ -18,32 +18,38 @@ import { ToastrModule } from 'ngx-toastr';
 import { NgxEditorModule } from 'ngx-editor';
 import { MatSelectModule } from '@angular/material/select';
 import { ModalModule } from 'ngx-bootstrap';
+import { BlankCompComponent } from './blankComp/blankComp.component';
+import { SiteCompComponent } from './siteComp/siteComp.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent,
-    HeaderComponent,
-    FooterComponent,
-    LeftPanelComponent,
-    RightPanelComponent,
-    TicketDetailComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    NgxEditorModule,
-    MatSelectModule,
-    ModalModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+   declarations: [
+      AppComponent,
+      LoginComponent,
+      HomeComponent,
+      HeaderComponent,
+      FooterComponent,
+      LeftPanelComponent,
+      RightPanelComponent,
+      TicketDetailComponent,
+      BlankCompComponent,
+      SiteCompComponent
+   ],
+   imports: [
+      BrowserModule,
+      AppRoutingModule,
+      NgbModule,
+      FormsModule,
+      ReactiveFormsModule,
+      HttpClientModule,
+      BrowserAnimationsModule,
+      ToastrModule.forRoot(),
+      NgxEditorModule,
+      MatSelectModule,
+      ModalModule
+   ],
+   providers: [],
+   bootstrap: [
+      AppComponent
+   ]
 })
 export class AppModule { }
