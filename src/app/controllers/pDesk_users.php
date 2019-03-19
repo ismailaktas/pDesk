@@ -38,6 +38,31 @@ switch($strMethod) {
         $result = $users->toJson;
         echo $result;
         break;
+    case "getLoggedUserInfo":
+        $userID = $globalFunctions->getUserID();
+        $result = $users->getLoggedUserInfo($userID);
+        $result = $users->toJson;
+        echo $result;
+        break;        
+    case "checkUser":
+        $username = $_POST["username"];
+        $password = $_POST["password"];
+        $result = $users->checkUser($username, $password);
+        $result = $users->toJson;
+
+        $userObj = json_decode($result);
+        $userCount = count($userObj);
+
+        if ($userCount>0) {
+            $_SESSION['organizationID'] = $userObj[0]->organizationID;
+            $_SESSION['userID'] = $userObj[0]->ID;
+            $_SESSION['fullname'] = $userObj[0]->fullname;
+            $_SESSION['username'] = $userObj[0]->username;
+            $_SESSION['userType'] = $userObj[0]->userType;
+        }
+
+        echo $userCount;
+        break;
 }
 
 

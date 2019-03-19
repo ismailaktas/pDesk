@@ -5,6 +5,8 @@ import { GlobalService } from 'src/app/services/global.service';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { userInfo } from 'src/app/classes/userInfo';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-detail',
@@ -29,13 +31,19 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
   selectedTicketID:number;
   ticketAssign:any;
   users:any;
-  
+    
   constructor(
       private activeRoute:ActivatedRoute, 
       private globalService:GlobalService, 
       private http: HttpClient,
       private modalService: BsModalService
   ) {
+
+    /*
+    this.globalService.getUserInfo().subscribe((resp:any) => {
+    });  
+    */
+
   }
 
   ngOnInit() {

@@ -25,11 +25,12 @@
               <div *ngIf="ticketDetail.isDeleted==0">
                 <span>Tarih: {{ticketDetail.ticketDate}} - Oluşturan: {{ticketDetail.fullname}} - Atanan: {{ticketDetail.assignedFullName}}</span> - 
                 <span id="{{ticketDetail.parentId == 0 ? 'dvStat' : ticketDetail.ID}}">Durum: {{ticketDetail.statusName}}</span>  
-                 <button *ngIf="globalService.userInfo.userID == ticketDetail.userID && ticketDetail.parentId != 0 " type="button" class="btn btn-dangerNew smallButton" (click)="openModal(template, ticketDetail.ID )">Sil</button>
+                 <button *ngIf="ticketDetail.parentId != 0 " type="button" class="btn btn-dangerNew smallButton" (click)="openModal(template, ticketDetail.ID )">Sil</button>
               </div>
           </div>
         </div>
-
+        {{posts}}
+        
         {{message}}
 
       </div>

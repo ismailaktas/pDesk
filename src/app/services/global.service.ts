@@ -6,7 +6,7 @@ import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
 import { MessageType } from '../classes/messageType.enum';
-
+import { userInfo } from '../classes/userInfo';
 
 @Injectable({
   providedIn: 'root'
@@ -21,15 +21,14 @@ export class GlobalService {
   {
   }
 
+  
   public apiUrl:string = this.constsService.appSettings.appApiUrl;
 
-  public userInfo = {
-    userID : 1,
-    userType : 1,
-    userOrganizationID : 1,
-    userFullName : "Kullanıcı Adı Soyadı"
-  };
-
+  getUserInfo() {
+    let strUrl:string = this.apiUrl + 'pDesk_users.php?method=getLoggedUserInfo';
+    return this.http.get<userInfo>(strUrl);
+  }
+  
   showMessage(strMessage:string, messageType:MessageType) {
     let mTimeOut:number = 3000;
     switch(messageType){

@@ -4,12 +4,15 @@
       <div class="login-form">
         <form>
           <div class="form-group">
+            <img src="assets/images/logo.png" alt="Logo" class="width50">
+          </div>            
+          <div class="form-group">
             <label>Kullanıcı Adı</label>
-            <input type="text" class="form-control" placeholder="Kullanıcı Adı" id="txtUsername" name="txtUsername" [(ngModel)]="username">
+            <input type="text" class="form-control" placeholder="Kullanıcı Adı" id="txtUsername" name="txtUsername" [(ngModel)]="strUsername">
           </div>
           <div class="form-group">
             <label>Şifre</label>
-            <input type="password" class="form-control" placeholder="Şifre" id="txtPassword" name="txtPassword" [(ngModel)]="password">
+            <input type="password" class="form-control" placeholder="Şifre" id="txtPassword" name="txtPassword" [(ngModel)]="strPassword">
           </div>
           <div class="checkbox">
             <label>

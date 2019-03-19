@@ -59,7 +59,51 @@
     border-color: #d67e87;
 }
 
+.right-panel{
+    margin-left: 0px !important;
+}
+
 .rightPanelClose{
     margin-left: 0px;
     background: #fff;
+}
+
+.width50{
+    width: 50%;
+}
+
+.login-form {
+    background: #ffffff;
+    padding: 30px 30px 20px;
+    border-radius: 20px !important;
+    border: 2px #dde6dd solid !important;
+}
+
+.bgColor{
+    background-color: #d67e87;
+}
+
+footer.site-footer .footer-inner {
+    color: #518198;
+    font-family: 'Open Sans';
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 10px !important;
+}
+
+.user-area .user-menu {
+    background: #fff;
+    border: none;
+    left: -60px !important;
+    right: 0;
+    top: 54px !important;
+    margin: 0;
+    max-width: 150px;
+    padding: 5px 10px;
+    position: absolute;
+    width: 100%;
+    z-index: 999;
+    min-width: 150px;
+    -webkit-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
 }

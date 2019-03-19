@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { $ } from 'protractor';
 
 @Component({
   selector: 'app-blankComp',
@@ -11,5 +12,7 @@ export class BlankCompComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
 
 }

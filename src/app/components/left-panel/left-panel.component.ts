@@ -7,8 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeftPanelComponent implements OnInit {
 
-  isLogin = 0;
-  
+ 
   constructor() { }
 
   ngOnInit() {
