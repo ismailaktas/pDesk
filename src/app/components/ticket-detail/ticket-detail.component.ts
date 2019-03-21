@@ -31,22 +31,27 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
   selectedTicketID:number;
   ticketAssign:any;
   users:any;
-    
+  userDetail:any;
+  userFullName:any;
+  
   constructor(
       private activeRoute:ActivatedRoute, 
       private globalService:GlobalService, 
       private http: HttpClient,
       private modalService: BsModalService
   ) {
-
-    /*
-    this.globalService.getUserInfo().subscribe((resp:any) => {
-    });  
-    */
-
   }
 
+  
   ngOnInit() {
+
+    this.globalService.getCustomers("pDesk_users.php?method=getLoggedUserInfo").then( 
+      ( res:any[] ) => {
+        this.userDetail = res[0];
+        this.userFullName = this.userDetail.userFullName;
+        console.log( this.userDetail.userFullName );
+      }
+    );
 
     this.ticketID = this.activeRoute.snapshot.params['id'];
  
