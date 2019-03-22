@@ -48,8 +48,9 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
     this.globalService.getCustomers("pDesk_users.php?method=getLoggedUserInfo").then( 
       ( res:any[] ) => {
         this.userDetail = res[0];
-        this.userFullName = this.userDetail.userFullName;
-        console.log( this.userDetail.userFullName );
+        this.userFullName = this.userDetail;
+        window.localStorage.setItem("userInfo", JSON.stringify(this.userDetail));
+        //console.log( this.userDetail.userFullName );
       }
     );
 
@@ -88,6 +89,10 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
   }
 
   replyTicket() {
+
+    let objU:any = JSON.parse(window.localStorage.getItem("userInfo")); 
+    console.log("Fullname: " + objU.userFullName );
+
     var fd = new FormData();
     fd.append("method", "ticketSave");
     fd.append("ID", "0");

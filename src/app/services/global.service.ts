@@ -1,24 +1,32 @@
 import { ConstsService } from "./../bl/consts/consts.service";
 import { DateFormatType } from "./../classes/dateFormatType.enum";
-import { Injectable } from "@angular/core";
+import { Injectable, OnDestroy } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { retry, catchError } from "rxjs/operators";
 import { ToastrService } from "ngx-toastr";
 import { MessageType } from "../classes/messageType.enum";
 import { userInfo } from "../classes/userInfo";
+import { ActivatedRoute } from '@angular/router';
 
 @Injectable({
   providedIn: "root"
 })
 export class GlobalService {
+
+  public apiUrl: string = this.constsService.appSettings.appApiUrl;
+  public getActivePageName: string = "";
+
   constructor(
     private http: HttpClient,
     private toastr: ToastrService,
-    private constsService: ConstsService
-  ) {}
+    private constsService: ConstsService,
+    routeInfo: ActivatedRoute
+  ) {
+       
+    this.getActivePageName = routeInfo.snapshot.url.toString();
 
-  public apiUrl: string = this.constsService.appSettings.appApiUrl;
+  }
 
   getUserInfo() {
     let strUrl: string =
