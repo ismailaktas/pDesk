@@ -1,5 +1,7 @@
+import { ConstsService } from './../bl/consts/consts.service';
 import { Component, OnInit } from '@angular/core';
 import { timer } from 'rxjs/observable/timer';
+
 @Component({
   selector: 'app-siteComp',
   templateUrl: './siteComp.component.html',
@@ -7,9 +9,9 @@ import { timer } from 'rxjs/observable/timer';
 })
 export class SiteCompComponent implements OnInit {
 
-  constructor() { 
+  constructor(private cntService: ConstsService ) { 
 
-    const source = timer(1000, 10000);
+    const source = timer(1000, cntService.appSettings.appLoginCheckTime);
     const abc = source.subscribe(val => {
       console.log( " Check Login");
     });

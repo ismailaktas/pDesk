@@ -10,15 +10,12 @@ import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.
 
 
 const routes: Routes = [
-  //{ path: 'home', component: HomeComponent },  
-  //{ path: '', pathMatch: 'full', redirectTo: 'home' },
-  //{ path: 'login', component: LoginComponent },
-  //{ path: 'ticketDetail/:id', component: TicketDetailComponent },
   { 
     path: '',
     component: BlankCompComponent, 
     children: [
       { path: 'login', component: LoginComponent },
+      { path: '', redirectTo: '/home', pathMatch: 'full' }
     ]
   },
   { 
@@ -28,12 +25,8 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'ticketDetail/:id', component: TicketDetailComponent }
     ]
-  },  
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-
+  }  
 ];
-
-
 
 @NgModule({
   imports: [

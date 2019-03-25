@@ -9,7 +9,8 @@ constructor() { }
 
 appSettings = {
   appTitle: 'PDESK',
-  appApiUrl: 'http://localhost/pDesk/pDesk/src/app/controllers/'
+  appApiUrl: 'http://localhost/pDesk/pDesk/src/app/controllers/',
+  appLoginCheckTime:  120000
 };
 
 
