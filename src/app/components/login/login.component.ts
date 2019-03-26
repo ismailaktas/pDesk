@@ -22,18 +22,23 @@ export class LoginComponent implements OnInit {
   }
 
   checkUser() {
-
     var fd = new FormData();
     fd.append("method", "checkUser");
     fd.append("username", this.strUsername);
     fd.append("password", this.strPassword);
     this.globalService.sendData('pDesk_users', fd).subscribe((resp:any)=>{
       if (resp>0) {
-        document.location.href = "/home";
+
+        this.globalService.getData("pDesk_users.php?method=getLoggedUserInfo").then( 
+          ( res:any[] ) => {
+            window.localStorage.setItem("userInfo", JSON.stringify(res[0]));
+
+            this.globalService.redirectPage("/home");
+          }
+        );        
+        
       }
     });  
-
-        
   }
 
 }

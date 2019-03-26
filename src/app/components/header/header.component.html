@@ -3,8 +3,8 @@
 <header id="header" class="header">
   <div class="top-left">
       <div class="navbar-header">
-          <a class="navbar-brand" href="./"><img src="assets/images/logo.png" alt="Logo"></a>
-          <a class="navbar-brand hidden" href="./"><img src="assets/images/logo2.png" alt="Logo"></a>
+          <a class="navbar-brand" href="/home"><img src="assets/images/logo.png" alt="Logo"></a>
+          <a class="navbar-brand hidden" href="/home"><img src="assets/images/logo2.png" alt="Logo"></a>
       </div>
   </div>
   <div class="top-right">
@@ -25,13 +25,10 @@
               </a>
 
               <div class="user-menu dropdown-menu">
-                  <a class="nav-link" href="#"><i class="fa fa- user"></i>My Profile</a>
-
-                  <a class="nav-link" href="#"><i class="fa fa- user"></i>Notifications <span class="count">13</span></a>
-
-                  <a class="nav-link" href="#"><i class="fa fa -cog"></i>Settings</a>
-
-                  <a class="nav-link" href="#"><i class="fa fa-power -off"></i>Logout</a>
+                  <a class="nav-link" href="#"><i class="fa fa- user"></i>{{ loggedUserFullname }}</a>
+                  <a class="nav-link" href="/home"><i class="fa fa -cog"></i>Ana Sayfa</a>
+                  <a class="nav-link" href="/definitions"><i class="fa fa -cog"></i>Tanımlar</a>
+                  <a class="nav-link" href="/logout"><i class="fa fa-power -off"></i>Çıkış</a>
               </div>
           </div>
 

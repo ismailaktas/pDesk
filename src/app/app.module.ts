@@ -20,6 +20,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { ModalModule } from 'ngx-bootstrap';
 import { BlankCompComponent } from './blankComp/blankComp.component';
 import { SiteCompComponent } from './siteComp/siteComp.component';
+import { LogoutComponent } from './components/logout/logout.component';
+import { TicketEditComponent } from './components/ticket-edit/ticket-edit.component';
 
 @NgModule({
    declarations: [
@@ -32,7 +34,9 @@ import { SiteCompComponent } from './siteComp/siteComp.component';
       RightPanelComponent,
       TicketDetailComponent,
       BlankCompComponent,
-      SiteCompComponent
+      SiteCompComponent,
+      LogoutComponent,
+      TicketEditComponent
    ],
    imports: [
       BrowserModule,

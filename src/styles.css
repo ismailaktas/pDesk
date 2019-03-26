@@ -83,6 +83,14 @@
     background-color: #d67e87;
 }
 
+.table-stats table td {
+    font-size: 12px !important;
+}
+
+.table-stats table th .name, .table-stats table td .name {
+    font-size: 12px !important;
+}
+
 footer.site-footer .footer-inner {
     color: #518198;
     font-family: 'Open Sans';

@@ -29,10 +29,12 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
   modalRef: BsModalRef;
   message: string;
   selectedTicketID:number;
+  selectedTicketParentID:number;
   ticketAssign:any;
   users:any;
   userDetail:any;
   userFullName:any;
+  ticketResponseSubject:string;
   
   constructor(
       private activeRoute:ActivatedRoute, 
@@ -42,38 +44,32 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
   ) {
   }
 
-  
   ngOnInit() {
-
-    this.globalService.getCustomers("pDesk_users.php?method=getLoggedUserInfo").then( 
-      ( res:any[] ) => {
-        this.userDetail = res[0];
-        this.userFullName = this.userDetail;
-        window.localStorage.setItem("userInfo", JSON.stringify(this.userDetail));
-        //console.log( this.userDetail.userFullName );
-      }
-    );
 
     this.ticketID = this.activeRoute.snapshot.params['id'];
  
-    //ticket Status
-    this.http.get(this.globalService.apiUrl + 'pDesk_ticketStatus.php?method=getTicketStatus').subscribe((resp:any) => {
-      this.ticketStats = resp;
+    //status
+    this.globalService.getData('pDesk_ticketStatus.php?method=getTicketStatus').then( 
+      ( res:any[] ) => {
+        this.ticketStats = res;
     });
-
     //users
-    this.http.get(this.globalService.apiUrl + 'pDesk_users.php?method=getUsers').subscribe((resp:any) => {
-      this.users = resp;
-    });    
-
+    this.globalService.getData('pDesk_users.php?method=getUsers').then( 
+      ( res:any[] ) => {
+        this.users = res;
+    });
     //ticket Details
     this.getTicketDetails();
+
   }
 
   getTicketDetails(){
-    this.http.get(this.globalService.apiUrl + 'pDesk_tickets.php?method=getTicketDetails&ticketID='+this.ticketID).subscribe((resp:any) => {
-      this.ticketDetails = resp;
-    });    
+    if (this.ticketID>0){
+      this.globalService.getData('pDesk_tickets.php?method=getTicketDetails&ticketID='+this.ticketID).then( 
+        ( res:any[] ) => {
+          this.ticketDetails = res;
+      }); 
+    }
   }
 
   ngAfterViewInit(){
@@ -90,39 +86,48 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
 
   replyTicket() {
 
-    let objU:any = JSON.parse(window.localStorage.getItem("userInfo")); 
+    let objU:any = this.globalService.getUserInfo();
     console.log("Fullname: " + objU.userFullName );
 
     var fd = new FormData();
     fd.append("method", "ticketSave");
     fd.append("ID", "0");
     fd.append("parentTicketID", this.ticketID);
+    fd.append("ticketResponseSubject", this.ticketResponseSubject);
     fd.append("ticketResponse", this.ticketResponse);
     fd.append("ticketStatus", this.ticketStatus);
     fd.append("ticketAssign", this.ticketAssign);
     fd.append("ticketFile", this.fileToUpload);
     this.globalService.sendData('pDesk_tickets', fd).subscribe((res)=>{
+      this.ticketID = res;
       this.getTicketDetails();
       this.globalService.showMessage("İşlem başarıyla gerçekleşti", MessageType.info);
     });    
   }
   
   deleteTicket(prmTicketID:number){
-    if(confirm("Are you sure to delete ")) {
+    if(confirm("Silmek istediğinize emin misiniz?")) {
       console.log(prmTicketID);
     }
   }
 
-  openModal(template: TemplateRef<any>, prmID:number) {
+  openModal(template: TemplateRef<any>, prmID:number, prmParentId:number) {
     this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
     this.selectedTicketID = prmID;
+    this.selectedTicketParentID = prmParentId;
   }  
 
   confirm(): void {
-    this.http.get(this.globalService.apiUrl + 'pDesk_tickets.php?method=ticketDelete&ticketID='+this.selectedTicketID.toString()).subscribe((resp:any) => {
-      this.getTicketDetails();
-      this.globalService.showMessage("İşlem başarıyla gerçekleşti", MessageType.info);
-    });  
+    this.globalService.getData('pDesk_tickets.php?method=ticketDelete&ticketID='+this.selectedTicketID.toString()).then( 
+      ( res:any[] ) => {
+        this.globalService.showMessage("İşlem başarıyla gerçekleşti", MessageType.info);
+        if ( this.selectedTicketParentID == 0 ) {
+          this.globalService.redirectPage("home");
+        }
+        else {
+          this.getTicketDetails();
+        }
+    });
     this.modalRef.hide();
   }
  

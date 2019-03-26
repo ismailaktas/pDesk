@@ -38,12 +38,24 @@ switch($strMethod) {
         $result = $users->toJson;
         echo $result;
         break;
+    case "getLoggedUserID":
+        $userID = $globalFunctions->getUserID();
+        echo $userID;
+        break;          
     case "getLoggedUserInfo":
         $userID = $globalFunctions->getUserID();
         $result = $users->getLoggedUserInfo($userID);
         $result = $users->toJson;
         echo $result;
-        break;        
+        break;    
+    case "logout":
+        $_SESSION['userID'] = 0;
+        $_SESSION['organizationID'] = 0;
+        $result = $_SESSION['userID'];
+        session_unset();
+        session_destroy();        
+        echo $result;
+        break;               
     case "checkUser":
         $username = $_POST["username"];
         $password = $_POST["password"];

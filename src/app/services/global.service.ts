@@ -2,18 +2,15 @@ import { ConstsService } from "./../bl/consts/consts.service";
 import { DateFormatType } from "./../classes/dateFormatType.enum";
 import { Injectable, OnDestroy } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable, throwError } from "rxjs";
-import { retry, catchError } from "rxjs/operators";
 import { ToastrService } from "ngx-toastr";
 import { MessageType } from "../classes/messageType.enum";
 import { userInfo } from "../classes/userInfo";
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from "@angular/router";
 
 @Injectable({
   providedIn: "root"
 })
 export class GlobalService {
-
   public apiUrl: string = this.constsService.appSettings.appApiUrl;
   public getActivePageName: string = "";
 
@@ -23,15 +20,18 @@ export class GlobalService {
     private constsService: ConstsService,
     routeInfo: ActivatedRoute
   ) {
-       
     this.getActivePageName = routeInfo.snapshot.url.toString();
-
   }
 
   getUserInfo() {
-    let strUrl: string =
-      this.apiUrl + "pDesk_users.php?method=getLoggedUserInfo";
-    return this.http.get<userInfo>(strUrl);
+    let res:any;
+    if (localStorage.getItem("userInfo") === null) {
+      res = null;
+    }
+    else {
+      res = JSON.parse(window.localStorage.getItem("userInfo"));
+    }
+    return res;
   }
 
   showMessage(strMessage: string, messageType: MessageType) {
@@ -47,6 +47,31 @@ export class GlobalService {
         this.toastr.info(strMessage, null, { timeOut: mTimeOut });
         break;
     }
+  }
+
+  getStatusCssClassName(statusID) {
+    let classResult: string = "";
+    switch (statusID) {
+      case "1":
+        classResult = "primary";
+        break; //Yeni
+      case "2":
+        classResult = "danger";
+        break; //Devam
+      case "3":
+        classResult = "success";
+        break; //Tamam
+      case "4":
+        classResult = "secondary";
+        break; //Kapandi
+      case "5":
+        classResult = "warning";
+        break; //Beklemede
+      default:
+        classResult = "secondary";
+        break; //default
+    }
+    return classResult;
   }
 
   getDate(dateFormat: DateFormatType) {
@@ -97,6 +122,10 @@ export class GlobalService {
     return returnDate;
   }
 
+  redirectPage(pageName:string){
+    document.location.href = pageName;
+  }
+
   sendData(strUrl: string, postData: any) {
     return this.http.post(
       this.constsService.appSettings.appApiUrl + strUrl + ".php",
@@ -104,24 +133,13 @@ export class GlobalService {
     );
   }
 
-  getData(strUrl: string) {
-    return new Promise( (resolve, reject) => {
-      let headers = new HttpHeaders();
-      this.http.get(this.constsService.appSettings.appApiUrl + strUrl, { headers: headers }).subscribe(
-          res => {
-            //console.info("getData", res);
-            resolve(res);
-          },
-          err => {
-            resolve(err);
-          }
-        );
-    });
+  async getData(strUrl: string): Promise<any[]> {
+    let headers = new HttpHeaders();
+    return await this.http
+      .get<any[]>(this.constsService.appSettings.appApiUrl + strUrl, {
+        headers: headers
+      })
+      .toPromise();
   }
 
-async getCustomers(strUrl: string): Promise<any[]> {
-    return await this.http.get<any[]>(this.constsService.appSettings.appApiUrl + strUrl).toPromise();
-} 
-
-  
 }

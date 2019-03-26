@@ -1,0 +1,90 @@
+<div class="clearfix"></div>
+<!-- Orders -->
+<div class="row">
+  <div class="col-lg-12">
+
+    <!-- Cevap Basla -->
+    <div class="card">
+      <div class="card-header">
+        <span class="ticketNo">#{{ticketID}}</span> Nolu Talebi Düzenle
+      </div>
+
+      <div class="card-body">
+
+        <div class="ticketDetail">
+
+          <div class="col-lg-12 ticketContent" *ngIf="ticketDetails?.parentId == 0">
+            <input type="text" name="txtTicketSubject" placeholder="Başlık Giriniz" class="form-control"
+              [(ngModel)]="ticketResponseSubject" >
+          </div>
+
+          <div class="col-lg-12 ticketContent">
+            <app-ngx-editor [placeholder]="'Açıklama...'" [spellcheck]="true" [(ngModel)]="ticketResponse">
+            </app-ngx-editor>
+          </div>
+
+          <div class="col-lg-12 ticketContent">
+            <div class="row form-group">
+              <div class="col-12 col-md-1 marginTop15"><label for="select" class=" form-control-label">Durum</label>
+              </div>
+              <div class="col-12 col-md-4">
+                <mat-form-field>
+                  <mat-select [(ngModel)]="ticketStatus" name="cmbTicketStatus" aria-required="true">
+                    <mat-option *ngFor="let stat of ticketStats" [value]="stat.ID">
+                      {{stat.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-12 ticketContent">
+            <div class="row form-group">
+              <div class="col-12 col-md-1 marginTop15"><label for="select" class=" form-control-label">Atanan</label>
+              </div>
+              <div class="col-12 col-md-4">
+                <mat-form-field>
+                  <mat-select [(ngModel)]="ticketAssign" name="cmbTicketAssign">
+                    <mat-option *ngFor="let user of users" [value]="user.ID">
+                      {{user.fullname}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-12 ticketContent">
+            <div class="row form-group">
+              <div class="col-12 col-md-1"><label class=" form-control-label">Doküman</label></div>
+              <div class="col-12 col-md-4"><input type="file" id="ticketFile" (change)="handleFileInput($event.target.files)">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-1">
+            <button type="button" class="btn btn-success" (click)="replyTicket()">Kaydet</button>
+          </div>
+          <div class="col-md-1" style="margin-left: -35px;">
+            <button type="button" class="btn btn-danger" *ngIf="ticketDetails?.userID == loggedUserID" (click)="openModal(template, ticketDetails.ID, ticketDetails.parentId )">Sil</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- Cevap Bitir -->
+
+    <ng-template #template>
+      <div class="modal-body text-center">
+        <p>İşlemi gerçekleştirmek istiyor musunuz?</p>
+        <button type="button" class="btn btn-default" (click)="confirm()">Evet</button>
+        <button type="button" class="btn btn-primary" (click)="decline()">Hayır</button>
+      </div>
+    </ng-template>
+
+  </div>
+</div>

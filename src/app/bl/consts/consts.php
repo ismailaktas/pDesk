@@ -4,7 +4,7 @@ class project
 {
     const name = "PDESK";
     const mainPageName = "PDESK";
-    const uploadPath = "Uploads/";
+    const uploadPath = "uploads/";
 }
 
 class db
