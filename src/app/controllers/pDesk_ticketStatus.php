@@ -11,17 +11,21 @@ require_once dirname ( dirname ( __FILE__ ) ) . "/classes/globalFunctions.php";
 $strMethod = "";
 $strID = "";
 
-if ($_POST['method'] == ""){
-    $strMethod = $formJson["method"];
-    $strID = $_POST['ID'];
-}
-else {
-    $strMethod = $_POST['method'];
-    $strID = $_POST['ID'];
+if (isset($_POST["method"])) {
+    $strMethod  = $_POST['method'];
 }
 
-if ($strMethod == "" && $_GET['method'] != "" ) {
+if (isset($_POST["ID"])) {
+    $strID  = $_POST['ID'];
+}
+
+
+if (isset($_GET["method"])) {
     $strMethod  = $_GET['method'];
+}
+
+if (isset($_GET["ID"])) {
+    $strID  = $_GET['ID'];
 }
 
 $obj = new pDesk_ticketStatus($strID);

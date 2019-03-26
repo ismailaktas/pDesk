@@ -21,7 +21,6 @@ export class TicketEditComponent implements OnInit, AfterViewInit {
 
   ticketID:any = 0;
   ticketResponse: string;
-  fileToUpload: File = null;  
   ticketSaveResult:string;
   ticketStats:any;
   ticketParentId:number = 0;
@@ -37,6 +36,7 @@ export class TicketEditComponent implements OnInit, AfterViewInit {
   userFullName:any;
   ticketResponseSubject:string;
   loggedUserID:number = this.globalService.getUserInfo().userID;
+  selectedFile:File = null;
 
   constructor(
     private activeRoute:ActivatedRoute, 
@@ -87,15 +87,26 @@ ngAfterViewInit(){
 
 }
 
-handleFileInput(files: FileList) {
-  this.fileToUpload = files.item(0);
+onFileSelected(event) {
+  this.selectedFile = <File>event.target.files[0];
+}
+
+onUpload() {
+
+  const fd = new FormData();
+  fd.append("method", "ticketUpload");
+  fd.append("uploadFile", this.selectedFile, this.selectedFile.name);
+
+  this.http.post('http://localhost/pDesk/src/app/controllers/pDesk_tickets.php', fd).subscribe( res=> {
+    console.log( res );
+  });
+}
+
+getFile( strFileName:string ) {
+  this.globalService.openPageNewTabCustomUrl(this.globalService.apiUrl +  "pDesk_tickets.php?method=downloadFile&fileName="+strFileName);
 }
 
 replyTicket() {
-
-  let objU:any = this.globalService.getUserInfo();
-  console.log("Fullname: " + objU.userFullName );
-
   var fd = new FormData();
   fd.append("method", "ticketSave");
   fd.append("ID", this.ticketID);
@@ -104,12 +115,15 @@ replyTicket() {
   fd.append("ticketResponse", this.ticketResponse);
   fd.append("ticketStatus", this.ticketStatus);
   fd.append("ticketAssign", this.ticketAssign);
-  fd.append("ticketFile", $('#ticketFile')[0].files[0]);
-  this.globalService.sendData('pDesk_tickets', fd).subscribe((res)=>{
+  if (this.selectedFile != null) {
+    fd.append("ticketFile", this.selectedFile, this.selectedFile.name);
+  }
+    this.globalService.sendData('pDesk_tickets', fd).subscribe((res)=>{
     this.ticketID = res;
-    //this.getTicketDetails();
+    this.getTicketDetails();
     this.globalService.showMessage("İşlem başarıyla gerçekleşti", MessageType.info);
   });    
+
 }
 
 deleteTicket(prmTicketID:number){
@@ -122,6 +136,11 @@ openModal(template: TemplateRef<any>, prmID:number, prmParentId:number) {
   this.modalRef = this.modalService.show(template, {class: 'modal-sm'});
   this.selectedTicketID = prmID;
   this.selectedTicketParentID = prmParentId;
+}  
+
+openModalFile(templateFile: TemplateRef<any>, prmID:number) {
+  this.modalRef = this.modalService.show(templateFile, {class: 'modal-sm'});
+  this.selectedTicketID = prmID;
 }  
 
 confirm(): void {
@@ -139,6 +158,19 @@ confirm(): void {
 }
 
 decline(): void {
+  this.modalRef.hide();
+}
+
+confirmFile(): void {
+  this.globalService.getData('pDesk_tickets.php?method=ticketFileDelete&ticketID='+this.selectedTicketID.toString()).then( 
+    ( res:any[] ) => {
+      this.globalService.showMessage("İşlem başarıyla gerçekleşti", MessageType.info);
+      this.getTicketDetails();
+  });
+  this.modalRef.hide();
+}
+
+declineFile(): void {
   this.modalRef.hide();
 }
 

@@ -12,19 +12,23 @@ require_once dirname ( dirname ( __FILE__ ) ) . "/classes/globalFunctions.php";
 
 $strMethod = "";
 $strID = "";
+$uploadFolder =  dirname ( dirname ( __FILE__  ) ) . "/uploads/" ;
 
-if ($_POST['method'] == ""){
-    $strMethod = $formJson["method"];
-    $strID = $_POST['ID'];
-}
-else {
-    $strMethod = $_POST['method'];
-    $strID = $_POST['ID'];
+if (isset($_POST["method"])) {
+    $strMethod  = $_POST['method'];
 }
 
-if ($strMethod == "" && $_GET['method'] != "" ) {
+if (isset($_POST["ID"])) {
+    $strID  = $_POST['ID'];
+}
+
+
+if (isset($_GET["method"])) {
     $strMethod  = $_GET['method'];
-    $strID = $_GET['ID'];
+}
+
+if (isset($_GET["ID"])) {
+    $strID  = $_GET['ID'];
 }
 
 $tickets = new pDesk_tickets($strID);
@@ -55,37 +59,26 @@ switch($strMethod) {
             $strID = $ticketsStatus->save();
         }
 
+        //Upload
         if (isset($_FILES['ticketFile']['tmp_name']))
         {
-
             $fileName = $_FILES['ticketFile']['tmp_name'];
-            $uploadFolder =  dirname ( dirname ( __FILE__  ) ) . "/uploads/" ;
-            $dosyaAdi = basename($_FILES['ticketFile']['name']);
-            $yuklenecek_dosya = $uploadFolder . $dosyaAdi;
+            $fileBaseName = basename($_FILES['ticketFile']['name']);
+            $array = explode('.', $fileBaseName);
+            $extension = end($array);
+            $lastFileName = $strID.".".$extension;
+            $uploadFile = $uploadFolder . $lastFileName;
 
-            if (move_uploaded_file($_FILES['txtFile']['tmp_name'], $yuklenecek_dosya))
+            if (move_uploaded_file($_FILES['ticketFile']['tmp_name'], $uploadFile))
             {
-                echo "SSSSSS";
+                $ticketsFile = new pDesk_tickets( $strID );
+                $ticketsFile->filePath = $lastFileName;
+                $ticketsFile->save();
             }
             else{
-                echo $_FILES['txtFile']['tmp_name'];
-            }
-
-
-            /*
-            if (move_uploaded_file($_FILES['ticketFile']['tmp_name'], $yuklenecek_dosya)) {
-                echo "ASDASDASD";
-            } 
-            else {
-                echo $_FILES['ticketFile']['tmp_name'];
-            }
-            */
-        }
-        else {
-            echo "Doaas dd";
-        }
-
-
+                echo $_FILES['ticketFile']['tmp_name']." Upload edilemedi";
+            }            
+        }        
         
         echo $strID;
         break;
@@ -107,7 +100,21 @@ switch($strMethod) {
         $result = $tickets->deleteTicketDetails( $ticketID, $userID );
         $result = $tickets->toJson;
         echo $result;
-        break;        
+        break;  
+    case "ticketFileDelete":
+        $ticketID  = $_GET['ticketID'];
+        $ticketFile = new pDesk_tickets( $ticketID );
+        $ticketFile->filePath = null;
+        $strID = $ticketFile->save();
+        echo $strID;
+        break;    
+    case 'downloadFile': 
+        $fileName  = $_GET['fileName'];
+        $uploadFile = $uploadFolder.$fileName;
+        header("Content-Length: " . filesize($uploadFile));
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename='.$fileName);
+        readfile($uploadFile);                    
 }
 
 

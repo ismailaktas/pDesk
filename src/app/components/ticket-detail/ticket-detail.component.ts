@@ -86,8 +86,8 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
 
   replyTicket() {
 
-    let objU:any = this.globalService.getUserInfo();
-    console.log("Fullname: " + objU.userFullName );
+    //let objU:any = this.globalService.getUserInfo();
+    //console.log("Fullname: " + objU.userFullName );
 
     var fd = new FormData();
     fd.append("method", "ticketSave");

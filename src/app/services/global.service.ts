@@ -24,7 +24,7 @@ export class GlobalService {
   }
 
   getUserInfo() {
-    let res:any;
+    let res: any;
     if (localStorage.getItem("userInfo") === null) {
       res = null;
     }
@@ -122,7 +122,7 @@ export class GlobalService {
     return returnDate;
   }
 
-  redirectPage(pageName:string){
+  redirectPage(pageName: string) {
     document.location.href = pageName;
   }
 
@@ -140,6 +140,10 @@ export class GlobalService {
         headers: headers
       })
       .toPromise();
+  }
+
+  openPageNewTabCustomUrl( strPage:string ){
+    window.open(strPage, '_blank');
   }
 
 }
