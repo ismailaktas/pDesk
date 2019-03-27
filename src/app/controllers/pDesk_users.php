@@ -1,6 +1,6 @@
 <?php 
 
-//header('Access-Control-Allow-Origin: *'); 
+header('Access-Control-Allow-Origin: *'); 
 date_default_timezone_set('Europe/Istanbul');
 @session_start();
 
@@ -27,7 +27,6 @@ if (isset($_POST["ID"])) {
     $strID  = $_POST['ID'];
 }
 
-
 if (isset($_GET["method"])) {
     $strMethod  = $_GET['method'];
 }
@@ -35,7 +34,6 @@ if (isset($_GET["method"])) {
 if (isset($_GET["ID"])) {
     $strID  = $_GET['ID'];
 }
-
 
 $users = new pDesk_users($strID);
 
@@ -49,8 +47,10 @@ switch($strMethod) {
         $users->organizationID = $_POST["organizationID"];
         $users->userType = $_POST["userType"];
         $users->isPassive = 0;
-        $users->createdBy = $globalFunctions->getUserID();
-        $users->createdDate = globalFunctions::convertStringtoDate(globalFunctions::getDateOrTime("dateTime"), "dateTime");
+        if ($strID == 0) {
+            $users->createdBy = $_POST["uID"];
+            $users->createdDate = globalFunctions::convertStringtoDate(globalFunctions::getDateOrTime("dateTime"), "dateTime");
+        }
         $result = $users->save();
         echo $result;
         break;   
@@ -59,25 +59,25 @@ switch($strMethod) {
         echo $result;
         break;            
     case "getUsers":
-        $organizationID = $globalFunctions->getOrganizationID();
+        $organizationID = $_GET["oID"];
         $result = $users->getUsers($organizationID);
         $result = $users->toJson;
         echo $result;
         break;
     case "getUserTypes":
-        $userID = $globalFunctions->getUserID();
+        $userID = $_GET["uID"];
         $result = $users->getUserTypes($userID);
         $result = $users->toJson;
         echo $result;
         break;
     case "getUserOrganizations":
-        $userID = $globalFunctions->getUserID();
+        $userID = $_GET["uID"];
         $result = $users->getUserOrganizations($userID);
         $result = $users->toJson;
         echo $result;
         break;        
     case "getAllUsers":
-        $userID = $globalFunctions->getUserID();
+        $userID = $_GET["uID"];
         $result = $users->getAllUsers($userID);
         $result = $users->toJson;
         echo $result;
@@ -87,12 +87,6 @@ switch($strMethod) {
         echo $userID;
         break;          
     case "getLoggedUserInfo":
-
-
-    echo  $globalFunctions->getUserID();
-    exit();
-
-
         $userID = $globalFunctions->getUserID();
         $result = $users->getLoggedUserInfo($userID);
         $result = $users->toJson;
@@ -125,28 +119,18 @@ switch($strMethod) {
         $userObj = json_decode($result);
         $userCount = count($userObj);
 
-		if(!isset($_COOKIE["isim"])) {
-			echo "FFFFFF";
-		} else {
-			echo $_COOKIE["isim"];
-		}
-
-
         if ($userCount>0) {
-
-            $domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false; 
-            setcookie('isim', 'ismail', time()+60*60*24*365, '/', $domain, false);
-
             $_SESSION['organizationID'] = $userObj[0]->organizationID;
             $_SESSION['userID'] = $userObj[0]->ID;
             $_SESSION['fullname'] = $userObj[0]->fullname;
             $_SESSION['username'] = $userObj[0]->username;
             $_SESSION['userType'] = $userObj[0]->userType;
-
         }
-        echo $userCount;
+        else {
+            $result = "null";
+        }
+        echo $result;
         break;
 }
-
 
 ?>

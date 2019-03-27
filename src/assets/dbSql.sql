@@ -173,6 +173,10 @@ UNLOCK TABLES;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+
+
+DROP PROCEDURE IF EXISTS `prcGetTicketById`;
+
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTicketById`(prmTicketID int)
 BEGIN
@@ -218,6 +222,9 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+
+DROP PROCEDURE IF EXISTS `prcGetTicketDetail`;
+
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTicketDetail`(prmTicketID int)
 BEGIN
@@ -263,6 +270,9 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+
+DROP PROCEDURE IF EXISTS `prcGetTickets`;
+
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTickets`(prmOrganizationID int, prmUserID int)
 BEGIN
@@ -310,6 +320,10 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+
+
+DROP PROCEDURE IF EXISTS `prcGetUserOrganizations`;
+
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetUserOrganizations`(prmUserID int)
 BEGIN
@@ -343,6 +357,9 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+
+DROP PROCEDURE IF EXISTS `prcGetUsers`;
+
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetUsers`(prmUserID int)
 BEGIN
@@ -393,6 +410,10 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+
+DROP PROCEDURE IF EXISTS `prcGetUserTypes`;
+
+
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetUserTypes`(prmUserID int)
 BEGIN

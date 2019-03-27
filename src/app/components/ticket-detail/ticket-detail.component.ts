@@ -35,6 +35,7 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
   userDetail:any;
   userFullName:any;
   ticketResponseSubject:string;
+  loggedUser:any;
   
   constructor(
       private activeRoute:ActivatedRoute, 
@@ -47,6 +48,7 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
   ngOnInit() {
 
     this.ticketID = this.activeRoute.snapshot.params['id'];
+    this.loggedUser = this.globalService.getUserInfo()[0];
  
     //status
     this.globalService.getData('pDesk_ticketStatus.php?method=getTicketStatus').then( 
@@ -54,7 +56,7 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
         this.ticketStats = res;
     });
     //users
-    this.globalService.getData('pDesk_users.php?method=getUsers').then( 
+    this.globalService.getData('pDesk_users.php?method=getUsers&oID='+this.loggedUser.organizationID).then( 
       ( res:any[] ) => {
         this.users = res;
     });

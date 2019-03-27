@@ -5,7 +5,10 @@
     <div class="card">
       <div class="card-header">
         Kullanıcı
-        <button type="button" class="btn btn-primary smallButton" (click)="openModalUser(templateUser, 0)">+ Yeni </button>
+        <button type="button" 
+          class="btn btn-primary smallButton" 
+          (click)="openModalUser(templateUser, 0)"
+          *ngIf="loggedUser.userType != 3">+ Yeni </button>
       </div>
       <div class="card-body">
         <div class="table-stats order-table ov-h">
@@ -35,12 +38,22 @@
                 <td> <span class="name">{{user.createdDate}}</span> </td>
                 <td> <span class="name">{{user.createdByName}}</span> </td>
                 <td>
-                  <button type="button" (click)="userActivePassive(user.userID, user.isPassive )"
+                  <button type="button" 
+                    *ngIf="loggedUser.userType != 3"
+                    (click)="userActivePassive(user.userID, user.isPassive )"
                     class="btn btn-{{ user.isPassive == 0 ? 'success' : 'danger' }} smallButton"
                     title="Aktif/Pasif yapmak için tıklayınız">{{ user.isPassive == 0 ? 'Aktif' : 'Pasif' }}</button>
+                  
+                    <span 
+                      *ngIf="loggedUser.userType == 3"
+                      class="btn btn-{{ user.isPassive == 0 ? 'success' : 'danger' }} smallButton">
+                      {{ user.isPassive == 0 ? 'Aktif' : 'Pasif' }}
+                    </span>
                 </td>
                 <td>
-                    <button type="button" (click)="openModalUserDelete(templateDeleteUser, user.userID )"
+                    <button type="button"  
+                      *ngIf="loggedUser.userType != 3"
+                      (click)="openModalUserDelete(templateDeleteUser, user.userID )"
                       class="btn btn-danger smallButton"
                       title="Silmek için tıklayınız">Sil</button>
                 </td>                
@@ -116,7 +129,7 @@
                 Türü</label></div>
             <div class="col-12 col-md-9">
               <mat-form-field style="z-index:999999">
-                <mat-select [(ngModel)]="selectedUser.userType" name="cmbUserType">
+                <mat-select [(ngModel)]="selectedUser.userType" name="cmbUserType" [disabled]="loggedUser.userType == 3">
                   <mat-option *ngFor="let userType of userTypes" [value]="userType.ID">
                     {{userType.name}}
                   </mat-option>
@@ -131,7 +144,7 @@
                 </label></div>
             <div class="col-12 col-md-9">
               <mat-form-field style="z-index:999999">
-                <mat-select [(ngModel)]="selectedUser.organizationID" name="cmbOrganizationID">
+                <mat-select [(ngModel)]="selectedUser.organizationID" name="cmbOrganizationID" [disabled]="loggedUser.userType == 3" >
                   <mat-option *ngFor="let organization of userOrganizations" [value]="organization.ID">
                     {{organization.name}}
                   </mat-option>

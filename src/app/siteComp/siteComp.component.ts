@@ -17,15 +17,10 @@ export class SiteCompComponent implements OnInit {
 
     const source = timer(10, cntService.appSettings.appLoginCheckTime);
     const abc = source.subscribe(val => {
-      this.globalService.getData("pDesk_users.php?method=getLoggedUserID").then( 
-        ( res:any ) => {
-          if (res == 0) {
-            this.globalService.redirectPage("login");
-          }
-          if (localStorage.getItem("userInfo") === null) {
-            this.globalService.redirectPage("login");
-          }
-      });       
+      let userInfo:any = globalService.getUserInfo();
+      if (userInfo === null) {
+        this.globalService.redirectPage("login");
+      }
     });
 
   }

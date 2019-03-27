@@ -25,8 +25,8 @@
               <div *ngIf="ticketDetail.isDeleted==0">
                 <span>Tarih: {{ticketDetail.ticketDate}} - Oluşturan: {{ticketDetail.fullname}} - Atanan: {{ticketDetail.assignedFullName}}</span> - 
                 <span id="{{ticketDetail.parentId == 0 ? 'dvStat' : ticketDetail.ID}}">Durum: {{ticketDetail.statusName}}</span>  
-                 <button *ngIf="ticketDetail.userID == globalService.getUserInfo().userID " type="button" class="btn btn-dangerNew smallButton" (click)="openModal(template, ticketDetail.ID, ticketDetail.parentId )">Sil</button>
-                 <button *ngIf="ticketDetail.userID == globalService.getUserInfo().userID " type="button" class="btn btn-warning smallButton" (click)="globalService.redirectPage('ticketEdit/' + ticketDetail.ID)">Düzenle</button>
+                 <button *ngIf="ticketDetail.userID == loggedUser.ID" type="button" class="btn btn-dangerNew smallButton" (click)="openModal(template, ticketDetail.ID, ticketDetail.parentId )">Sil</button>
+                 <button *ngIf="ticketDetail.userID == loggedUser.ID" type="button" class="btn btn-warning smallButton" (click)="globalService.redirectPage('ticketEdit/' + ticketDetail.ID)">Düzenle</button>
               </div>
           </div>
         </div>

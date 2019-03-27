@@ -378,12 +378,6 @@ class TableItem extends DALProsess
            $this->closeCon();
            $this->history($lastInsert, $operation);
            
-           //historyExec
-           $userID = $_SESSION["userID"];
-           $sqlhistExec = "insert into historyExec (userID, execDate, execSql) values (". $userID . ", now(), '".str_replace("'", "''", $sql)."')";
-           $this->openCon();
-           mysqli_query($this->con, $sqlhistExec);
-           $this->closeCon();
            
            return $lastInsert;
         } catch (\Exception $error) {
@@ -452,6 +446,7 @@ class TableItem extends DALProsess
     {
         if ($ID>0) {
             // $con = new DAL();
+            /*
             try {
                 // operation 1-New 2-Update 3-Delete
                 $userID = $_SESSION["userID"];
@@ -465,6 +460,8 @@ class TableItem extends DALProsess
                 echo "Hata " . $error;
                 return false;
             }
+            */
+            return false;
         }
     }
 

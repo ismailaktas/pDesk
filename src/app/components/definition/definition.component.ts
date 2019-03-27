@@ -30,6 +30,7 @@ export class DefinitionComponent implements OnInit {
   selectedUser:IselectedUser;
   userOrganizations:any;  
   selectedUserIDForDelete:any;
+  loggedUser:any;
 
   constructor(
     private globalService:GlobalService, 
@@ -37,14 +38,17 @@ export class DefinitionComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+    this.loggedUser = this.globalService.getUserInfo()[0];
+
     this.getAllUsers();
 
-    this.globalService.getData("pDesk_users.php?method=getUserTypes").then( 
+    this.globalService.getData("pDesk_users.php?method=getUserTypes&uID="+this.loggedUser.ID).then( 
     ( res:any[] ) => {
         this.userTypes = res;
     });    
 
-    this.globalService.getData("pDesk_users.php?method=getUserOrganizations").then( 
+    this.globalService.getData("pDesk_users.php?method=getUserOrganizations&uID="+this.loggedUser.ID).then( 
     ( res:any[] ) => {
           this.userOrganizations = res;
     });        
@@ -52,7 +56,7 @@ export class DefinitionComponent implements OnInit {
   }
 
   getAllUsers() {
-    this.globalService.getData("pDesk_users.php?method=getAllUsers").then( 
+    this.globalService.getData("pDesk_users.php?method=getAllUsers&uID="+this.loggedUser.ID).then( 
       ( res:any[] ) => {
         this.users = res;
       });
@@ -112,6 +116,8 @@ export class DefinitionComponent implements OnInit {
     fd.append("password", this.selectedUser.password );
     fd.append("organizationID", this.selectedUser.organizationID );
     fd.append("userType", this.selectedUser.userType );
+    fd.append("uID", this.loggedUser.ID );
+    fd.append("oID", this.loggedUser.organizationID );
 
     this.globalService.sendData('pDesk_users', fd).subscribe((res)=>{
       this.getAllUsers();

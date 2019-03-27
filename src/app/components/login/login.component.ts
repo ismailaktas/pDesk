@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { GlobalService } from 'src/app/services/global.service';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
+import { MessageType } from 'src/app/classes/messageType.enum';
 
 @Component({
   selector: 'app-login',
@@ -27,16 +28,13 @@ export class LoginComponent implements OnInit {
     fd.append("username", this.strUsername);
     fd.append("password", this.strPassword);
     this.globalService.sendData('pDesk_users', fd).subscribe((resp:any)=>{
-      if (resp>0) {
-
-        this.globalService.getData("pDesk_users.php?method=getLoggedUserInfo").then( 
-          ( res:any[] ) => {
-            window.localStorage.setItem("userInfo", JSON.stringify(res[0]));
-
-            //this.globalService.redirectPage("/home");
-          }
-        );        
-        
+      if (resp !== null) {
+        window.localStorage.setItem('userInfo', JSON.stringify(resp)); 
+        this.globalService.redirectPage('home');
+      }
+      else {
+        this.globalService.showMessage("Kullanıcı Adı ve/veya Şifre Hatalı", MessageType.warning);
+        return false;
       }
     });  
   }
