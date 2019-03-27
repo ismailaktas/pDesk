@@ -1,11 +1,17 @@
 <?php 
 
-header('Access-Control-Allow-Origin: *'); 
+//header('Access-Control-Allow-Origin: *'); 
+date_default_timezone_set('Europe/Istanbul');
+@session_start();
+
 /*
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 */
+
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
 
 require_once dirname ( dirname ( __FILE__ ) ) . "/bl/models/pDesk_users.php";
 require_once dirname ( dirname ( __FILE__ ) ) . "/classes/globalFunctions.php";
@@ -36,17 +42,57 @@ $users = new pDesk_users($strID);
 $globalFunctions = new globalFunctions();
 
 switch($strMethod) {
+    case "saveUser":
+        $users->fullname = $_POST["fullname"];
+        $users->username = $_POST["username"];
+        $users->password = $_POST["password"];
+        $users->organizationID = $_POST["organizationID"];
+        $users->userType = $_POST["userType"];
+        $users->isPassive = 0;
+        $users->createdBy = $globalFunctions->getUserID();
+        $users->createdDate = globalFunctions::convertStringtoDate(globalFunctions::getDateOrTime("dateTime"), "dateTime");
+        $result = $users->save();
+        echo $result;
+        break;   
+    case "deleteUser":
+        $result = $users->delete();
+        echo $result;
+        break;            
     case "getUsers":
         $organizationID = $globalFunctions->getOrganizationID();
         $result = $users->getUsers($organizationID);
         $result = $users->toJson;
         echo $result;
         break;
+    case "getUserTypes":
+        $userID = $globalFunctions->getUserID();
+        $result = $users->getUserTypes($userID);
+        $result = $users->toJson;
+        echo $result;
+        break;
+    case "getUserOrganizations":
+        $userID = $globalFunctions->getUserID();
+        $result = $users->getUserOrganizations($userID);
+        $result = $users->toJson;
+        echo $result;
+        break;        
+    case "getAllUsers":
+        $userID = $globalFunctions->getUserID();
+        $result = $users->getAllUsers($userID);
+        $result = $users->toJson;
+        echo $result;
+        break;                
     case "getLoggedUserID":
         $userID = $globalFunctions->getUserID();
         echo $userID;
         break;          
     case "getLoggedUserInfo":
+
+
+    echo  $globalFunctions->getUserID();
+    exit();
+
+
         $userID = $globalFunctions->getUserID();
         $result = $users->getLoggedUserInfo($userID);
         $result = $users->toJson;
@@ -59,7 +105,17 @@ switch($strMethod) {
         session_unset();
         session_destroy();        
         echo $result;
-        break;               
+        break;       
+    case "setUserActivePassive":
+        $userID = $_GET["userID"];
+        $activePassive = $_GET["activePassive"];
+
+        $userActivePassive = new pDesk_users($userID);
+        $userActivePassive->isPassive = $activePassive;
+        $result = $userActivePassive->save();
+        
+        echo $result;
+        break;                   
     case "checkUser":
         $username = $_POST["username"];
         $password = $_POST["password"];
@@ -69,14 +125,25 @@ switch($strMethod) {
         $userObj = json_decode($result);
         $userCount = count($userObj);
 
+		if(!isset($_COOKIE["isim"])) {
+			echo "FFFFFF";
+		} else {
+			echo $_COOKIE["isim"];
+		}
+
+
         if ($userCount>0) {
+
+            $domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false; 
+            setcookie('isim', 'ismail', time()+60*60*24*365, '/', $domain, false);
+
             $_SESSION['organizationID'] = $userObj[0]->organizationID;
             $_SESSION['userID'] = $userObj[0]->ID;
             $_SESSION['fullname'] = $userObj[0]->fullname;
             $_SESSION['username'] = $userObj[0]->username;
             $_SESSION['userType'] = $userObj[0]->userType;
-        }
 
+        }
         echo $userCount;
         break;
 }

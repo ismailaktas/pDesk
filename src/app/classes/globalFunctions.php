@@ -2,9 +2,6 @@
 date_default_timezone_set('Europe/Istanbul');
 @session_start();
 
-$_SESSION['organizationID'] = 1;
-$_SESSION['userID'] = 1;
-
 class globalFunctions {
 	
 	public static function getOrganizationID() {
@@ -17,6 +14,13 @@ class globalFunctions {
 		}
 	}
 	public static function getUserID() {
+		if(!isset($_COOKIE["userID"])) {
+			return 0;
+		} else {
+			return $_COOKIE["userID"];
+		}
+
+		/*
 	    if(isset($_SESSION['userID'])){
 			return $_SESSION['userID'];
 	    }
@@ -24,7 +28,17 @@ class globalFunctions {
 	    {
 	        return 0;
 		}
+		*/
 	}
+	public static function getUserType() {
+	    if(isset($_SESSION['userType'])){
+			return $_SESSION['userType'];
+	    }
+	    else
+	    {
+	        return 0;
+		}
+	}	
 
 	public static function convertStringtoDate ($strDate, $strType = "date") {
 		if ($strDate != "")

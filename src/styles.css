@@ -1,6 +1,10 @@
 @import '~ngx-toastr/toastr.css';
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 
+.content{
+    min-height: 550px !important;
+}
+
 .ticketNo{
     color: #269a1a;    
 }
@@ -38,6 +42,10 @@
     margin-top: 15px;
 }
 
+.marginTop-15{
+    margin-top: -15px;
+}
+
 .marginLeft10{
     margin-left: 10px;
 }
@@ -46,8 +54,20 @@
     margin-left: 20px;
 }
 
+.marginLeft0{
+    margin-left: 0px !important;
+}
+
 .paddingLeft20{
     padding-left: 20px;
+}
+
+.modal{
+    z-index: 999 !important;
+}
+
+.modal-backdrop{
+    z-index: 999 !important;
 }
 
 .smallButton{
@@ -107,6 +127,7 @@
 
 .table-stats table th .name, .table-stats table td .name {
     font-size: 12px !important;
+    text-transform: none !important;
 }
 
 footer.site-footer .footer-inner {

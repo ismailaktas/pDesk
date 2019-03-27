@@ -12,6 +12,7 @@ class pDesk_users extends TableItem {
     public $userType;
     public $createdDate;
     public $createdBy;
+    public $isPassive;
 
     // Counctructor
     function __construct($ID = NULL) {
@@ -31,12 +32,17 @@ class pDesk_users extends TableItem {
     
     function getUsers($organizationID)
     {
-        return $this->executenonquery("select ID, fullname from pDesk_users where organizationID = $organizationID order by fullname;", true );
+        return $this->executenonquery("select ID, fullname from pDesk_users where ifnull(isPassive, 0) = 0 and organizationID = $organizationID order by fullname;", true );
     }
+
+    function getAllUsers($userID)
+    {
+        return $this->executenonquery("call prcGetUsers($userID);", true );
+    }    
 
     function checkUser($username, $password)
     {
-        $strSQL = "select ID, fullname, organizationID, userType, username from pDesk_users where username = '$username' and password = '$password' ";
+        $strSQL = "select ID, fullname, organizationID, userType, username from pDesk_users where ifnull(isPassive, 0) = 0 and username = '$username' and password = '$password' ";
         return $this->executenonquery($strSQL, true );
     }  
     
@@ -44,7 +50,17 @@ class pDesk_users extends TableItem {
     {
         $strSQL = "select ID as userID, fullname as userFullName, organizationID as userOrganizationID, userType as usertType, username as username from pDesk_users where ID = $userID ";
         return $this->executenonquery($strSQL, true );
-    }      
+    }
+    
+    function getUserTypes($userID)
+    {
+        return $this->executenonquery("call prcGetUserTypes($userID); ", true );
+    } 
+    
+    function getUserOrganizations($userID)
+    {
+        return $this->executenonquery("call prcGetUserOrganizations($userID); ", true );
+    }     
 
     
 }

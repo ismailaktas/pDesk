@@ -9,7 +9,7 @@ class project
 
 class db
 {
-    const Server     = "localhost";
+    const Server     = "127.0.0.1";
     const Database   = "ismail";
     const Username   = "root";  
     const Password   = "ismail123";

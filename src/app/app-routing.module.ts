@@ -1,3 +1,4 @@
+import { DefinitionComponent } from './components/definition/definition.component';
 import { SiteCompComponent } from './siteComp/siteComp.component';
 import { BlankCompComponent } from './blankComp/blankComp.component';
 import { AppComponent } from './app.component';
@@ -26,7 +27,8 @@ const routes: Routes = [
     children: [
       { path: 'home', component: HomeComponent },
       { path: 'ticketDetail/:id', component: TicketDetailComponent },
-      { path: 'ticketEdit/:id', component: TicketEditComponent }
+      { path: 'ticketEdit/:id', component: TicketEditComponent },
+      { path: 'definition', component: DefinitionComponent }
     ]
   }  
 ];

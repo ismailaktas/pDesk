@@ -22,6 +22,7 @@ import { BlankCompComponent } from './blankComp/blankComp.component';
 import { SiteCompComponent } from './siteComp/siteComp.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { TicketEditComponent } from './components/ticket-edit/ticket-edit.component';
+import { DefinitionComponent } from './components/definition/definition.component';
 
 @NgModule({
    declarations: [
@@ -36,7 +37,8 @@ import { TicketEditComponent } from './components/ticket-edit/ticket-edit.compon
       BlankCompComponent,
       SiteCompComponent,
       LogoutComponent,
-      TicketEditComponent
+      TicketEditComponent,
+      DefinitionComponent
    ],
    imports: [
       BrowserModule,

@@ -1,6 +1,9 @@
 <?php 
 
 header('Access-Control-Allow-Origin: *'); 
+date_default_timezone_set('Europe/Istanbul');
+@session_start();
+
 /*
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);

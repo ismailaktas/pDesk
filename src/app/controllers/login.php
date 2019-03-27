@@ -10,8 +10,7 @@ error_reporting(E_ALL);
 @session_start();
 require_once dirname ( dirname ( __FILE__ ) ) . "/classes/globalFunctions.php";
 
-$_SESSION['organizationID'] = 1;
-$_SESSION['userID'] = 1;
+
 
 
 

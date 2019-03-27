@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
           ( res:any[] ) => {
             window.localStorage.setItem("userInfo", JSON.stringify(res[0]));
 
-            this.globalService.redirectPage("/home");
+            //this.globalService.redirectPage("/home");
           }
         );        
         

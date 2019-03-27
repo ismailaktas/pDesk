@@ -1,0 +1,152 @@
+<div class="clearfix"></div>
+<div class="row">
+
+  <div class="col-lg-12 col-md-6">
+    <div class="card">
+      <div class="card-header">
+        Kullanıcı
+        <button type="button" class="btn btn-primary smallButton" (click)="openModalUser(templateUser, 0)">+ Yeni </button>
+      </div>
+      <div class="card-body">
+        <div class="table-stats order-table ov-h">
+          <table class="table ">
+            <thead>
+              <tr>
+                <th>İsim Soyad</th>
+                <th>Kullanıcı Adı</th>
+                <th>Şifre</th>
+                <th>Kullanıcı Türü</th>
+                <th>Organizasyon</th>
+                <th>Oluşturulma Tarihi</th>
+                <th>Oluşturan</th>
+                <th>Durum</th>
+                <th>#</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td> <button type="button" (click)="openModalUser(templateUser, user.userID )"
+                    class="btn btn-primary smallButton marginLeft0"
+                    title="Düzenlemek için tıklayınız">{{user.fullname}}</button></td>
+                <td> <span class="name">{{user.username}}</span> </td>
+                <td> <span class="name">{{user.password}}</span> </td>
+                <td> <span class="name">{{user.userTypeName}}</span> </td>
+                <td> <span class="name">{{user.organizationName}}</span> </td>
+                <td> <span class="name">{{user.createdDate}}</span> </td>
+                <td> <span class="name">{{user.createdByName}}</span> </td>
+                <td>
+                  <button type="button" (click)="userActivePassive(user.userID, user.isPassive )"
+                    class="btn btn-{{ user.isPassive == 0 ? 'success' : 'danger' }} smallButton"
+                    title="Aktif/Pasif yapmak için tıklayınız">{{ user.isPassive == 0 ? 'Aktif' : 'Pasif' }}</button>
+                </td>
+                <td>
+                    <button type="button" (click)="openModalUserDelete(templateDeleteUser, user.userID )"
+                      class="btn btn-danger smallButton"
+                      title="Silmek için tıklayınız">Sil</button>
+                </td>                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 col-md-6">
+    <div class="card">
+      <div class="card-header">
+        Talep Durumu
+      </div>
+      <div class="card-body">
+        ADASDASD SD SD
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 col-md-6">
+    <div class="card">
+      <div class="card-header">
+        Organizasyon
+      </div>
+      <div class="card-body">
+        ADASDASD SD SD
+      </div>
+    </div>
+  </div>
+
+  <ng-template #templateDeleteUser>
+      <div class="modal-body text-center">
+        <p>İşlemi gerçekleştirmek istiyor musunuz?</p>
+        <button type="button" class="btn btn-default" (click)="confirmDeleteUser()">Evet</button>
+        <button type="button" class="btn btn-primary" (click)="decline()">Hayır</button>
+      </div>
+  </ng-template>  
+
+  <ng-template #templateUser>
+    <div class="modal-body">
+      <div class="col-lg-12 col-md-6">
+
+        <div class="col-lg-12 ticketContent">
+          <div class="row form-group">
+            <div class="col-12 col-md-3"><label for="select" class=" form-control-label">İsim</label></div>
+            <div class="col-12 col-md-9">
+              <input type="text" name="txtFullName" class="form-control" [(ngModel)]="selectedUser.fullname">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 ticketContent">
+          <div class="row form-group">
+            <div class="col-12 col-md-3"><label for="select" class=" form-control-label">Kullanıcı Adı</label></div>
+            <div class="col-12 col-md-9">
+              <input type="text" name="txtUserName" class="form-control" [(ngModel)]="selectedUser.username">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 ticketContent">
+          <div class="row form-group">
+            <div class="col-12 col-md-3"><label for="select" class=" form-control-label">Şifre</label></div>
+            <div class="col-12 col-md-9">
+              <input type="text" name="txtPassword" class="form-control" [(ngModel)]="selectedUser.password">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 ticketContent">
+          <div class="row form-group marginTop-15">
+            <div class="col-12 col-md-3"><label for="cmbUserType" class="form-control-label marginTop15">Kullanıcı
+                Türü</label></div>
+            <div class="col-12 col-md-9">
+              <mat-form-field style="z-index:999999">
+                <mat-select [(ngModel)]="selectedUser.userType" name="cmbUserType">
+                  <mat-option *ngFor="let userType of userTypes" [value]="userType.ID">
+                    {{userType.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 ticketContent">
+          <div class="row form-group marginTop-15">
+            <div class="col-12 col-md-3"><label for="cmbUserType" class="form-control-label marginTop15">Organizasyon
+                </label></div>
+            <div class="col-12 col-md-9">
+              <mat-form-field style="z-index:999999">
+                <mat-select [(ngModel)]="selectedUser.organizationID" name="cmbOrganizationID">
+                  <mat-option *ngFor="let organization of userOrganizations" [value]="organization.ID">
+                    {{organization.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+      <button type="button" class="btn btn-success" (click)="saveUser()">Kaydet</button>
+      <button type="button" class="btn btn-primary marginLeft10" (click)="decline()">Hayır</button>
+    </div>
+  </ng-template>
+
+</div>
