@@ -60,6 +60,7 @@ CREATE TABLE `pDesk_tickets` (
   `createdBy` int(11) NOT NULL,
   `isDeleted` int(11) NOT NULL DEFAULT '0',
   `deletedDate` datetime DEFAULT NULL,
+  `ticketType` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
 ) ENGINE=InnoDB AUTO_INCREMENT=49 DEFAULT CHARSET=utf8;
@@ -71,7 +72,7 @@ CREATE TABLE `pDesk_tickets` (
 
 LOCK TABLES `pDesk_tickets` WRITE;
 /*!40000 ALTER TABLE `pDesk_tickets` DISABLE KEYS */;
-INSERT INTO `pDesk_tickets` VALUES (1,0,'Ders Sayfası hakkında','sdfdf rwe wer wer werwer 42 234234234','ss.jpg',1,3,2,'2019-03-13 00:00:00',1,0,NULL),(29,1,'','fghfg hfgh',NULL,1,3,1,'2019-03-15 16:54:54',1,0,NULL),(30,1,'','&nbsp;tyut uty utyu tyu tutyu','qwe.jpg',1,2,3,'2019-03-15 16:54:37',1,0,NULL),(31,1,'','&nbsp;ghj fghjfghjfghghjghj 567567567',NULL,1,3,3,'2019-03-15 08:39:22',1,0,NULL),(32,1,'','yenice vapp asidasliqwpe qweip',NULL,1,3,2,'2019-03-15 11:13:38',1,1,'2019-03-18 12:17:20'),(33,1,'','er ter tert',NULL,1,3,1,'2019-03-15 11:13:56',1,0,NULL),(34,1,'','&nbsp;we ewrw erewr',NULL,1,2,2,'2019-03-15 11:14:57',1,1,'2019-03-15 17:05:10'),(35,1,'','undefined',NULL,1,2,1,'2019-03-15 17:03:38',1,1,'2019-03-15 17:05:03'),(36,1,'','\'+5%+&amp;%&amp;/(///wa wewq wqe ---q weqw ewqe?dsfdsfsd=werewr werjweejrwljrl<div>sdf sdfsdf</div><div><br></div><div>&nbsp;wer werwerwrwrew .</div><div><br></div><div>İĞ&amp;/(&amp;/(()()===--++**///+^+^+!!!&gt;sdfsdfsd&lt;dsfsdf&gt;zZZZX</div>',NULL,1,2,2,'2019-03-15 15:38:19',1,0,NULL),(37,1,'','rty',NULL,1,2,1,'2019-03-18 11:48:47',1,0,NULL),(40,1,'','ytutu',NULL,1,2,4,'2019-03-18 12:20:15',1,0,NULL),(41,1,'','undefined',NULL,1,3,4,'2019-03-22 11:12:49',1,0,NULL),(42,42,'','ertert!\'^!\'WEDFSDF DF DF SDFSDFSDFSDFxVCCC<div><br></div><div><br></div><div>qweqw eqw5+^+%&amp;&amp;%/%&amp;%&amp;(//**rty* rty r*ty---- rtyty rtyrty</div><div><br></div><div><br></div><div>23 234 234 32434</div>',NULL,1,5,1,'2019-03-26 14:45:38',1,0,NULL),(43,42,'','345 5345 435',NULL,1,1,2,'2019-03-26 11:31:15',1,1,'2019-03-26 11:31:22'),(44,0,'yeni subject denemee33','12 312 312werwerwe<div>qw</div><div>wqeqwe</div>','44.jpg',1,1,2,'2019-03-27 08:23:39',1,0,'2019-03-26 12:17:03'),(47,44,'undefined','werwer qwerwer',NULL,1,1,3,'2019-03-27 08:26:47',1,0,NULL),(48,44,'undefined','sdkfjlskdjfdlkje rwer',NULL,1,1,4,'2019-03-27 13:21:51',1,0,NULL);
+INSERT INTO `pDesk_tickets` VALUES (1,0,'Ders Sayfası hakkında','sdfdf rwe wer wer werwer 42 234234234','ss.jpg',1,3,2,'2019-03-13 00:00:00',1,0,NULL,0),(29,1,'','fghfg hfgh',NULL,1,3,1,'2019-03-15 16:54:54',1,0,NULL,0),(30,1,'','&nbsp;tyut uty utyu tyu tutyu','qwe.jpg',1,2,3,'2019-03-15 16:54:37',1,0,NULL,0),(31,1,'','&nbsp;ghj fghjfghjfghghjghj 567567567',NULL,1,3,3,'2019-03-15 08:39:22',1,0,NULL,0),(32,1,'','yenice vapp asidasliqwpe qweip',NULL,1,3,2,'2019-03-15 11:13:38',1,1,'2019-03-18 12:17:20',0),(33,1,'','er ter tert',NULL,1,3,1,'2019-03-15 11:13:56',1,0,NULL,0),(34,1,'','&nbsp;we ewrw erewr',NULL,1,2,2,'2019-03-15 11:14:57',1,1,'2019-03-15 17:05:10',0),(35,1,'','undefined',NULL,1,2,1,'2019-03-15 17:03:38',1,1,'2019-03-15 17:05:03',0),(36,1,'','\'+5%+&amp;%&amp;/(///wa wewq wqe ---q weqw ewqe?dsfdsfsd=werewr werjweejrwljrl<div>sdf sdfsdf</div><div><br></div><div>&nbsp;wer werwerwrwrew .</div><div><br></div><div>İĞ&amp;/(&amp;/(()()===--++**///+^+^+!!!&gt;sdfsdfsd&lt;dsfsdf&gt;zZZZX</div>',NULL,1,2,2,'2019-03-15 15:38:19',1,0,NULL,0),(37,1,'','rty',NULL,1,2,1,'2019-03-18 11:48:47',1,0,NULL,0),(40,1,'','ytutu',NULL,1,2,4,'2019-03-18 12:20:15',1,0,NULL,0),(41,1,'','undefined',NULL,1,3,4,'2019-03-22 11:12:49',1,0,NULL,0),(42,42,'','ertert!\'^!\'WEDFSDF DF DF SDFSDFSDFSDFxVCCC<div><br></div><div><br></div><div>qweqw eqw5+^+%&amp;&amp;%/%&amp;%&amp;(//**rty* rty r*ty---- rtyty rtyrty</div><div><br></div><div><br></div><div>23 234 234 32434</div>',NULL,1,5,1,'2019-03-26 14:45:38',1,0,NULL,0),(43,42,'','345 5345 435',NULL,1,1,2,'2019-03-26 11:31:15',1,1,'2019-03-26 11:31:22',0),(44,0,'yeni subject denemee33','12 312 312werwerwe<div>qw</div><div>wqeqwe</div>','44.jpg',0,1,2,'2019-03-28 10:33:46',0,0,'2019-03-26 12:17:03',3),(47,44,'undefined','werwer qwerwer',NULL,1,1,3,'2019-03-27 08:26:47',1,0,NULL,0),(48,44,'undefined','sdkfjlskdjfdlkje rwer',NULL,1,1,4,'2019-03-27 13:21:51',1,0,NULL,0);
 /*!40000 ALTER TABLE `pDesk_tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -98,6 +99,31 @@ LOCK TABLES `pDesk_ticketStatus` WRITE;
 /*!40000 ALTER TABLE `pDesk_ticketStatus` DISABLE KEYS */;
 INSERT INTO `pDesk_ticketStatus` VALUES (1,'Yeni'),(2,'Devam Ediyor'),(3,'Tamamlandı'),(4,'Kapandı'),(5,'Beklemede');
 /*!40000 ALTER TABLE `pDesk_ticketStatus` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `pDesk_ticketTypes`
+--
+
+DROP TABLE IF EXISTS `pDesk_ticketTypes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `pDesk_ticketTypes` (
+  `ID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  PRIMARY KEY (`ID`),
+  UNIQUE KEY `ID_UNIQUE` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `pDesk_ticketTypes`
+--
+
+LOCK TABLES `pDesk_ticketTypes` WRITE;
+/*!40000 ALTER TABLE `pDesk_ticketTypes` DISABLE KEYS */;
+INSERT INTO `pDesk_ticketTypes` VALUES (1,'Diğer'),(2,'Ek Geliştirme'),(3,'Hata'),(4,'Soru');
+/*!40000 ALTER TABLE `pDesk_ticketTypes` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -173,10 +199,6 @@ UNLOCK TABLES;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-
-
-DROP PROCEDURE IF EXISTS `prcGetTicketById`;
-
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTicketById`(prmTicketID int)
 BEGIN
@@ -196,7 +218,8 @@ BEGIN
         pDesk_tickets.isDeleted,
         pDesk_tickets.assignUserID as assignUserID,
         assigned.fullname as assignedFullName,
-        date_format(pDesk_tickets.deletedDate, '%d.%m.%Y %H:%i') as deletedDate
+        date_format(pDesk_tickets.deletedDate, '%d.%m.%Y %H:%i') as deletedDate,
+        pDesk_tickets.ticketType
 	FROM 
 		pDesk_tickets
 		left join pDesk_organization on pDesk_tickets.organizationID = pDesk_organization.ID
@@ -222,9 +245,6 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-
-DROP PROCEDURE IF EXISTS `prcGetTicketDetail`;
-
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTicketDetail`(prmTicketID int)
 BEGIN
@@ -270,9 +290,6 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-
-DROP PROCEDURE IF EXISTS `prcGetTickets`;
-
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTickets`(prmOrganizationID int, prmUserID int)
 BEGIN
@@ -292,13 +309,16 @@ BEGIN
         pDesk_tickets.isDeleted,
         pDesk_tickets.assignUserID as assignUserID,
         assigned.fullname as assignedFullName,
-        date_format(pDesk_tickets.deletedDate, '%d.%m.%Y %H:%i') as deletedDate
+        date_format(pDesk_tickets.deletedDate, '%d.%m.%Y %H:%i') as deletedDate,
+        pDesk_tickets.ticketType,
+        pDesk_ticketTypes.name as ticketTypeName
 	FROM 
 		pDesk_tickets
 		left join pDesk_organization on pDesk_tickets.organizationID = pDesk_organization.ID
 		left join pDesk_ticketStatus on pDesk_tickets.status = pDesk_ticketStatus.ID
 		left join pDesk_users on pDesk_tickets.createdBy = pDesk_users.ID
         left join pDesk_users assigned on pDesk_tickets.assignUserID = assigned.ID
+        left join pDesk_ticketTypes on pDesk_tickets.ticketType = pDesk_ticketTypes.ID
 	where
 		pDesk_tickets.parentId = 0
         and  ifnull(pDesk_tickets.isDeleted, 0) = 0
@@ -320,10 +340,6 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-
-
-DROP PROCEDURE IF EXISTS `prcGetUserOrganizations`;
-
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetUserOrganizations`(prmUserID int)
 BEGIN
@@ -357,9 +373,6 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-
-DROP PROCEDURE IF EXISTS `prcGetUsers`;
-
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetUsers`(prmUserID int)
 BEGIN
@@ -410,10 +423,6 @@ DELIMITER ;
 /*!50003 SET collation_connection  = utf8_general_ci */ ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
-
-DROP PROCEDURE IF EXISTS `prcGetUserTypes`;
-
-
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetUserTypes`(prmUserID int)
 BEGIN
@@ -442,4 +451,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-03-27 17:08:28
+-- Dump completed on 2019-03-28 10:47:29
