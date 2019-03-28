@@ -29,7 +29,9 @@ export class LoginComponent implements OnInit {
     fd.append("password", this.strPassword);
     this.globalService.sendData('pDesk_users', fd).subscribe((resp:any)=>{
       if (resp !== null) {
-        window.localStorage.setItem('userInfo', JSON.stringify(resp)); 
+        let resUInfo = JSON.stringify(resp);
+        resUInfo = this.globalService.encodeString(resUInfo);
+        window.localStorage.setItem('pDeskUI', resUInfo ); 
         this.globalService.redirectPage('home');
       }
       else {

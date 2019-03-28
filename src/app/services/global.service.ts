@@ -25,11 +25,13 @@ export class GlobalService {
 
   getUserInfo() {
     let res: any;
-    if (localStorage.getItem("userInfo") === null) {
+    if (localStorage.getItem("pDeskUI") === null) {
       res = null;
     }
     else {
-      res = JSON.parse(window.localStorage.getItem("userInfo"));
+      let getEncodedCode = window.localStorage.getItem("pDeskUI");
+      let dCode = this.decodeString(getEncodedCode);
+      res = JSON.parse(dCode);
     }
     return res;
   }
@@ -144,6 +146,14 @@ export class GlobalService {
 
   openPageNewTabCustomUrl( strPage:string ){
     window.open(strPage, '_blank');
+  }
+
+  encodeString(text:string) {
+    return window.btoa(unescape(encodeURIComponent( text )));
+  }
+
+  decodeString(text:string) {
+    return decodeURIComponent(escape(window.atob( text )));
   }
 
 }
