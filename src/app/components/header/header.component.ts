@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit {
   constructor(
     private globalService:GlobalService
   ) { 
-    this.loggedUserFullname = globalService.getUserInfo().userFullName;
+    this.loggedUserFullname = this.globalService.getUserInfo()[0].fullname;
   }
 
   ngOnInit() {
