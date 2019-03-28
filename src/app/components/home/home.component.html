@@ -1,35 +1,17 @@
 <!-- Widgets  -->
 <div class="row">
 
-  <div class="col-lg-3 col-md-6">
+  <div class="col-lg-2 col-md-6">
     <div class="card">
       <div class="card-body">
-        <div class="stat-widget-five">
+        <div class="stat-widget-four">
           <div class="stat-icon dib text-danger">
             <i class="menu-icon fa fa-gears"></i>
           </div>
           <div class="stat-content">
             <div class="text-left dib">
-              <div class="stat-text"><span class="count">25</span></div>
-              <div class="stat-heading">Devam Ediyor</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-lg-3 col-md-6">
-    <div class="card">
-      <div class="card-body">
-        <div class="stat-widget-five">
-          <div class="stat-icon dib text-primary">
-            <i class="menu-icon fa fa-sun-o"></i>
-          </div>
-          <div class="stat-content">
-            <div class="text-left dib">
-              <div class="stat-text"><span class="count">34</span></div>
-              <div class="stat-heading">Yeni</div>
+              <div class="stat-text text-danger"><span class="count">25</span></div>
+              <div class="stat-text">Devam Ediyor</div>
             </div>
           </div>
         </div>
@@ -40,14 +22,32 @@
   <div class="col-lg-2 col-md-6">
     <div class="card">
       <div class="card-body">
-        <div class="stat-widget-five">
+        <div class="stat-widget-four">
+          <div class="stat-icon dib text-primary">
+            <i class="menu-icon fa fa-sun-o"></i>
+          </div>
+          <div class="stat-content">
+            <div class="text-left dib">
+              <div class="stat-text text-primary"><span class="count">34</span></div>
+              <div class="stat-text">Yeni</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-2 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="stat-widget-four">
           <div class="stat-icon dib text-warning">
             <i class="menu-icon fa fa-spinner"></i>
           </div>
           <div class="stat-content">
             <div class="text-left dib">
-              <div class="stat-text"><span class="count">74</span></div>
-              <div class="stat-heading">Beklemede</div>
+              <div class="stat-text text-warning"><span class="count">74</span></div>
+              <div class="stat-text">Beklemede</div>
             </div>
           </div>
         </div>
@@ -58,14 +58,14 @@
   <div class="col-lg-2 col-md-6">
       <div class="card">
         <div class="card-body">
-          <div class="stat-widget-five">
+          <div class="stat-widget-four">
             <div class="stat-icon dib text-success">
               <i class="menu-icon fa fa-check-square-o"></i>
             </div>
             <div class="stat-content">
               <div class="text-left dib">
-                <div class="stat-text"><span class="count">18</span></div>
-                <div class="stat-heading">Tamamlandı</div>
+                <div class="stat-text text-success"><span class="count">18</span></div>
+                <div class="stat-text">Tamamlandı</div>
               </div>
             </div>
           </div>
@@ -74,22 +74,40 @@
     </div> 
     
     <div class="col-lg-2 col-md-6">
-        <div class="card">
-          <div class="card-body">
-            <div class="stat-widget-five">
-              <div class="stat-icon dib text-secondary">
-                <i class="menu-icon fa fa-minus-square-o"></i>
-              </div>
-              <div class="stat-content">
-                <div class="text-left dib">
-                  <div class="stat-text"><span class="count">18</span></div>
-                  <div class="stat-heading">Kapandı</div>
-                </div>
+      <div class="card">
+        <div class="card-body">
+          <div class="stat-widget-four">
+            <div class="stat-icon dib text-secondary">
+              <i class="menu-icon fa fa-minus-square-o"></i>
+            </div>
+            <div class="stat-content">
+              <div class="text-left dib">
+                <div class="stat-text text-secondary"><span class="count">18</span></div>
+                <div class="stat-text">Kapandı</div>
               </div>
             </div>
           </div>
         </div>
-      </div>     
+      </div>
+    </div> 
+    
+    <div class="col-lg-2 col-md-6">
+      <div class="card">
+        <div class="card-body">
+          <div class="stat-widget-four">
+            <div class="stat-icon dib text-info">
+              <i class="menu-icon fa fa-ban"></i>
+            </div>
+            <div class="stat-content">
+              <div class="text-left dib">
+                <div class="stat-text text-info"><span class="count">18</span></div>
+                <div class="stat-text">Hata</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>     
 
 </div>
 <!-- /Widgets -->
@@ -102,7 +120,7 @@
       <div class="card">
         <div class="card-body">
           <span class="col-xl-10">Talepler</span>
-          <span class="col-xl-1 pull-right"> <button type="button" class="btn btn-primary" (click)="newTicket()">Yeni Talep <i class="fa fa-plus"></i> </button> </span>
+          <span class="col-xl-1"> <button type="button" class="btn btn-primary smallButton" (click)="newTicket()">Yeni Talep <i class="fa fa-plus"></i> </button> </span>
         </div>
         <div class="card-body--">
           <div class="table-stats order-table ov-h">
@@ -112,6 +130,7 @@
                   <th>ID</th>
                   <th>Kimde</th>
                   <th>Başlık</th>
+                  <th>Tür</th>
                   <th>Oluşturan</th>
                   <th>Oluşturma Tarihi</th>
                   <th>Durum</th>
@@ -122,6 +141,7 @@
                   <td> <a href="ticketDetail/{{ticket.ID}}">#{{ticket.ID}}</a> </td>
                   <td> <span class="name">{{ticket.assignedFullName}}</span> </td>
                   <td> <span class="product">{{ticket.subject}}</span> </td>
+                  <td> <span class="name">{{ticket.ticketTypeName}}</span> </td>
                   <td> <span class="name">{{ticket.fullname}}</span> </td>
                   <td> <span class="name">{{ticket.ticketDate}}</span> </td>
                   <td>

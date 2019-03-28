@@ -9,13 +9,16 @@ import { GlobalService } from 'src/app/services/global.service';
 export class HomeComponent implements OnInit {
 
   tickets:any;
+  loggedUser:any;
 
   constructor(
     private globalService:GlobalService, 
   ) { }
 
   ngOnInit() {
-    this.globalService.getData("pDesk_tickets.php?method=getTickets").then( 
+    this.loggedUser = this.globalService.getUserInfo()[0];
+    
+    this.globalService.getData("pDesk_tickets.php?method=getTickets&uID="+this.loggedUser.ID+"&oID="+this.loggedUser.organizationID).then( 
       ( res:any[] ) => {
         this.tickets = res;
       });

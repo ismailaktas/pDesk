@@ -25,6 +25,8 @@ export class TicketEditComponent implements OnInit, AfterViewInit {
   ticketStats:any;
   ticketParentId:number = 0;
   ticketStatus: string = "1";
+  ticketTypes:any;
+  ticketType:any = "1";  
   ticketDetails:any;
   modalRef: BsModalRef;
   message: string;
@@ -52,6 +54,11 @@ ngOnInit() {
   this.ticketID = this.activeRoute.snapshot.params['id'];
   this.loggedUser = this.globalService.getUserInfo()[0];
 
+  //types
+  this.globalService.getData('pDesk_tickets.php?method=getTicketTypes').then( 
+      ( res:any[] ) => {
+        this.ticketTypes = res;
+      });   
   //status
   this.globalService.getData('pDesk_ticketStatus.php?method=getTicketStatus').then( 
     ( res:any[] ) => {
@@ -77,6 +84,7 @@ getTicketDetails(){
         this.ticketStatus = res[0].status;
         this.ticketAssign = res[0].assignUserID;
         this.ticketParentId = res[0].parentId;
+        this.ticketType = res[0].ticketType;
     }); 
   }
 }
@@ -117,6 +125,7 @@ replyTicket() {
   fd.append("ticketResponse", this.ticketResponse);
   fd.append("ticketStatus", this.ticketStatus);
   fd.append("ticketAssign", this.ticketAssign);
+  fd.append("ticketType", this.ticketType);
   if (this.selectedFile != null) {
     fd.append("ticketFile", this.selectedFile, this.selectedFile.name);
   }

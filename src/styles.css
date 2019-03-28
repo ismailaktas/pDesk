@@ -138,6 +138,10 @@ footer.site-footer .footer-inner {
     padding: 10px !important;
 }
 
+.search-trigger{
+    margin-top: 45% !important;
+}
+
 .user-area .user-menu {
     background: #fff;
     border: none;
