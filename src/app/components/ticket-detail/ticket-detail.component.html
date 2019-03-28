@@ -19,7 +19,7 @@
               <span *ngIf="ticketDetail.isDeleted == 1" class="text-danger ticketDetailSubTitle">Bu cevap {{ticketDetail.fullname}} tarafından {{ticketDetail.deletedDate}} tarihinde silindi.</span>
           </div>
           <div class="col-lg-12 ticketContent">
-            <a *ngIf="ticketDetail.filePath" href="uploads/{{ticketDetail.filePath}}" target="_blank" title="Görüntülemek için tıklayınız"><i *ngIf="ticketDetail.filePath" class="fa fa-file-text"></i></a>
+            <button type="button" class="btn btn-info mediumButton" *ngIf="ticketDetail?.filePath" (click)="getFile(ticketDetail?.filePath)" title="İndirmek için tıklayınız"><i *ngIf="ticketDetail?.filePath" class="fa fa-file-text"></i> indir</button>
           </div>
           <div class="col-lg-12 ticketDetailSubTitle">
               <div *ngIf="ticketDetail.isDeleted==0">

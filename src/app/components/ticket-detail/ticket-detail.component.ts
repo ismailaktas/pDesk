@@ -137,5 +137,8 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
     this.modalRef.hide();
   }
 
-
+  getFile( strFileName:string ) {
+    this.globalService.openPageNewTabCustomUrl(this.globalService.apiUrl +  "pDesk_tickets.php?method=downloadFile&fileName="+strFileName);
+  }
+  
 }
