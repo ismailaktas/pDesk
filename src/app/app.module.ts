@@ -25,6 +25,7 @@ import { TicketEditComponent } from './components/ticket-edit/ticket-edit.compon
 import { DefinitionComponent } from './components/definition/definition.component';
 import { ReportsComponent } from './components/reports/reports.component';
 import { ChartsModule } from 'ng2-charts';
+import { SearchresultComponent } from './components/searchresult/searchresult.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { ChartsModule } from 'ng2-charts';
       LogoutComponent,
       TicketEditComponent,
       DefinitionComponent,
-      ReportsComponent
+      ReportsComponent,
+      SearchresultComponent
    ],
    imports: [
       BrowserModule,

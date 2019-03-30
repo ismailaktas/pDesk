@@ -5,8 +5,6 @@ import { GlobalService } from 'src/app/services/global.service';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { userInfo } from 'src/app/classes/userInfo';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-edit',

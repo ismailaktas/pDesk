@@ -11,6 +11,7 @@ import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.
 import { LogoutComponent } from './components/logout/logout.component';
 import { TicketEditComponent } from './components/ticket-edit/ticket-edit.component';
 import { ReportsComponent } from './components/reports/reports.component';
+import { SearchresultComponent } from './components/searchresult/searchresult.component';
 
 const routes: Routes = [
   { 
@@ -30,7 +31,8 @@ const routes: Routes = [
       { path: 'ticketDetail/:id', component: TicketDetailComponent },
       { path: 'ticketEdit/:id', component: TicketEditComponent },
       { path: 'definition', component: DefinitionComponent },
-      { path: 'reports', component: ReportsComponent }
+      { path: 'reports', component: ReportsComponent },
+      { path: 'searchresult/:searchkey', component: SearchresultComponent }
     ]
   }  
 ];

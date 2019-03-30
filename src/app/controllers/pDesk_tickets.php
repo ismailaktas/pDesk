@@ -44,7 +44,15 @@ switch($strMethod) {
         $result = $tickets->getTickets($organizationID, $userID);
         $result = $tickets->toJson;
         echo $result;
-        break;    
+        break;  
+    case "getTicketsSearch":
+        $userID  = $_GET['uID'];
+        $organizationID = $_GET['oID'];
+        $key = $_GET['key'];
+        $result = $tickets->getTicketsSearch($organizationID, $userID, $key);
+        $result = $tickets->toJson;
+        echo $result;
+        break;            
     case "ticketSave":
         $tickets->parentId = $_POST["parentTicketID"];
         $tickets->description = $_POST["ticketResponse"];

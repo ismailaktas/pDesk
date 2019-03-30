@@ -30,9 +30,13 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
 
-
-
+  searchTicket(searchKey:any) {
+    let strKey = searchKey.value;
+    if (strKey != "") {
+      this.globalService.redirectPage("/searchresult/"+strKey);
+    }
   }
 
 }
