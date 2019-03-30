@@ -20,6 +20,11 @@ interface IselectedModule {
   organizationName:string,
 }
 
+interface IselectedOrganization {
+  ID:string,
+  name:string,
+}
+
 @Component({
   selector: 'app-definition',
   templateUrl: './definition.component.html',
@@ -39,8 +44,11 @@ export class DefinitionComponent implements OnInit {
   selectedUserIDForDelete:any;
   loggedUser:any;
   ticketModules:any;
-  selectedModule:any;
-  selectedModuleIDForDelete
+    selectedModule:any;
+  selectedModuleIDForDelete:any;
+  organizations:any;
+  selectedOrganization:IselectedOrganization;
+  selectedOrganizationIDForDelete:any;
 
   constructor(
     private globalService:GlobalService, 
@@ -53,6 +61,7 @@ export class DefinitionComponent implements OnInit {
 
     this.getAllUsers();
     this.getAllModules();
+    this.getAllOrganizations();
 
     this.globalService.getData("pDesk_users.php?method=getUserTypes&uID="+this.loggedUser.ID).then( 
     ( res:any[] ) => {
@@ -79,6 +88,13 @@ export class DefinitionComponent implements OnInit {
         this.ticketModules = res;
       });
   }  
+
+  getAllOrganizations() {
+    this.globalService.getData("pDesk_users.php?method=getAllOrganizations").then( 
+      ( res:any[] ) => {
+        this.organizations = res;
+      });
+  }    
 
   userActivePassive(userID:number, isPassive:number ){
     isPassive = isPassive == 0 ? 1 : 0;
@@ -201,6 +217,58 @@ export class DefinitionComponent implements OnInit {
   }
 
   declineModule() {
+    this.modalRef.hide();
+  }  
+
+
+  openModalOrganization(templateOrganization: TemplateRef<any>, prmOrganizationID:any) {
+    this.modalRef = this.modalService.show(templateOrganization, {class: 'modal-lg'});
+    if( prmOrganizationID>0 ) {
+      this.selectedOrganization = this.organizations.find(x=>x.ID == prmOrganizationID);
+      console.log (this.selectedOrganization);
+
+    }
+    else {
+      let newOrganization:IselectedOrganization = { ID:"0", name:"" };
+      this.selectedOrganization = newOrganization;
+    }
+  } 
+  
+  openModalOrganizationDelete(templateOrganizationDelete: TemplateRef<any>, prmID:number) {
+    this.modalRef = this.modalService.show(templateOrganizationDelete, {class: 'modal-sm'});
+    this.selectedOrganizationIDForDelete = prmID;
+  }  
+
+  saveOrganization() {
+    let err = 0;
+
+    if (this.selectedOrganization.name == "" ) {
+      this.globalService.showMessage("Organizasyon alanı zorunludur", MessageType.warning);
+      return false;
+    }
+
+    var fd = new FormData();
+    fd.append("method", "saveOrganization");
+    fd.append("ID", this.selectedOrganization.ID );
+    fd.append("organizationName", this.selectedOrganization.name );
+
+    this.globalService.sendData('pDesk_organization', fd).subscribe((res)=>{
+      this.getAllOrganizations();
+      this.globalService.showMessage("İşlem başarıyla gerçekleşti", MessageType.info);
+      this.modalRef.hide();
+    });     
+     
+  }
+
+  confirmDeleteOrganization(){
+    this.globalService.getData("pDesk_organization.php?method=deleteOrganization&ID="+this.selectedOrganizationIDForDelete.toString()).then( 
+      ( res:any[] ) => {
+        this.modalRef.hide();
+        this.getAllOrganizations();
+      });    
+  }
+
+  declineorganization() {
     this.modalRef.hide();
   }  
 

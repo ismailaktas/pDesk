@@ -132,7 +132,32 @@ switch($strMethod) {
         header("Content-Length: " . filesize($uploadFile));
         header('Content-Type: application/octet-stream');
         header('Content-Disposition: attachment; filename='.$fileName);
-        readfile($uploadFile);                    
+        readfile($uploadFile);   
+    case "prcRptTicketStatus":
+        $organizationID = $_GET['oID'];
+        $result = $tickets->prcRptTicketStatus( $organizationID );
+        $result = $tickets->toJson;
+        echo $result;
+        break; 
+    case "prcRptTicketTypes":
+        $organizationID = $_GET['oID'];
+        $result = $tickets->prcRptTicketTypes( $organizationID );
+        $result = $tickets->toJson;
+        echo $result;
+        break; 
+    case "prcRptModuleErros":
+        $organizationID = $_GET['oID'];
+        $result = $tickets->prcRptModuleErros( $organizationID );
+        $result = $tickets->toJson;
+        echo $result;
+        break;      
+    case "prcRptAssignedUsers":
+        $organizationID = $_GET['oID'];
+        $result = $tickets->prcRptAssignedUsers( $organizationID );
+        $result = $tickets->toJson;
+        echo $result;
+        break;              
+                                                    
 }
 
 

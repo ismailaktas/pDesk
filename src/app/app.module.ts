@@ -23,6 +23,9 @@ import { SiteCompComponent } from './siteComp/siteComp.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { TicketEditComponent } from './components/ticket-edit/ticket-edit.component';
 import { DefinitionComponent } from './components/definition/definition.component';
+import { ReportsComponent } from './components/reports/reports.component';
+import { ChartsModule } from 'ng2-charts';
+
 
 @NgModule({
    declarations: [
@@ -38,7 +41,8 @@ import { DefinitionComponent } from './components/definition/definition.componen
       SiteCompComponent,
       LogoutComponent,
       TicketEditComponent,
-      DefinitionComponent
+      DefinitionComponent,
+      ReportsComponent
    ],
    imports: [
       BrowserModule,
@@ -51,7 +55,8 @@ import { DefinitionComponent } from './components/definition/definition.componen
       ToastrModule.forRoot(),
       NgxEditorModule,
       MatSelectModule,
-      ModalModule
+      ModalModule,
+      ChartsModule
    ],
    providers: [],
    bootstrap: [

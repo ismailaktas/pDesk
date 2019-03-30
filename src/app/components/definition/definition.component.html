@@ -96,16 +96,40 @@
     </div>
   </div>
 
-  <div class="col-lg-6 col-md-6">
-    <div class="card">
-      <div class="card-header">
-        Organizasyon
-      </div>
-      <div class="card-body">
-        ADASDASD SD SD
+  <div class="col-lg-6 col-md-6" *ngIf="loggedUser.userType == 1">
+      <div class="card">
+        <div class="card-header">
+          Organizasyon
+          <button type="button" class="btn btn-primary smallButton" (click)="openModalOrganization(templateOrganization, 0)"
+            *ngIf="loggedUser.userType == 1">+ Yeni </button>
+        </div>
+        <div class="card-body">
+          <div class="table-stats order-table ov-h">
+            <table class="table ">
+              <thead>
+                <tr>
+                  <th>Organizasyon</th>
+                  <th>#</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let organization of organizations">
+                  <td> <button type="button" (click)="openModalOrganization(templateOrganization, organization.ID )"
+                      class="btn btn-primary smallButton marginLeft0"
+                      title="Düzenlemek için tıklayınız">{{organization.name}}</button>
+                  </td>
+                  <td>
+                    <button type="button" *ngIf="loggedUser.userType != 3"
+                      (click)="openModalOrganizationDelete(templateDeleteOrganization, organization.ID )"
+                      class="btn btn-danger smallButton" title="Silmek için tıklayınız">Sil</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
 
   <ng-template #templateDeleteUser>
     <div class="modal-body text-center">
@@ -226,7 +250,35 @@
         <button type="button" class="btn btn-default" (click)="confirmDeleteModule()">Evet</button>
         <button type="button" class="btn btn-primary" (click)="declineModule()">Hayır</button>
       </div>
+  </ng-template>
+
+
+  <ng-template #templateOrganization>
+      <div class="modal-body">
+        <div class="col-lg-12 col-md-6">
+  
+          <div class="col-lg-12 ticketContent">
+            <div class="row form-group">
+              <div class="col-12 col-md-3"><label for="select" class=" form-control-label">Organizasyon</label></div>
+              <div class="col-12 col-md-9">
+                <input type="text" name="txtFullName" class="form-control" [(ngModel)]="selectedOrganization.name">
+              </div>
+            </div>
+          </div>
+        </div>
+  
+        <button type="button" class="btn btn-success" (click)="saveOrganization()">Kaydet</button>
+        <button type="button" class="btn btn-primary marginLeft10" (click)="declineorganization()">Hayır</button>
+      </div>
     </ng-template>
+
+    <ng-template #templateDeleteOrganization>
+        <div class="modal-body text-center">
+          <p>İşlemi gerçekleştirmek istiyor musunuz?</p>
+          <button type="button" class="btn btn-default" (click)="confirmDeleteOrganization()">Evet</button>
+          <button type="button" class="btn btn-primary" (click)="declineorganization()">Hayır</button>
+        </div>
+    </ng-template>    
 
 
 </div>

@@ -10,6 +10,7 @@ import { LoginComponent } from './components/login/login.component';
 import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.component';
 import { LogoutComponent } from './components/logout/logout.component';
 import { TicketEditComponent } from './components/ticket-edit/ticket-edit.component';
+import { ReportsComponent } from './components/reports/reports.component';
 
 const routes: Routes = [
   { 
@@ -28,7 +29,8 @@ const routes: Routes = [
       { path: 'home', component: HomeComponent },
       { path: 'ticketDetail/:id', component: TicketDetailComponent },
       { path: 'ticketEdit/:id', component: TicketEditComponent },
-      { path: 'definition', component: DefinitionComponent }
+      { path: 'definition', component: DefinitionComponent },
+      { path: 'reports', component: ReportsComponent }
     ]
   }  
 ];

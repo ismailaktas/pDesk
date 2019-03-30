@@ -60,7 +60,12 @@ class pDesk_users extends TableItem {
     function getUserOrganizations($userID)
     {
         return $this->executenonquery("call prcGetUserOrganizations($userID); ", true );
-    }     
+    }  
+    
+    function getAllOrganizations()
+    {
+        return $this->executenonquery("select ID, name from pdesk_organization order by name ", true );
+    }      
 
     
 }

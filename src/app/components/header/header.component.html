@@ -28,10 +28,11 @@
               </a>
 
               <div class="user-menu dropdown-menu">
-                  <a class="nav-link"><i class="fa fa- user"></i>{{ loggedUserFullname }}</a>
-                  <a class="nav-link" href="/home"><i class="fa fa -cog"></i>Ana Sayfa</a>
-                  <a class="nav-link" href="/definition"><i class="fa fa -cog"></i>Tanımlar</a>
-                  <a class="nav-link" href="/logout"><i class="fa fa-power -off"></i>Çıkış</a>
+                  <a class="nav-link"><i class="fa fa-user-circle-o"></i>{{ loggedUserFullname }}</a>
+                  <a class="nav-link" href="/home"><i class="fa fa-home"></i>Ana Sayfa</a>
+                  <a class="nav-link" href="/definition"><i class="fa fa-sliders"></i>Tanımlar</a>
+                  <a *ngIf="loggedUser.userType != 3 " class="nav-link" href="/reports"><i class="fa fa-bar-chart"></i>Raporlar</a>
+                  <a class="nav-link" href="/logout"><i class="fa fa-power-off"></i>Çıkış</a>
               </div>
           </div>
 

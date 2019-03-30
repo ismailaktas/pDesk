@@ -65,6 +65,28 @@ class pDesk_tickets extends TableItem {
         return $this->executenonquery("call prcGetCounts ($prmStatus, $prmType, $prmOrganizationID)", true );
     }     
     
+    function prcRptTicketStatus( $prmOrganizationID )
+    {
+        return $this->executenonquery("call prcRptTicketStatus ($prmOrganizationID)", true );
+    } 
+    
+    function prcRptTicketTypes( $prmOrganizationID )
+    {
+        return $this->executenonquery("call prcRptTicketTypes ($prmOrganizationID)", true );
+    }     
+
+    function prcRptModuleErros( $prmOrganizationID )
+    {
+        return $this->executenonquery("call prcRptModuleErros ($prmOrganizationID)", true );
+    }         
+
+    function prcRptAssignedUsers( $prmOrganizationID )
+    {
+        return $this->executenonquery("call prcRptAssignedUsers ($prmOrganizationID)", true );
+    }         
+    
+    
+    
     
 }
 ?>

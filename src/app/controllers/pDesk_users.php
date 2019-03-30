@@ -79,7 +79,12 @@ switch($strMethod) {
         $result = $users->getUserOrganizations($userID);
         $result = $users->toJson;
         echo $result;
-        break;        
+        break;  
+    case "getAllOrganizations":
+        $result = $users->getAllOrganizations();
+        $result = $users->toJson;
+        echo $result;
+        break;                
     case "getAllUsers":
         $userID = $_GET["uID"];
         $result = $users->getAllUsers($userID);
