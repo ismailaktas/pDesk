@@ -17,6 +17,7 @@ class pDesk_tickets extends TableItem {
     public $isDeleted;
     public $deletedDate;
     public $ticketType;
+    public $ticketModule;
         
     // Counctructor
     function __construct($ID = NULL) {
@@ -57,7 +58,12 @@ class pDesk_tickets extends TableItem {
     function getTicketTypes()
     {
         return $this->executenonquery("SELECT ID, name FROM pDesk_ticketTypes order by name", true );
-    }        
+    } 
+    
+    function getTicketCounts($prmStatus, $prmType, $prmOrganizationID)
+    {
+        return $this->executenonquery("call prcGetCounts ($prmStatus, $prmType, $prmOrganizationID)", true );
+    }     
     
     
 }

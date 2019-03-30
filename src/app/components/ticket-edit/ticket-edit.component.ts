@@ -40,6 +40,9 @@ export class TicketEditComponent implements OnInit, AfterViewInit {
   loggedUserID:number = this.globalService.getUserInfo().userID;
   selectedFile:File = null;
   loggedUser:any;
+  ticketModules:any
+  ticketModule:any = "1";
+  isAuth:boolean = false;
 
   constructor(
     private activeRoute:ActivatedRoute, 
@@ -64,8 +67,13 @@ ngOnInit() {
     ( res:any[] ) => {
       this.ticketStats = res;
   });
+  //ticket Modules
+  this.globalService.getData('pDesk_ticketModules.php?method=getTicketModules&oID='+this.loggedUser.organizationID).then( 
+      ( res:any[] ) => {
+        this.ticketModules = res;
+    });     
   //users
-  this.globalService.getData('pDesk_users.php?method=getUsers&oID='+this.loggedUser.organizationID).then( 
+  this.globalService.getData('pDesk_users.php?method=getUsers&oID='+this.loggedUser.organizationID+'&utype='+this.loggedUser.userType).then( 
     ( res:any[] ) => {
       this.users = res;
   });
@@ -85,6 +93,16 @@ getTicketDetails(){
         this.ticketAssign = res[0].assignUserID;
         this.ticketParentId = res[0].parentId;
         this.ticketType = res[0].ticketType;
+        this.ticketModule = res[0].ticketModule;
+
+        if( this.loggedUser.ID == res[0].ticketModule.userID ) {
+          this.isAuth = true;
+        }
+
+        if ( this.loggedUser.userType == 1 ) {
+          this.isAuth = true;
+        }
+
     }); 
   }
 }
@@ -120,12 +138,15 @@ replyTicket() {
   var fd = new FormData();
   fd.append("method", "ticketSave");
   fd.append("ID", this.ticketID);
+  fd.append("oID", this.loggedUser.organizationID);
+  fd.append("uID", this.loggedUser.userID);
   fd.append("parentTicketID", this.ticketParentId.toString());
   fd.append("ticketResponseSubject", this.ticketResponseSubject);
   fd.append("ticketResponse", this.ticketResponse);
   fd.append("ticketStatus", this.ticketStatus);
   fd.append("ticketAssign", this.ticketAssign);
   fd.append("ticketType", this.ticketType);
+  fd.append("ticketModule", this.ticketModule);
   if (this.selectedFile != null) {
     fd.append("ticketFile", this.selectedFile, this.selectedFile.name);
   }

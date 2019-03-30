@@ -5,6 +5,17 @@
     min-height: 550px !important;
 }
 
+.right-panel .top-left {
+    width: 150px !important;
+    float: left;
+}
+
+.organizationName {
+    line-height: 40px;
+    font-weight: bold;
+    width: max-content;    
+}
+
 .ticketNo{
     color: #269a1a;    
 }

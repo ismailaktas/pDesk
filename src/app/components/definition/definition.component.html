@@ -5,9 +5,7 @@
     <div class="card">
       <div class="card-header">
         Kullanıcı
-        <button type="button" 
-          class="btn btn-primary smallButton" 
-          (click)="openModalUser(templateUser, 0)"
+        <button type="button" class="btn btn-primary smallButton" (click)="openModalUser(templateUser, 0)"
           *ngIf="loggedUser.userType != 3">+ Yeni </button>
       </div>
       <div class="card-body">
@@ -38,25 +36,21 @@
                 <td> <span class="name">{{user.createdDate}}</span> </td>
                 <td> <span class="name">{{user.createdByName}}</span> </td>
                 <td>
-                  <button type="button" 
-                    *ngIf="loggedUser.userType != 3"
+                  <button type="button" *ngIf="loggedUser.userType != 3"
                     (click)="userActivePassive(user.userID, user.isPassive )"
                     class="btn btn-{{ user.isPassive == 0 ? 'success' : 'danger' }} smallButton"
                     title="Aktif/Pasif yapmak için tıklayınız">{{ user.isPassive == 0 ? 'Aktif' : 'Pasif' }}</button>
-                  
-                    <span 
-                      *ngIf="loggedUser.userType == 3"
-                      class="btn btn-{{ user.isPassive == 0 ? 'success' : 'danger' }} smallButton">
-                      {{ user.isPassive == 0 ? 'Aktif' : 'Pasif' }}
-                    </span>
+
+                  <span *ngIf="loggedUser.userType == 3"
+                    class="btn btn-{{ user.isPassive == 0 ? 'success' : 'danger' }} smallButton">
+                    {{ user.isPassive == 0 ? 'Aktif' : 'Pasif' }}
+                  </span>
                 </td>
                 <td>
-                    <button type="button"  
-                      *ngIf="loggedUser.userType != 3"
-                      (click)="openModalUserDelete(templateDeleteUser, user.userID )"
-                      class="btn btn-danger smallButton"
-                      title="Silmek için tıklayınız">Sil</button>
-                </td>                
+                  <button type="button" *ngIf="loggedUser.userType != 3"
+                    (click)="openModalUserDelete(templateDeleteUser, user.userID )" class="btn btn-danger smallButton"
+                    title="Silmek için tıklayınız">Sil</button>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -68,10 +62,36 @@
   <div class="col-lg-6 col-md-6">
     <div class="card">
       <div class="card-header">
-        Talep Durumu
+        Modül
+        <button type="button" class="btn btn-primary smallButton" (click)="openModalModule(templateModule, 0)"
+          *ngIf="loggedUser.userType != 3">+ Yeni </button>
       </div>
       <div class="card-body">
-        ADASDASD SD SD
+        <div class="table-stats order-table ov-h">
+          <table class="table ">
+            <thead>
+              <tr>
+                <th>Modül Adı</th>
+                <th>Organizasyon</th>
+                <th>#</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ticketModule of ticketModules">
+                <td> <button type="button" (click)="openModalModule(templateModule, ticketModule.moduleID )"
+                    class="btn btn-primary smallButton marginLeft0"
+                    title="Düzenlemek için tıklayınız">{{ticketModule.moduleName}}</button>
+                </td>
+                <td>{{ticketModule.organizationName}}</td>
+                <td>
+                  <button type="button" *ngIf="loggedUser.userType != 3"
+                    (click)="openModalModuleDelete(templateDeleteModule, ticketModule.moduleID )"
+                    class="btn btn-danger smallButton" title="Silmek için tıklayınız">Sil</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
@@ -88,12 +108,12 @@
   </div>
 
   <ng-template #templateDeleteUser>
-      <div class="modal-body text-center">
-        <p>İşlemi gerçekleştirmek istiyor musunuz?</p>
-        <button type="button" class="btn btn-default" (click)="confirmDeleteUser()">Evet</button>
-        <button type="button" class="btn btn-primary" (click)="decline()">Hayır</button>
-      </div>
-  </ng-template>  
+    <div class="modal-body text-center">
+      <p>İşlemi gerçekleştirmek istiyor musunuz?</p>
+      <button type="button" class="btn btn-default" (click)="confirmDeleteUser()">Evet</button>
+      <button type="button" class="btn btn-primary" (click)="declineUser()">Hayır</button>
+    </div>
+  </ng-template>
 
   <ng-template #templateUser>
     <div class="modal-body">
@@ -129,7 +149,8 @@
                 Türü</label></div>
             <div class="col-12 col-md-9">
               <mat-form-field style="z-index:999999">
-                <mat-select [(ngModel)]="selectedUser.userType" name="cmbUserType" [disabled]="loggedUser.userType == 3">
+                <mat-select [(ngModel)]="selectedUser.userType" name="cmbUserType"
+                  [disabled]="loggedUser.userType == 3">
                   <mat-option *ngFor="let userType of userTypes" [value]="userType.ID">
                     {{userType.name}}
                   </mat-option>
@@ -141,10 +162,11 @@
         <div class="col-lg-12 ticketContent">
           <div class="row form-group marginTop-15">
             <div class="col-12 col-md-3"><label for="cmbUserType" class="form-control-label marginTop15">Organizasyon
-                </label></div>
+              </label></div>
             <div class="col-12 col-md-9">
               <mat-form-field style="z-index:999999">
-                <mat-select [(ngModel)]="selectedUser.organizationID" name="cmbOrganizationID" [disabled]="loggedUser.userType == 3" >
+                <mat-select [(ngModel)]="selectedUser.organizationID" name="cmbOrganizationID"
+                  [disabled]="loggedUser.userType == 3">
                   <mat-option *ngFor="let organization of userOrganizations" [value]="organization.ID">
                     {{organization.name}}
                   </mat-option>
@@ -161,5 +183,50 @@
       <button type="button" class="btn btn-primary marginLeft10" (click)="decline()">Hayır</button>
     </div>
   </ng-template>
+
+
+  <ng-template #templateModule>
+    <div class="modal-body">
+      <div class="col-lg-12 col-md-6">
+
+        <div class="col-lg-12 ticketContent">
+          <div class="row form-group">
+            <div class="col-12 col-md-3"><label for="select" class=" form-control-label">Modül</label></div>
+            <div class="col-12 col-md-9">
+              <input type="text" name="txtFullName" class="form-control" [(ngModel)]="selectedModule.moduleName">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12 ticketContent">
+            <div class="row form-group marginTop-15">
+              <div class="col-12 col-md-3"><label for="cmbModuleOrganization" class="form-control-label marginTop15">Organizasyon
+                </label></div>
+              <div class="col-12 col-md-9">
+                <mat-form-field style="z-index:999999">
+                  <mat-select [(ngModel)]="selectedModule.organizationID" name="cmbOrganizationID"
+                    [disabled]="loggedUser.userType == 3">
+                    <mat-option *ngFor="let organization of userOrganizations" [value]="organization.ID">
+                      {{organization.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+      </div>
+
+      <button type="button" class="btn btn-success" (click)="saveModule()">Kaydet</button>
+      <button type="button" class="btn btn-primary marginLeft10" (click)="declineModule()">Hayır</button>
+    </div>
+  </ng-template>
+
+  <ng-template #templateDeleteModule>
+      <div class="modal-body text-center">
+        <p>İşlemi gerçekleştirmek istiyor musunuz?</p>
+        <button type="button" class="btn btn-default" (click)="confirmDeleteModule()">Evet</button>
+        <button type="button" class="btn btn-primary" (click)="declineModule()">Hayır</button>
+      </div>
+    </ng-template>
+
 
 </div>

@@ -32,7 +32,7 @@ class pDesk_users extends TableItem {
     
     function getUsers($organizationID)
     {
-        return $this->executenonquery("select ID, fullname from pDesk_users where ifnull(isPassive, 0) = 0 and organizationID = $organizationID order by fullname;", true );
+        return $this->executenonquery("select ID, fullname from pDesk_users where ifnull(isPassive, 0) = 0 and ( $organizationID = 0 or organizationID = $organizationID) order by fullname;", true );
     }
 
     function getAllUsers($userID)
@@ -42,7 +42,7 @@ class pDesk_users extends TableItem {
 
     function checkUser($username, $password)
     {
-        $strSQL = "select ID, fullname, organizationID, userType, username from pDesk_users where ifnull(isPassive, 0) = 0 and username = '$username' and password = '$password' ";
+        $strSQL = "call prcCheckUser('$username', '$password'); ";
         return $this->executenonquery($strSQL, true );
     }  
     

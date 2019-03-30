@@ -13,6 +13,13 @@ interface IselectedUser {
   userType:string
 }
 
+interface IselectedModule {
+  moduleID:string,
+  moduleName:string,
+  organizationID:string,
+  organizationName:string,
+}
+
 @Component({
   selector: 'app-definition',
   templateUrl: './definition.component.html',
@@ -31,6 +38,9 @@ export class DefinitionComponent implements OnInit {
   userOrganizations:any;  
   selectedUserIDForDelete:any;
   loggedUser:any;
+  ticketModules:any;
+  selectedModule:any;
+  selectedModuleIDForDelete
 
   constructor(
     private globalService:GlobalService, 
@@ -42,6 +52,7 @@ export class DefinitionComponent implements OnInit {
     this.loggedUser = this.globalService.getUserInfo()[0];
 
     this.getAllUsers();
+    this.getAllModules();
 
     this.globalService.getData("pDesk_users.php?method=getUserTypes&uID="+this.loggedUser.ID).then( 
     ( res:any[] ) => {
@@ -61,6 +72,13 @@ export class DefinitionComponent implements OnInit {
         this.users = res;
       });
   }
+
+  getAllModules() {
+    this.globalService.getData("pDesk_ticketModules.php?method=getAllModules&oID="+this.loggedUser.organizationID).then( 
+      ( res:any[] ) => {
+        this.ticketModules = res;
+      });
+  }  
 
   userActivePassive(userID:number, isPassive:number ){
     isPassive = isPassive == 0 ? 1 : 0;
@@ -131,6 +149,60 @@ export class DefinitionComponent implements OnInit {
     this.modalRef.hide();
   }
 
+
+  openModalModule(templateModule: TemplateRef<any>, prmModuleID:any) {
+    this.modalRef = this.modalService.show(templateModule, {class: 'modal-lg'});
+    if( prmModuleID>0 ) {
+      this.selectedModule = this.ticketModules.find(x=>x.moduleID == prmModuleID);
+      console.log (this.selectedModule);
+
+    }
+    else {
+      let newModule:IselectedModule = { moduleID:"0", moduleName:"", organizationID:"0", organizationName:"3" };
+      this.selectedModule = newModule;
+    }
+  }    
+
+  openModalModuleDelete(templateModuleDelete: TemplateRef<any>, prmID:number) {
+    this.modalRef = this.modalService.show(templateModuleDelete, {class: 'modal-sm'});
+    this.selectedModuleIDForDelete = prmID;
+  }   
+
+  saveModule() {
+    let err = 0;
+
+    if (this.selectedModule.moduleName == "" || this.selectedModule.organizationID == "0"  ) {
+      this.globalService.showMessage("Modül, organizasyon alanları zorunludur", MessageType.warning);
+      return false;
+    }
+
+    var fd = new FormData();
+    fd.append("method", "saveModule");
+    fd.append("ID", this.selectedModule.moduleID );
+    fd.append("moduleName", this.selectedModule.moduleName );
+    fd.append("organizationID", this.selectedModule.organizationID );
+    fd.append("uID", this.loggedUser.ID );
+    fd.append("oID", this.loggedUser.organizationID );
+
+    this.globalService.sendData('pDesk_ticketModules', fd).subscribe((res)=>{
+      this.getAllModules();
+      this.globalService.showMessage("İşlem başarıyla gerçekleşti", MessageType.info);
+      this.modalRef.hide();
+    });     
+   
+  }
+
+  confirmDeleteModule(){
+    this.globalService.getData("pDesk_ticketModules.php?method=deleteModule&ID="+this.selectedModuleIDForDelete.toString()).then( 
+      ( res:any[] ) => {
+        this.modalRef.hide();
+        this.getAllModules();
+      });    
+  }
+
+  declineModule() {
+    this.modalRef.hide();
+  }  
 
 
 }

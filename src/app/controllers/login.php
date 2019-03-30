@@ -12,8 +12,6 @@ require_once dirname ( dirname ( __FILE__ ) ) . "/classes/globalFunctions.php";
 
 
 
-$domain = ($_SERVER['HTTP_HOST'] != 'localhost') ? $_SERVER['HTTP_HOST'] : false; 
-setcookie('isim', 'ismail', time()+60*60*24*365, '/', $domain, false);
 
 
 

@@ -38,7 +38,7 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
   userFullName:any;
   ticketResponseSubject:string;
   loggedUser:any;
-  
+
   constructor(
       private activeRoute:ActivatedRoute, 
       private globalService:GlobalService, 
@@ -52,18 +52,13 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
     this.ticketID = this.activeRoute.snapshot.params['id'];
     this.loggedUser = this.globalService.getUserInfo()[0];
  
-    //types
-    this.globalService.getData('pDesk_tickets.php?method=getTicketTypes').then( 
-    ( res:any[] ) => {
-      this.ticketTypes = res;
-    });    
     //status
     this.globalService.getData('pDesk_ticketStatus.php?method=getTicketStatus').then( 
       ( res:any[] ) => {
         this.ticketStats = res;
-    });
+    }); 
     //users
-    this.globalService.getData('pDesk_users.php?method=getUsers&oID='+this.loggedUser.organizationID).then( 
+    this.globalService.getData('pDesk_users.php?method=getUsers&oID='+this.loggedUser.organizationID+'&utype='+this.loggedUser.userType).then( 
       ( res:any[] ) => {
         this.users = res;
     });

@@ -8,15 +8,31 @@ import { GlobalService } from 'src/app/services/global.service';
 })
 export class HeaderComponent implements OnInit {
 
+  loggedUser:any;
   loggedUserFullname:string;
+  organizationName:string;
 
   constructor(
     private globalService:GlobalService
   ) { 
-    this.loggedUserFullname = this.globalService.getUserInfo()[0].fullname;
+    
+      this.loggedUser  = this.globalService.getUserInfo()[0];
+
+      this.loggedUserFullname = this.loggedUser.fullname;
+
+      if (this.loggedUser.userType == 1 ) {
+        this.organizationName = "Admin";
+      }
+      else {
+        this.organizationName = this.loggedUser.organizationName;
+      }
+    
   }
 
   ngOnInit() {
+
+
+
   }
 
 }

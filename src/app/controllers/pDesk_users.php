@@ -60,6 +60,10 @@ switch($strMethod) {
         break;            
     case "getUsers":
         $organizationID = $_GET["oID"];
+        $userType = $_GET["utype"];
+        if ($userType == 1) {
+            $organizationID = 0;
+        }
         $result = $users->getUsers($organizationID);
         $result = $users->toJson;
         echo $result;
@@ -121,6 +125,7 @@ switch($strMethod) {
 
         if ($userCount>0) {
             $_SESSION['organizationID'] = $userObj[0]->organizationID;
+            $_SESSION['organizationName'] = $userObj[0]->organizationName;
             $_SESSION['userID'] = $userObj[0]->ID;
             $_SESSION['fullname'] = $userObj[0]->fullname;
             $_SESSION['username'] = $userObj[0]->username;
