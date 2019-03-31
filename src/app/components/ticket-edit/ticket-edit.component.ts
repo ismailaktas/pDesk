@@ -135,6 +135,13 @@ getFile( strFileName:string ) {
 
 replyTicket() {
 
+
+  if (this.ticketStatus == "" || this.ticketAssign == "") {
+    this.globalService.showMessage("Durum, Atanan alanları zorunludur", MessageType.warning);
+    return false;
+  }
+
+
   if (this.ticketParentId>0) {
     this.ticketModule = 0;
     this.ticketType = 0;

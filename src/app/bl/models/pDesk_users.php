@@ -32,7 +32,7 @@ class pDesk_users extends TableItem {
     
     function getUsers($organizationID)
     {
-        return $this->executenonquery("select ID, fullname from pDesk_users where ifnull(isPassive, 0) = 0 and ( $organizationID = 0 or organizationID = $organizationID) order by fullname;", true );
+        return $this->executenonquery("select ID, fullname from pDesk_users where ifnull(isPassive, 0) = 0 and ( $organizationID = 0 or (organizationID = $organizationID  or organizationID = 0 ) ) order by fullname;", true );
     }
 
     function getAllUsers($userID)

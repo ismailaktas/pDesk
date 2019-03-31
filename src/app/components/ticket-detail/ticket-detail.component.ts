@@ -32,7 +32,7 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
   message: string;
   selectedTicketID:number;
   selectedTicketParentID:number;
-  ticketAssign:any;
+  ticketAssign:any="0";
   users:any;
   userDetail:any;
   userFullName:any;
@@ -104,6 +104,11 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
 
     //let objU:any = this.globalService.getUserInfo();
     //console.log("Fullname: " + objU.userFullName );
+
+    if (this.ticketStatus == "" || (this.ticketAssign == "0") ) {
+      this.globalService.showMessage("Durum, Atanan alanları zorunludur", MessageType.warning);
+      return false;
+    }
 
     if (this.ticketID>0) {
       this.ticketModule = 0;
