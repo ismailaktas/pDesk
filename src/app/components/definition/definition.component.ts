@@ -136,10 +136,14 @@ export class DefinitionComponent implements OnInit {
 
   saveUser() {
     let err = 0;
-
+    
     if (this.selectedUser.fullname == "" || this.selectedUser.username == ""  || this.selectedUser.organizationID == "0"  || this.selectedUser.userType == "") {
       this.globalService.showMessage("İsim, kullanıcı adı, tür, organizasyon alanları zorunludur", MessageType.warning);
       return false;
+    }
+
+    if (this.selectedUser.userType == "1") {
+      this.selectedUser.organizationID = "0";
     }
 
     var fd = new FormData();

@@ -41,6 +41,7 @@ export class TicketEditComponent implements OnInit, AfterViewInit {
   ticketModules:any
   ticketModule:any = "1";
   isAuth:boolean = false;
+  ticketParentID:any;
 
   constructor(
     private activeRoute:ActivatedRoute, 
@@ -133,11 +134,17 @@ getFile( strFileName:string ) {
 }
 
 replyTicket() {
+
+  if (this.ticketParentId>0) {
+    this.ticketModule = 0;
+    this.ticketType = 0;
+  }
+
   var fd = new FormData();
   fd.append("method", "ticketSave");
   fd.append("ID", this.ticketID);
   fd.append("oID", this.loggedUser.organizationID);
-  fd.append("uID", this.loggedUser.userID);
+  fd.append("uID", this.loggedUser.ID);
   fd.append("parentTicketID", this.ticketParentId.toString());
   fd.append("ticketResponseSubject", this.ticketResponseSubject);
   fd.append("ticketResponse", this.ticketResponse);

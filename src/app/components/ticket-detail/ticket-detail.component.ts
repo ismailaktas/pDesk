@@ -37,6 +37,8 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
   userDetail:any;
   userFullName:any;
   ticketResponseSubject:string;
+  ticketModules:any
+  ticketModule:any = "1";
   loggedUser:any;
 
   constructor(
@@ -62,6 +64,16 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
       ( res:any[] ) => {
         this.users = res;
     });
+    //types
+    this.globalService.getData('pDesk_tickets.php?method=getTicketTypes').then( 
+    ( res:any[] ) => {
+      this.ticketTypes = res;
+    });      
+    //ticket Modules
+    this.globalService.getData('pDesk_ticketModules.php?method=getTicketModules&oID='+this.loggedUser.organizationID).then( 
+      ( res:any[] ) => {
+        this.ticketModules = res;
+    });     
     //ticket Details
     this.getTicketDetails();
 
@@ -93,15 +105,23 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
     //let objU:any = this.globalService.getUserInfo();
     //console.log("Fullname: " + objU.userFullName );
 
+    if (this.ticketID>0) {
+      this.ticketModule = 0;
+      this.ticketType = 0;
+    }
+
     var fd = new FormData();
     fd.append("method", "ticketSave");
     fd.append("ID", "0");
+    fd.append("oID", this.loggedUser.organizationID);
+    fd.append("uID", this.loggedUser.ID);    
     fd.append("parentTicketID", this.ticketID);
     fd.append("ticketResponseSubject", this.ticketResponseSubject);
     fd.append("ticketResponse", this.ticketResponse);
     fd.append("ticketStatus", this.ticketStatus);
     fd.append("ticketAssign", this.ticketAssign);
     fd.append("ticketType", this.ticketType);
+    fd.append("ticketModule", this.ticketModule);    
     fd.append("ticketFile", this.fileToUpload);
     this.globalService.sendData('pDesk_tickets', fd).subscribe((res)=>{
       this.ticketID = res;

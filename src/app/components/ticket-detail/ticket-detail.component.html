@@ -27,13 +27,12 @@
           </div>
           <div class="col-lg-12 ticketDetailSubTitle">
             <div *ngIf="ticketDetail.isDeleted==0">
-              <span>Tarih: {{ticketDetail.ticketDate}} - Oluşturan: {{ticketDetail.fullname}} - Atanan:
-                {{ticketDetail.assignedFullName}}</span> -
+              <span>Tarih: {{ticketDetail.ticketDate}} - Oluşturan: {{ticketDetail.fullname}} - Atanan: {{ticketDetail.assignedFullName}} - Tür: {{ticketDetail.ticketTypeName}} - Modül: {{ticketDetail.ticketModuleName}}</span> -
               <span id="{{ticketDetail.parentId == 0 ? 'dvStat' : ticketDetail.ID}}">Durum:
                 {{ticketDetail.statusName}}</span>
-              <button *ngIf="ticketDetail.userID == loggedUser.ID" type="button" class="btn btn-dangerNew smallButton"
+              <button *ngIf="ticketDetail.userID == loggedUser.ID || loggedUser.userType == 1" type="button" class="btn btn-dangerNew smallButton"
                 (click)="openModal(template, ticketDetail.ID, ticketDetail.parentId )">Sil</button>
-              <button *ngIf="ticketDetail.userID == loggedUser.ID" type="button" class="btn btn-warning smallButton"
+              <button *ngIf="ticketDetail.userID == loggedUser.ID || loggedUser.userType == 1" type="button" class="btn btn-warning smallButton"
                 (click)="globalService.redirectPage('ticketEdit/' + ticketDetail.ID)">Düzenle</button>
             </div>
           </div>
@@ -64,6 +63,37 @@
           <div class="col-lg-12 ticketContent">
             <app-ngx-editor [placeholder]="'Açıklama...'" [spellcheck]="true" [(ngModel)]="ticketResponse">
             </app-ngx-editor>
+          </div>
+
+          <div class="col-lg-12 ticketContent" *ngIf="ticketID==0">
+            <div class="row form-group">
+              <div class="col-12 col-md-1 marginTop15"><label for="select" class=" form-control-label">Tür</label></div>
+              <div class="col-12 col-md-4">
+                <mat-form-field>
+                  <mat-select [(ngModel)]="ticketType" name="cmbTicketTypes" aria-required="true">
+                    <mat-option *ngFor="let ticketType of ticketTypes" [value]="ticketType.ID">
+                      {{ticketType.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-12 ticketContent" *ngIf="ticketID==0">
+            <div class="row form-group">
+              <div class="col-12 col-md-1 marginTop15"><label for="select" class=" form-control-label">Modül</label>
+              </div>
+              <div class="col-12 col-md-4">
+                <mat-form-field>
+                  <mat-select [(ngModel)]="ticketModule" name="cmbTicketModule" aria-required="true">
+                    <mat-option *ngFor="let module of ticketModules" [value]="module.ID">
+                      {{module.name}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
           </div>
 
           <div class="col-lg-12 ticketContent">

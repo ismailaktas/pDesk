@@ -26,7 +26,7 @@ class pDesk_ticketModules extends TableItem {
     
     function getTicketModules($organizationID)
     {
-        return $this->executenonquery("select ID, name from pDesk_ticketModules where organizationID = $organizationID order by name;", true );
+        return $this->executenonquery("select ID, name from pDesk_ticketModules where ($organizationID = 0 or organizationID = $organizationID) order by name;", true );
     }
 
     function getAllModules($organizationID)
