@@ -77,30 +77,16 @@ CREATE TABLE IF NOT EXISTS `pdesk_tickets` (
   `ticketModule` int(11) DEFAULT '0',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
 
--- Dumping data for table ismail.pdesk_tickets: ~18 rows (approximately)
+-- Dumping data for table ismail.pdesk_tickets: ~4 rows (approximately)
 DELETE FROM `pdesk_tickets`;
 /*!40000 ALTER TABLE `pdesk_tickets` DISABLE KEYS */;
 INSERT INTO `pdesk_tickets` (`ID`, `parentId`, `subject`, `description`, `filePath`, `organizationID`, `status`, `assignUserID`, `createdDate`, `createdBy`, `isDeleted`, `deletedDate`, `ticketType`, `ticketModule`) VALUES
-	(1, 0, 'Ders Sayfası hakkında', 'sdfdf rwe wer wer werwer 42 234234234', 'ss.jpg', 1, 3, 2, '2019-03-13 00:00:00', 1, 0, NULL, 2, 3),
-	(29, 1, '', 'fghfg hfgh', NULL, 1, 3, 1, '2019-03-15 16:54:54', 1, 0, NULL, 0, 0),
-	(30, 1, 'rrrr', '&nbsp;tyut uty utyu tyu tutyu', 'qwe.jpg', 1, 2, 3, '2019-03-15 16:54:37', 1, 0, NULL, 0, 0),
-	(31, 0, '', '&nbsp;ghj fghjfghjfghghjghj 567567567', NULL, 3, 3, 3, '2019-03-15 08:39:22', 1, 0, NULL, 1, 2),
-	(32, 1, '', 'yenice vapp asidasliqwpe qweip', NULL, 1, 3, 2, '2019-03-15 11:13:38', 1, 1, '2019-03-18 12:17:20', 0, 0),
-	(33, 1, '', 'er ter tert', NULL, 1, 3, 1, '2019-03-15 11:13:56', 1, 0, NULL, 0, 0),
-	(34, 1, '', '&nbsp;we ewrw erewr', NULL, 1, 2, 2, '2019-03-15 11:14:57', 1, 1, '2019-03-15 17:05:10', 0, 0),
-	(35, 1, '', 'undefined', NULL, 1, 2, 1, '2019-03-15 17:03:38', 1, 1, '2019-03-15 17:05:03', 0, 0),
-	(36, 1, '', '\'+5%+&amp;%&amp;/(///wa wewq wqe ---q weqw ewqe?dsfdsfsd=werewr werjweejrwljrl<div>sdf sdfsdf</div><div><br></div><div>&nbsp;wer werwerwrwrew .</div><div><br></div><div>İĞ&amp;/(&amp;/(()()===--++**///+^+^+!!!&gt;sdfsdfsd&lt;dsfsdf&gt;zZZZX</div>', NULL, 1, 2, 2, '2019-03-15 15:38:19', 1, 0, NULL, 0, 0),
-	(37, 1, '', 'rty', NULL, 1, 2, 1, '2019-03-18 11:48:47', 1, 0, NULL, 0, 0),
-	(40, 1, '', 'ytutu', NULL, 1, 2, 4, '2019-03-18 12:20:15', 1, 0, NULL, 0, 0),
-	(41, 1, '', 'undefined', NULL, 1, 3, 4, '2019-03-22 11:12:49', 1, 0, NULL, 0, 0),
-	(42, 42, '', 'ertert!\'^!\'WEDFSDF DF DF SDFSDFSDFSDFxVCCC<div><br></div><div><br></div><div>qweqw eqw5+^+%&amp;&amp;%/%&amp;%&amp;(//**rty* rty r*ty---- rtyty rtyrty</div><div><br></div><div><br></div><div>23 234 234 32434</div>', NULL, 1, 5, 1, '2019-03-26 14:45:38', 1, 0, NULL, 0, 0),
-	(43, 42, '', '345 5345 435', NULL, 1, 1, 2, '2019-03-26 11:31:15', 1, 1, '2019-03-26 11:31:22', 0, 0),
-	(44, 0, 'yeni subject denemee33', '12 312 312werwerwe<div>qw</div><div>wqeqwe</div>', '44.jpg', 1, 3, 4, '2019-03-30 12:36:53', 1, 0, NULL, 3, 4),
-	(47, 44, 'undefined', 'werwer qwerwer', NULL, 1, 1, 3, '2019-03-27 08:26:47', 1, 0, NULL, 0, 0),
-	(48, 44, 'undefined', 'sdkfjlskdjfdlkje rwer', NULL, 1, 1, 4, '2019-03-27 13:21:51', 1, 0, NULL, 0, 0),
-	(49, 44, 'undefined', 'undefined', NULL, 0, 1, 4, '2019-03-30 12:06:26', 0, 0, NULL, 2, 3);
+	(50, 0, 'wer', 'wr', '50.jpg', 1, 3, 17, '2019-03-31 09:43:58', 19, 0, NULL, 2, 7),
+	(51, 50, 'undefined', 'ewrwe', NULL, 0, 2, 19, '2019-03-31 09:55:10', 17, 0, NULL, 1, 1),
+	(52, 50, 'undefined', 'sdf we rwerwe', NULL, 0, 5, 19, '2019-03-31 09:58:19', 0, 1, '2019-03-31 10:37:23', 0, 0),
+	(53, 50, 'undefined', 'düzelmiş', NULL, 1, 3, 19, '2019-03-31 10:06:10', 19, 0, NULL, 0, 0);
 /*!40000 ALTER TABLE `pdesk_tickets` ENABLE KEYS */;
 
 -- Dumping structure for table ismail.pdesk_ticketstatus
@@ -156,16 +142,16 @@ CREATE TABLE IF NOT EXISTS `pdesk_users` (
   `isPassive` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- Dumping data for table ismail.pdesk_users: ~4 rows (approximately)
 DELETE FROM `pdesk_users`;
 /*!40000 ALTER TABLE `pdesk_users` DISABLE KEYS */;
 INSERT INTO `pdesk_users` (`ID`, `fullname`, `username`, `password`, `organizationID`, `userType`, `createdDate`, `createdBy`, `isPassive`) VALUES
-	(1, 'İsmail AKTAŞ', 'ismail', '1', 1, 1, '2019-03-13 00:00:00', 1, 0),
-	(2, 'Ayşegül Dilaver', 'aysegul', '1', 3, 2, '2019-03-13 00:00:00', 1, 0),
-	(3, 'Eyüp Turan', 'eyup', '1', 2, 3, '2019-03-27 23:53:05', 1, 0),
-	(4, 'Cem Çavuş', 'cem', '1', 1, 3, '2019-03-13 00:00:00', 1, 0);
+	(1, 'İsmail AKTAŞ', 'ismail', '1', 0, 1, '2019-03-13 00:00:00', 1, 0),
+	(17, 'Eyüp Ensari Turan', 'eyup', '1', 0, 1, '2019-03-31 09:25:11', 1, 0),
+	(18, 'Ayşegül Dilaver', 'aysegul', '1', 1, 2, '2019-03-31 09:26:04', 1, 0),
+	(19, 'Cem Çavuş', 'cem', '1', 1, 3, '2019-03-31 09:26:21', 1, 0);
 /*!40000 ALTER TABLE `pdesk_users` ENABLE KEYS */;
 
 -- Dumping structure for table ismail.pdesk_usertype
@@ -544,7 +530,9 @@ DELIMITER ;
 -- Dumping structure for procedure ismail.prcRptAssignedUsers
 DROP PROCEDURE IF EXISTS `prcRptAssignedUsers`;
 DELIMITER //
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcRptAssignedUsers`(prmOrganizationID int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcRptAssignedUsers`(
+	IN `prmOrganizationID` int
+)
 BEGIN
 
 	select 
@@ -556,6 +544,7 @@ BEGIN
 	where
 		ifnull(pdesk_tickets.isDeleted, 0) = 0
 		and ifnull(pdesk_tickets.status , 0) = 2
+		and ifnull(pdesk_tickets.parentId, 0) = 0
 		and (pdesk_tickets.organizationID = prmOrganizationID or 0 = prmOrganizationID)
 	group by
 		pdesk_tickets.assignUserID
@@ -568,7 +557,9 @@ DELIMITER ;
 -- Dumping structure for procedure ismail.prcRptModuleErros
 DROP PROCEDURE IF EXISTS `prcRptModuleErros`;
 DELIMITER //
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcRptModuleErros`(prmOrganizationID int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcRptModuleErros`(
+	IN `prmOrganizationID` int
+)
 BEGIN
 
 	select 
@@ -580,6 +571,7 @@ BEGIN
 	where
 		ifnull(pdesk_tickets.isDeleted, 0) = 0
 		and ifnull(pdesk_tickets.ticketType, 0) = 3
+		and ifnull(pdesk_tickets.parentId, 0) = 0
 		and (pdesk_tickets.organizationID = prmOrganizationID or 0 = prmOrganizationID)
 	group by
 		pdesk_tickets.ticketModule
@@ -592,7 +584,9 @@ DELIMITER ;
 -- Dumping structure for procedure ismail.prcRptTicketStatus
 DROP PROCEDURE IF EXISTS `prcRptTicketStatus`;
 DELIMITER //
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcRptTicketStatus`(prmOrganizationID int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcRptTicketStatus`(
+	IN `prmOrganizationID` int
+)
 BEGIN
 
 
@@ -604,6 +598,7 @@ BEGIN
 		inner join pdesk_ticketstatus on pdesk_tickets.status = pdesk_ticketstatus.ID
 	where
 		ifnull(pdesk_tickets.isDeleted, 0) = 0
+		and ifnull(pdesk_tickets.parentId, 0) = 0
 		and ( pdesk_tickets.organizationID = prmOrganizationID or 0 = prmOrganizationID )
 	group by
 		pdesk_tickets.status
@@ -617,7 +612,9 @@ DELIMITER ;
 -- Dumping structure for procedure ismail.prcRptTicketTypes
 DROP PROCEDURE IF EXISTS `prcRptTicketTypes`;
 DELIMITER //
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcRptTicketTypes`(prmOrganizationID int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcRptTicketTypes`(
+	IN `prmOrganizationID` int
+)
 BEGIN
 
 	select 
@@ -628,6 +625,7 @@ BEGIN
 		inner join pdesk_tickettypes on pdesk_tickets.ticketType = pdesk_tickettypes.ID
 	where
 		ifnull(pdesk_tickets.isDeleted, 0) = 0
+		and ifnull(pdesk_tickets.parentId, 0) = 0
 		and (pdesk_tickets.organizationID = 0 or 0 = 0)
 	group by
 		pdesk_tickets.ticketType
