@@ -43,9 +43,9 @@ CREATE TABLE IF NOT EXISTS `pdesk_ticketmodules` (
   `organizationID` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
--- Dumping data for table ismail.pdesk_ticketmodules: 7 rows
+-- Dumping data for table ismail.pdesk_ticketmodules: 9 rows
 DELETE FROM `pdesk_ticketmodules`;
 /*!40000 ALTER TABLE `pdesk_ticketmodules` DISABLE KEYS */;
 INSERT INTO `pdesk_ticketmodules` (`ID`, `name`, `organizationID`) VALUES
@@ -55,7 +55,9 @@ INSERT INTO `pdesk_ticketmodules` (`ID`, `name`, `organizationID`) VALUES
 	(4, 'Kurul Komisyon', 1),
 	(5, 'Projeler', 1),
 	(8, 'Yoklama', 3),
-	(7, 'Duyurular', 1);
+	(7, 'Duyurular', 1),
+	(10, 'revir', 3),
+	(11, 'duyurular', 3);
 /*!40000 ALTER TABLE `pdesk_ticketmodules` ENABLE KEYS */;
 
 -- Dumping structure for table ismail.pdesk_tickets
@@ -77,16 +79,19 @@ CREATE TABLE IF NOT EXISTS `pdesk_tickets` (
   `ticketModule` int(11) DEFAULT '0',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=57 DEFAULT CHARSET=utf8;
 
--- Dumping data for table ismail.pdesk_tickets: ~4 rows (approximately)
+-- Dumping data for table ismail.pdesk_tickets: ~7 rows (approximately)
 DELETE FROM `pdesk_tickets`;
 /*!40000 ALTER TABLE `pdesk_tickets` DISABLE KEYS */;
 INSERT INTO `pdesk_tickets` (`ID`, `parentId`, `subject`, `description`, `filePath`, `organizationID`, `status`, `assignUserID`, `createdDate`, `createdBy`, `isDeleted`, `deletedDate`, `ticketType`, `ticketModule`) VALUES
 	(50, 0, 'wer', 'wr', '50.jpg', 1, 3, 17, '2019-03-31 09:43:58', 19, 0, NULL, 2, 7),
 	(51, 50, 'undefined', 'ewrwe', NULL, 0, 2, 19, '2019-03-31 09:55:10', 17, 0, NULL, 1, 1),
 	(52, 50, 'undefined', 'sdf we rwerwe', NULL, 0, 5, 19, '2019-03-31 09:58:19', 0, 1, '2019-03-31 10:37:23', 0, 0),
-	(53, 50, 'undefined', 'düzelmiş', NULL, 1, 3, 19, '2019-03-31 10:06:10', 19, 0, NULL, 0, 0);
+	(53, 50, 'undefined', 'düzelmiş', NULL, 1, 3, 19, '2019-03-31 10:06:10', 19, 0, NULL, 0, 0),
+	(54, 0, 'revirde hata', 'revir kaydı alınamıyor', '54.jpg', 3, 3, 1, '2019-03-31 23:49:01', 22, 0, NULL, 3, 10),
+	(55, 54, 'undefined', 'Kontrol eder misiniz?', NULL, 0, 2, 22, '2019-03-31 23:52:56', 1, 0, NULL, 0, 0),
+	(56, 54, 'undefined', 'Tamam. Çalışıyor.', NULL, 3, 3, 22, '2019-04-01 00:31:23', 22, 0, NULL, 0, 0);
 /*!40000 ALTER TABLE `pdesk_tickets` ENABLE KEYS */;
 
 -- Dumping structure for table ismail.pdesk_ticketstatus
@@ -142,16 +147,19 @@ CREATE TABLE IF NOT EXISTS `pdesk_users` (
   `isPassive` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
--- Dumping data for table ismail.pdesk_users: ~4 rows (approximately)
+-- Dumping data for table ismail.pdesk_users: ~7 rows (approximately)
 DELETE FROM `pdesk_users`;
 /*!40000 ALTER TABLE `pdesk_users` DISABLE KEYS */;
 INSERT INTO `pdesk_users` (`ID`, `fullname`, `username`, `password`, `organizationID`, `userType`, `createdDate`, `createdBy`, `isPassive`) VALUES
 	(1, 'İsmail AKTAŞ', 'ismail', '1', 0, 1, '2019-03-13 00:00:00', 1, 0),
 	(17, 'Eyüp Ensari Turan', 'eyup', '1', 0, 1, '2019-03-31 09:25:11', 1, 0),
 	(18, 'Ayşegül Dilaver', 'aysegul', '1', 1, 2, '2019-03-31 09:26:04', 1, 0),
-	(19, 'Cem Çavuş', 'cem', '1', 1, 3, '2019-03-31 09:26:21', 1, 0);
+	(19, 'Cem Çavuş', 'cem', '1', 1, 3, '2019-03-31 09:26:21', 1, 0),
+	(20, 'sakine', 'sakine', '1', 3, 2, '2019-03-31 23:38:29', 1, 0),
+	(21, 'Mustafa Aydos', 'mustafa', '1', 2, 2, '2019-03-31 23:38:54', 1, 0),
+	(22, 'emre', 'emre', '1', 3, 3, '2019-03-31 23:39:21', 1, 0);
 /*!40000 ALTER TABLE `pdesk_users` ENABLE KEYS */;
 
 -- Dumping structure for table ismail.pdesk_usertype
@@ -262,7 +270,10 @@ DELIMITER ;
 -- Dumping structure for procedure ismail.prcGetTicketById
 DROP PROCEDURE IF EXISTS `prcGetTicketById`;
 DELIMITER //
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTicketById`(prmTicketID int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTicketById`(
+	IN `prmTicketID` int
+
+)
 BEGIN
 	SELECT 
 		pDesk_tickets.ID,
@@ -277,20 +288,50 @@ BEGIN
 		date_format(pDesk_tickets.createdDate, '%d.%m.%Y %H:%i') as ticketDate,
 		pDesk_users.ID as userID,
 		pDesk_users.fullname,
-        pDesk_tickets.isDeleted,
-        pDesk_tickets.assignUserID as assignUserID,
-        assigned.fullname as assignedFullName,
-        date_format(pDesk_tickets.deletedDate, '%d.%m.%Y %H:%i') as deletedDate,
-		pDesk_tickets.ticketType,
-        pDesk_ticketTypes.name as ticketTypeName,
+      pDesk_tickets.isDeleted,
+      -- assigned.ID as assignUserID,
+      -- assigned.fullname as assignedFullName,
+      date_format(pDesk_tickets.deletedDate, '%d.%m.%Y %H:%i') as deletedDate,
+      pDesk_tickets.ticketType,
+      pDesk_ticketTypes.name as ticketTypeName,
 		pDesk_tickets.ticketModule,
-		pDesk_ticketModules.name as ticketModuleName		
+		pDesk_ticketModules.name as ticketModuleName,
+		
+		(
+			(case when
+					(SELECT COUNT(*) FROM pDesk_tickets pTickets WHERE pTickets.parentId = pDesk_tickets.ID AND pTickets.isDeleted = 0 ) > 0 then
+						(
+							SELECT pTicketsLast.assignUserID FROM pDesk_tickets pTicketsLast 
+							left join pDesk_users pTicketsLastAssigned on pTicketsLast.assignUserID = pTicketsLastAssigned.ID
+							WHERE pTicketsLast.parentId = pDesk_tickets.ID AND pTicketsLast.isDeleted = 0
+							ORDER BY pTicketsLast.ID DESC LIMIT 1
+						)
+					else
+					pDesk_tickets.assignUserID
+			 end)
+		
+		) AS assignUserID,
+		
+		(
+			(case when
+					(SELECT COUNT(*) FROM pDesk_tickets pTickets WHERE pTickets.parentId = pDesk_tickets.ID AND pTickets.isDeleted = 0 ) > 0 then
+						(
+							SELECT pTicketsLastAssigned.fullname FROM pDesk_tickets pTicketsLast 
+							left join pDesk_users pTicketsLastAssigned on pTicketsLast.assignUserID = pTicketsLastAssigned.ID
+							WHERE pTicketsLast.parentId = pDesk_tickets.ID AND pTicketsLast.isDeleted = 0
+							ORDER BY pTicketsLast.ID DESC LIMIT 1
+						)
+					else
+					assigned.fullname
+			 end)
+		
+		) AS assignedFullName	
 	FROM 
 		pDesk_tickets
 		left join pDesk_organization on pDesk_tickets.organizationID = pDesk_organization.ID
 		left join pDesk_ticketStatus on pDesk_tickets.status = pDesk_ticketStatus.ID
 		left join pDesk_users on pDesk_tickets.createdBy = pDesk_users.ID
-        left join pDesk_users assigned on pDesk_tickets.assignUserID = assigned.ID
+      left join pDesk_users assigned on pDesk_tickets.assignUserID = assigned.ID
 		left join pDesk_ticketTypes on pDesk_tickets.ticketType = pDesk_ticketTypes.ID
 		left join pDesk_ticketModules on pDesk_tickets.ticketModule = pDesk_ticketModules.ID
 	where
@@ -303,7 +344,11 @@ DELIMITER ;
 -- Dumping structure for procedure ismail.prcGetTicketDetail
 DROP PROCEDURE IF EXISTS `prcGetTicketDetail`;
 DELIMITER //
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTicketDetail`(prmTicketID int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTicketDetail`(
+	IN `prmTicketID` int
+
+
+)
 BEGIN
 	SELECT 
 		pDesk_tickets.ID,
@@ -318,14 +363,44 @@ BEGIN
 		date_format(pDesk_tickets.createdDate, '%d.%m.%Y %H:%i') as ticketDate,
 		pDesk_users.ID as userID,
 		pDesk_users.fullname,
-        pDesk_tickets.isDeleted,
-        pDesk_tickets.assignUserID as assignUserID,
-        assigned.fullname as assignedFullName,
-        date_format(pDesk_tickets.deletedDate, '%d.%m.%Y %H:%i') as deletedDate,
-        pDesk_tickets.ticketType,
-        pDesk_ticketTypes.name as ticketTypeName,
+      pDesk_tickets.isDeleted,
+      -- assigned.ID as assignUserID,
+      -- assigned.fullname as assignedFullName,
+      date_format(pDesk_tickets.deletedDate, '%d.%m.%Y %H:%i') as deletedDate,
+      pDesk_tickets.ticketType,
+      pDesk_ticketTypes.name as ticketTypeName,
 		pDesk_tickets.ticketModule,
-		pDesk_ticketModules.name as ticketModuleName
+		pDesk_ticketModules.name as ticketModuleName,
+		
+		(
+			(case when
+					(SELECT COUNT(*) FROM pDesk_tickets pTickets WHERE pTickets.parentId = pDesk_tickets.ID AND pTickets.isDeleted = 0 ) > 0 then
+						(
+							SELECT pTicketsLast.assignUserID FROM pDesk_tickets pTicketsLast 
+							left join pDesk_users pTicketsLastAssigned on pTicketsLast.assignUserID = pTicketsLastAssigned.ID
+							WHERE pTicketsLast.parentId = pDesk_tickets.ID AND pTicketsLast.isDeleted = 0
+							ORDER BY pTicketsLast.ID DESC LIMIT 1
+						)
+					else
+					pDesk_tickets.assignUserID
+			 end)
+		
+		) AS assignUserID,
+		
+		(
+			(case when
+					(SELECT COUNT(*) FROM pDesk_tickets pTickets WHERE pTickets.parentId = pDesk_tickets.ID AND pTickets.isDeleted = 0 ) > 0 then
+						(
+							SELECT pTicketsLastAssigned.fullname FROM pDesk_tickets pTicketsLast 
+							left join pDesk_users pTicketsLastAssigned on pTicketsLast.assignUserID = pTicketsLastAssigned.ID
+							WHERE pTicketsLast.parentId = pDesk_tickets.ID AND pTicketsLast.isDeleted = 0
+							ORDER BY pTicketsLast.ID DESC LIMIT 1
+						)
+					else
+					assigned.fullname
+			 end)
+		
+		) AS assignedFullName
 	FROM 
 		pDesk_tickets
 		left join pDesk_organization on pDesk_tickets.organizationID = pDesk_organization.ID
@@ -337,14 +412,19 @@ BEGIN
 	where
 		(pDesk_tickets.ID = prmTicketID or pDesk_tickets.parentId = prmTicketID)
 	order by
-		parentId asc, pDesk_tickets.createdDate desc;
+		parentId asc, pDesk_tickets.createdDate;
 END//
 DELIMITER ;
 
 -- Dumping structure for procedure ismail.prcGetTickets
 DROP PROCEDURE IF EXISTS `prcGetTickets`;
 DELIMITER //
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTickets`(prmOrganizationID int, prmUserID int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTickets`(
+	IN `prmOrganizationID` int,
+	IN `prmUserID` int
+
+
+)
 BEGIN
 	SELECT 
 		pDesk_tickets.ID,
@@ -359,21 +439,51 @@ BEGIN
 		date_format(pDesk_tickets.createdDate, '%d.%m.%Y %H:%i') as ticketDate,
 		pDesk_users.ID as userID,
 		pDesk_users.fullname,
-        pDesk_tickets.isDeleted,
-        pDesk_tickets.assignUserID as assignUserID,
-        assigned.fullname as assignedFullName,
-        date_format(pDesk_tickets.deletedDate, '%d.%m.%Y %H:%i') as deletedDate,
-        pDesk_tickets.ticketType,
-        pDesk_ticketTypes.name as ticketTypeName,
+      pDesk_tickets.isDeleted,
+      -- assigned.ID as assignUserID,
+      -- assigned.fullname as assignedFullName,
+      date_format(pDesk_tickets.deletedDate, '%d.%m.%Y %H:%i') as deletedDate,
+      pDesk_tickets.ticketType,
+      pDesk_ticketTypes.name as ticketTypeName,
 		pDesk_tickets.ticketModule,
-		pDesk_ticketModules.name as ticketModuleName
+		pDesk_ticketModules.name as ticketModuleName,
+		
+		(
+			(case when
+					(SELECT COUNT(*) FROM pDesk_tickets pTickets WHERE pTickets.parentId = pDesk_tickets.ID AND pTickets.isDeleted = 0 ) > 0 then
+						(
+							SELECT pTicketsLast.assignUserID FROM pDesk_tickets pTicketsLast 
+							left join pDesk_users pTicketsLastAssigned on pTicketsLast.assignUserID = pTicketsLastAssigned.ID
+							WHERE pTicketsLast.parentId = pDesk_tickets.ID AND pTicketsLast.isDeleted = 0
+							ORDER BY pTicketsLast.ID DESC LIMIT 1
+						)
+					else
+					pDesk_tickets.assignUserID
+			 end)
+		
+		) AS assignUserID,
+		
+		(
+			(case when
+					(SELECT COUNT(*) FROM pDesk_tickets pTickets WHERE pTickets.parentId = pDesk_tickets.ID AND pTickets.isDeleted = 0 ) > 0 then
+						(
+							SELECT pTicketsLastAssigned.fullname FROM pDesk_tickets pTicketsLast 
+							left join pDesk_users pTicketsLastAssigned on pTicketsLast.assignUserID = pTicketsLastAssigned.ID
+							WHERE pTicketsLast.parentId = pDesk_tickets.ID AND pTicketsLast.isDeleted = 0
+							ORDER BY pTicketsLast.ID DESC LIMIT 1
+						)
+					else
+					pDesk_tickets.assignUserID
+			 end)
+		
+		) AS assignedFullName
 	FROM 
 		pDesk_tickets
 		left join pDesk_organization on pDesk_tickets.organizationID = pDesk_organization.ID
 		left join pDesk_ticketStatus on pDesk_tickets.status = pDesk_ticketStatus.ID
 		left join pDesk_users on pDesk_tickets.createdBy = pDesk_users.ID
-        left join pDesk_users assigned on pDesk_tickets.assignUserID = assigned.ID
-        left join pDesk_ticketTypes on pDesk_tickets.ticketType = pDesk_ticketTypes.ID
+      left join pDesk_users assigned on pDesk_tickets.assignUserID = assigned.ID
+      left join pDesk_ticketTypes on pDesk_tickets.ticketType = pDesk_ticketTypes.ID
 		left join pDesk_ticketModules on pDesk_tickets.ticketModule = pDesk_ticketModules.ID
 
 	where
@@ -388,7 +498,12 @@ DELIMITER ;
 -- Dumping structure for procedure ismail.prcGetTicketsSearch
 DROP PROCEDURE IF EXISTS `prcGetTicketsSearch`;
 DELIMITER //
-CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTicketsSearch`(prmOrganizationID int, prmUserID int, prmKey varchar(50) )
+CREATE DEFINER=`root`@`localhost` PROCEDURE `prcGetTicketsSearch`(
+	IN `prmOrganizationID` int,
+	IN `prmUserID` int,
+	IN `prmKey` varchar(50) 
+
+)
 BEGIN
 
 	declare newKey varchar(50);
@@ -408,20 +523,50 @@ BEGIN
 		pDesk_users.ID as userID,
 		pDesk_users.fullname,
         pDesk_tickets.isDeleted,
-        pDesk_tickets.assignUserID as assignUserID,
-        assigned.fullname as assignedFullName,
-        date_format(pDesk_tickets.deletedDate, '%d.%m.%Y %H:%i') as deletedDate,
-        pDesk_tickets.ticketType,
-        pDesk_ticketTypes.name as ticketTypeName,
+      -- assigned.ID as assignUserID,
+      -- assigned.fullname as assignedFullName,
+      date_format(pDesk_tickets.deletedDate, '%d.%m.%Y %H:%i') as deletedDate,
+      pDesk_tickets.ticketType,
+      pDesk_ticketTypes.name as ticketTypeName,
 		pDesk_tickets.ticketModule,
-		pDesk_ticketModules.name as ticketModuleName
+		pDesk_ticketModules.name as ticketModuleName,
+		
+		(
+			(case when
+					(SELECT COUNT(*) FROM pDesk_tickets pTickets WHERE pTickets.parentId = pDesk_tickets.ID AND pTickets.isDeleted = 0 ) > 0 then
+						(
+							SELECT pTicketsLast.assignUserID FROM pDesk_tickets pTicketsLast 
+							left join pDesk_users pTicketsLastAssigned on pTicketsLast.assignUserID = pTicketsLastAssigned.ID
+							WHERE pTicketsLast.parentId = pDesk_tickets.ID AND pTicketsLast.isDeleted = 0
+							ORDER BY pTicketsLast.ID DESC LIMIT 1
+						)
+					else
+					pDesk_tickets.assignUserID
+			 end)
+		
+		) AS assignUserID,
+		
+		(
+			(case when
+					(SELECT COUNT(*) FROM pDesk_tickets pTickets WHERE pTickets.parentId = pDesk_tickets.ID AND pTickets.isDeleted = 0 ) > 0 then
+						(
+							SELECT pTicketsLastAssigned.fullname FROM pDesk_tickets pTicketsLast 
+							left join pDesk_users pTicketsLastAssigned on pTicketsLast.assignUserID = pTicketsLastAssigned.ID
+							WHERE pTicketsLast.parentId = pDesk_tickets.ID AND pTicketsLast.isDeleted = 0
+							ORDER BY pTicketsLast.ID DESC LIMIT 1
+						)
+					else
+					assigned.fullname
+			 end)
+		
+		) AS assignedFullName
 	FROM 
 		pDesk_tickets
 		left join pDesk_organization on pDesk_tickets.organizationID = pDesk_organization.ID
 		left join pDesk_ticketStatus on pDesk_tickets.status = pDesk_ticketStatus.ID
 		left join pDesk_users on pDesk_tickets.createdBy = pDesk_users.ID
-        left join pDesk_users assigned on pDesk_tickets.assignUserID = assigned.ID
-        left join pDesk_ticketTypes on pDesk_tickets.ticketType = pDesk_ticketTypes.ID
+      left join pDesk_users assigned on pDesk_tickets.assignUserID = assigned.ID
+      left join pDesk_ticketTypes on pDesk_tickets.ticketType = pDesk_ticketTypes.ID
 		left join pDesk_ticketModules on pDesk_tickets.ticketModule = pDesk_ticketModules.ID
 
 	where
@@ -614,6 +759,7 @@ DROP PROCEDURE IF EXISTS `prcRptTicketTypes`;
 DELIMITER //
 CREATE DEFINER=`root`@`localhost` PROCEDURE `prcRptTicketTypes`(
 	IN `prmOrganizationID` int
+
 )
 BEGIN
 
@@ -626,7 +772,7 @@ BEGIN
 	where
 		ifnull(pdesk_tickets.isDeleted, 0) = 0
 		and ifnull(pdesk_tickets.parentId, 0) = 0
-		and (pdesk_tickets.organizationID = 0 or 0 = 0)
+		and (pdesk_tickets.organizationID = prmOrganizationID or prmOrganizationID = 0)
 	group by
 		pdesk_tickets.ticketType
 	order by
