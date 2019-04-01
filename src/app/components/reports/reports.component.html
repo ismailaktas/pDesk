@@ -12,8 +12,15 @@
           <div class="text-center">
             <div>
               <div style="display: block">
-                <canvas baseChart [data]="ticketStatusData" [labels]="ticketStatusLabel" [chartType]="pieChartType"
-                  [options]="pieChartOptions" [legend]="pieChartLegend"></canvas>
+                <canvas baseChart 
+                  [data]="ticketStatusData" 
+                  [labels]="ticketStatusLabel" 
+                  [chartType]="pieChartType"
+                  [options]="pieChartOptions" 
+                  [legend]="pieChartLegend"
+                  [colors]="chartColors"
+                  >
+                </canvas>
               </div>
             </div>
           </div>
@@ -33,7 +40,7 @@
             <div>
               <div style="display: block">
                 <canvas baseChart [data]="typesData" [labels]="typesLabel" [chartType]="pieChartType"
-                  [options]="pieChartOptions" [legend]="pieChartLegend"></canvas>
+                  [options]="pieChartOptions" [legend]="pieChartLegend" [colors]="chartColors"></canvas>
               </div>
             </div>
           </div>
@@ -52,7 +59,7 @@
             <div>
               <div style="display: block">
                 <canvas baseChart [data]="moduleErrorsData" [labels]="moduleErrosLabel" [chartType]="pieChartType"
-                  [options]="pieChartOptions" [legend]="pieChartLegend"></canvas>
+                  [options]="pieChartOptions" [legend]="pieChartLegend" [colors]="chartColors"></canvas>
               </div>
             </div>
           </div>
@@ -71,7 +78,7 @@
             <div>
               <div style="display: block">
                 <canvas baseChart [data]="assignedUserData" [labels]="assignedUserLabel" [chartType]="pieChartType"
-                  [options]="pieChartOptions" [legend]="pieChartLegend"></canvas>
+                  [options]="pieChartOptions" [legend]="pieChartLegend" [colors]="chartColors"></canvas>
               </div>
             </div>
           </div>

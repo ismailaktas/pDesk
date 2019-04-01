@@ -10,6 +10,10 @@
     float: left;
 }
 
+.stat-text{
+    font-size: 14px;
+}
+
 .organizationName {
     line-height: 40px;
     font-weight: bold;

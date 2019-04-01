@@ -13,6 +13,10 @@ import { GlobalService } from 'src/app/services/global.service';
 })
 export class ReportsComponent implements OnInit {
 
+  public chartColors:any[] = [
+    { backgroundColor: ["#86c7f3", "#ffe199"] },
+    { borderColor: ["#AEEBF2", "#FEFFC9"] }];
+
   constructor(
     private globalService:GlobalService, 
   ) { 
