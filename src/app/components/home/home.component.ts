@@ -6,7 +6,6 @@ import { GlobalService } from 'src/app/services/global.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
   providers: [
-    GlobalService
   ]  
 })
 export class HomeComponent implements OnInit {

@@ -69,7 +69,7 @@ switch($strMethod) {
         if ($_POST["parentTicketID"] != 0) {
             $ticketsStatus = new pDesk_tickets( $_POST["parentTicketID"] );
             $ticketsStatus->status = $_POST["ticketStatus"];
-            $strID = $ticketsStatus->save();
+            $strIDParent = $ticketsStatus->save();
         }
 
         //Upload

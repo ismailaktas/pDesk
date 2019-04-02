@@ -5,15 +5,12 @@ import { GlobalService } from 'src/app/services/global.service';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { userInfo } from 'src/app/classes/userInfo';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-ticket-detail',
   templateUrl: './ticket-detail.component.html',
   styleUrls: ['./ticket-detail.component.css'],
   providers: [
-    GlobalService,
     BsModalService
   ]
 })
@@ -98,6 +95,15 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
 
   handleFileInput(files: FileList) {
     this.fileToUpload = files.item(0);
+    /*
+    console.log(this.fileToUpload);
+    const fd = new FormData();
+    fd.append("method", "ticketUpload");
+    fd.append("uploadFile", this.fileToUpload, this.fileToUpload.name);
+    this.globalService.sendData('pDesk_tickets', fd).subscribe((res)=>{
+      console.log(res);
+    });    
+    */
   }
 
   replyTicket() {

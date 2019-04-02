@@ -8,7 +8,6 @@ import { GlobalService } from 'src/app/services/global.service';
   templateUrl: './reports.component.html',
   styleUrls: ['./reports.component.css'],
   providers: [
-    GlobalService,   
   ]  
 })
 export class ReportsComponent implements OnInit {

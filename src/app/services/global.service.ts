@@ -4,12 +4,10 @@ import { Injectable, OnDestroy } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ToastrService } from "ngx-toastr";
 import { MessageType } from "../classes/messageType.enum";
-import { userInfo } from "../classes/userInfo";
 import { ActivatedRoute } from "@angular/router";
 
-@Injectable({
-  providedIn: "root"
-})
+@Injectable()
+
 export class GlobalService {
   public apiUrl: string = this.constsService.appSettings.appApiUrl;
   public getActivePageName: string = "";

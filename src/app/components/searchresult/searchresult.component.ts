@@ -7,7 +7,6 @@ import { GlobalService } from 'src/app/services/global.service';
   templateUrl: './searchresult.component.html',
   styleUrls: ['./searchresult.component.css'],
   providers: [
-    GlobalService
   ]    
 })
 export class SearchresultComponent implements OnInit {

@@ -30,7 +30,6 @@ interface IselectedOrganization {
   templateUrl: './definition.component.html',
   styleUrls: ['./definition.component.css'],
   providers: [
-    GlobalService,
     BsModalService
   ]  
 })

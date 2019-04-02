@@ -11,7 +11,6 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   templateUrl: './ticket-edit.component.html',
   styleUrls: ['./ticket-edit.component.css'],
   providers: [
-    GlobalService,
     BsModalService
   ]  
 })
@@ -46,7 +45,6 @@ export class TicketEditComponent implements OnInit, AfterViewInit {
   constructor(
     private activeRoute:ActivatedRoute, 
     private globalService:GlobalService, 
-    private http: HttpClient,
     private modalService: BsModalService
 ) {
 }
@@ -119,13 +117,11 @@ onFileSelected(event) {
 }
 
 onUpload() {
-
   const fd = new FormData();
   fd.append("method", "ticketUpload");
   fd.append("uploadFile", this.selectedFile, this.selectedFile.name);
-
-  this.http.post('http://localhost/pDesk/src/app/controllers/pDesk_tickets.php', fd).subscribe( res=> {
-    console.log( res );
+  this.globalService.sendData('pDesk_tickets', fd).subscribe((res)=>{
+    console.log(res);
   });
 }
 
