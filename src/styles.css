@@ -10,6 +10,11 @@
     float: left;
 }
 
+.cardbodyHeight500 {
+  max-height: 500px;
+  overflow-y: auto;  
+}
+
 .nav-link{
     cursor: pointer;
 }

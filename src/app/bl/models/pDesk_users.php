@@ -64,7 +64,7 @@ class pDesk_users extends TableItem {
     
     function getAllOrganizations()
     {
-        return $this->executenonquery("select ID, name from pdesk_organization order by name ", true );
+        return $this->executenonquery("select ID, name from pDesk_organization order by name ", true );
     }      
 
     

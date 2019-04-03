@@ -7,7 +7,7 @@ use \mysqli;
 
 @session_start();
 
-require_once dirname(dirname(__FILE__)) . "/BL/Consts/consts.php";
+require_once dirname(dirname(__FILE__)) . "/bl/consts/consts.php";
 
 class DAL
 {
