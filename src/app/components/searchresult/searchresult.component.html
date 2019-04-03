@@ -25,7 +25,7 @@
               </thead>
               <tbody>
                 <tr *ngFor="let ticket of tickets">
-                  <td> <a href="ticketDetail/{{ticket.ID}}">#{{ticket.ID}}</a> </td>
+                  <td> <a routerLink="/ticketDetail/{{ticket.ID}}" routerLinkActive="active">#{{ticket.ID}}</a> </td>
                   <td> <span class="name">{{ticket.assignedFullName}}</span> </td>
                   <td> <span class="product" [innerHTML]="ticket.subject"></span> </td>
                   <td> <span class="name">{{ticket.ticketTypeName}}</span> </td>

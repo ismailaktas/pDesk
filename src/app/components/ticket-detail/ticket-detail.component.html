@@ -33,7 +33,8 @@
               <button *ngIf="ticketDetail.userID == loggedUser.ID || loggedUser.userType == 1" type="button" class="btn btn-dangerNew smallButton"
                 (click)="openModal(template, ticketDetail.ID, ticketDetail.parentId )">Sil</button>
               <button *ngIf="ticketDetail.userID == loggedUser.ID || loggedUser.userType == 1" type="button" class="btn btn-warning smallButton"
-                (click)="globalService.redirectPage('ticketEdit/' + ticketDetail.ID)">Düzenle</button>
+                routerLink="/ticketEdit/{{ticketDetail.ID}}" routerLinkActive="active"
+                >Düzenle</button>
             </div>
           </div>
         </div>
