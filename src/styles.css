@@ -5,6 +5,29 @@
     min-height: 550px !important;
 }
 
+.popover-header {
+    padding: .5rem .75rem;
+    margin-bottom: 0;
+    font-size: 13px;
+    background-color: #233e5a !important;
+    border-bottom: 1px solid #868686;
+    border-top-left-radius: calc(.3rem - 1px);
+    border-top-right-radius: calc(.3rem - 1px);
+    color: #fff;
+}
+
+.customPopOver{
+    background-color: #f1fff1 !important;
+    max-width: 500px !important;
+    border: 1px solid #9a9ba0;
+    font-size: 13px;
+}
+
+.subject{
+    color: #407898;
+    cursor: pointer;
+}
+
 .right-panel .top-left {
     width: 150px !important;
     float: left;
