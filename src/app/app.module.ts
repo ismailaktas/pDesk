@@ -27,6 +27,7 @@ import { ReportsComponent } from './components/reports/reports.component';
 import { ChartsModule } from 'ng2-charts';
 import { SearchresultComponent } from './components/searchresult/searchresult.component';
 import { GlobalService } from './services/global.service';
+import { SearchFilterPipe } from './pipes/searchFilter.pipe';
 
 @NgModule({
    declarations: [
@@ -44,7 +45,8 @@ import { GlobalService } from './services/global.service';
       TicketEditComponent,
       DefinitionComponent,
       ReportsComponent,
-      SearchresultComponent
+      SearchresultComponent,
+      SearchFilterPipe
    ],
    imports: [
       BrowserModule,

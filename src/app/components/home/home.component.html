@@ -119,12 +119,13 @@
     <div class="col-xl-12">
       <div class="card">
         <div class="card-body">
-          <span class="col-xl-10">Talepler</span>
+          <span class="col-xl-5">Talepler</span>
           <span class="col-xl-1"> <button type="button" class="btn btn-primary smallButton" (click)="newTicket()">Yeni Talep <i class="fa fa-plus"></i> </button> </span>
+          <span class="col-xl-5"><input [(ngModel)]="searchText" placeholder="Ara..." class="searchInput"></span>
         </div>
         <div class="card-body--">
           <div class="table-stats order-table ov-h">
-            <table class="table ">
+            <table class="table" id="tblTickets">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -138,7 +139,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let ticket of tickets">
+                <tr *ngFor="let ticket of tickets | searchFilter: {ID: searchText, subject: searchText, assignedFullName: searchText, ticketTypeName: searchText, ticketModuleName: searchText, fullname: searchText, ticketDate: searchText}; ">
                   <td> <a routerLink="/ticketDetail/{{ticket.ID}}" routerLinkActive="active">#{{ticket.ID}}</a> </td>
                   <td> <span class="name">{{ticket.assignedFullName}}</span> </td>
                   <td> <span class="product">{{ticket.subject}}</span> </td>

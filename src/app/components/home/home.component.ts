@@ -18,6 +18,7 @@ export class HomeComponent implements OnInit {
   sCompleted:any;
   sClosed:any;
   sError:any;
+  public searchText : string;
 
   constructor(
     private globalService:GlobalService, 
@@ -34,7 +35,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
   }
-
+ 
   getCounts() {
     //yeni
     this.globalService.getData("pDesk_tickets.php?method=getTicketCounts&status=1&type=0&oID="+this.loggedUser.organizationID).then( 
