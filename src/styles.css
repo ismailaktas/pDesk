@@ -5,6 +5,15 @@
     min-height: 550px !important;
 }
 
+.bs-popover-auto[x-placement^=right]>.arrow::after, .bs-popover-right>.arrow::after {
+    left: 9px;
+    top: 16px;
+    border-width: .5rem .5rem .5rem 0;
+    border-right-color: rgb(241, 255, 241);
+    width: 1px;
+    height: 1px;
+}
+
 .popover-header {
     padding: .5rem .75rem;
     margin-bottom: 0;
