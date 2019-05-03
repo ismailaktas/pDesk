@@ -5,6 +5,13 @@
     min-height: 550px !important;
 }
 
+.filterIcon {
+    font-size: 15px !important;
+    display: initial !important;
+    color: #99a4ad !important; 
+    cursor: pointer;  
+}
+
 .bs-popover-auto[x-placement^=right]>.arrow::after, .bs-popover-right>.arrow::after {
     left: 9px;
     top: 16px;

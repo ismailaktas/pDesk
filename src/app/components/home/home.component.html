@@ -11,7 +11,10 @@
           <div class="stat-content">
             <div class="text-left dib">
               <div class="stat-text text-danger"><span class="count">{{sContinue}}</span></div>
-              <div class="stat-text">Devam Ediyor</div>
+              <div class="stat-text">
+                Devam Ediyor
+                <i class="menu-icon fa fa-filter filterIcon" (click)="filterData(2)" ngbPopover="Filtrelemek için tıklayınız" triggers="mouseenter:mouseleave" ></i>
+              </div>
             </div>
           </div>
         </div>
@@ -29,7 +32,9 @@
           <div class="stat-content">
             <div class="text-left dib">
               <div class="stat-text text-primary"><span class="count">{{sNew}}</span></div>
-              <div class="stat-text">Yeni</div>
+              <div class="stat-text">Yeni
+                  <i class="menu-icon fa fa-filter filterIcon" (click)="filterData(1)" ngbPopover="Filtrelemek için tıklayınız" triggers="mouseenter:mouseleave" ></i>
+              </div>
             </div>
           </div>
         </div>
@@ -41,13 +46,35 @@
     <div class="card">
       <div class="card-body">
         <div class="stat-widget-four">
+          <div class="stat-icon dib text-secondary">
+            <i class="menu-icon fa fa-minus-square-o"></i>
+          </div>
+          <div class="stat-content">
+            <div class="text-left dib">
+              <div class="stat-text text-secondary"><span class="count">{{sTesting}}</span></div>
+              <div class="stat-text">Test Ediliyor
+                  <i class="menu-icon fa fa-filter filterIcon" (click)="filterData(6)" ngbPopover="Filtrelemek için tıklayınız" triggers="mouseenter:mouseleave" ></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>   
+
+  <div class="col-lg-2 col-md-6">
+    <div class="card">
+      <div class="card-body">
+        <div class="stat-widget-four">
           <div class="stat-icon dib text-warning">
             <i class="menu-icon fa fa-spinner"></i>
           </div>
           <div class="stat-content">
             <div class="text-left dib">
               <div class="stat-text text-warning"><span class="count">{{sWait}}</span></div>
-              <div class="stat-text">Beklemede</div>
+              <div class="stat-text">Beklemede
+                  <i class="menu-icon fa fa-filter filterIcon" (click)="filterData(5)" ngbPopover="Filtrelemek için tıklayınız" triggers="mouseenter:mouseleave" ></i>
+              </div>
             </div>
           </div>
         </div>
@@ -65,25 +92,9 @@
             <div class="stat-content">
               <div class="text-left dib">
                 <div class="stat-text text-success"><span class="count">{{sCompleted}}</span></div>
-                <div class="stat-text">Tamamlandı</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> 
-    
-    <div class="col-lg-2 col-md-6">
-      <div class="card">
-        <div class="card-body">
-          <div class="stat-widget-four">
-            <div class="stat-icon dib text-secondary">
-              <i class="menu-icon fa fa-minus-square-o"></i>
-            </div>
-            <div class="stat-content">
-              <div class="text-left dib">
-                <div class="stat-text text-secondary"><span class="count">{{sClosed}}</span></div>
-                <div class="stat-text">Kapandı</div>
+                <div class="stat-text">Tamamlandı
+                    <i class="menu-icon fa fa-filter filterIcon" (click)="filterData(3)" ngbPopover="Filtrelemek için tıklayınız" triggers="mouseenter:mouseleave" ></i>
+                </div>
               </div>
             </div>
           </div>
@@ -101,7 +112,9 @@
             <div class="stat-content">
               <div class="text-left dib">
                 <div class="stat-text text-info"><span class="count">{{sError}}</span></div>
-                <div class="stat-text">Hata</div>
+                <div class="stat-text">Hata
+                    <i class="menu-icon fa fa-filter filterIcon" (click)="filterDataType(3)" ngbPopover="Filtrelemek için tıklayınız" triggers="mouseenter:mouseleave" ></i>
+                </div>
               </div>
             </div>
           </div>
@@ -132,6 +145,7 @@
                   <th>Atanan</th>
                   <th>Başlık</th>
                   <th>Tür</th>
+                  <th>Organizasyon</th>
                   <th>Modül</th>
                   <th>Oluşturan</th>
                   <th>Oluşturma Tarihi</th>
@@ -139,7 +153,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let ticket of tickets | searchFilter: {ID: searchText, subject: searchText, assignedFullName: searchText, ticketTypeName: searchText, ticketModuleName: searchText, fullname: searchText, ticketDate: searchText}; ">
+                <tr *ngFor="let ticket of tickets | searchFilter: {ID: searchText, statusName: searchText, subject: searchText, assignedFullName: searchText, organizationName: searchText, ticketTypeName: searchText, ticketModuleName: searchText, fullname: searchText, ticketDate: searchText}; ">
                   <td> <a routerLink="/ticketDetail/{{ticket.ID}}" routerLinkActive="active">#{{ticket.ID}}</a> </td>
                   <td> <span class="name">{{ticket.assignedFullName}}</span> </td>
                   <td> 
@@ -149,6 +163,7 @@
                       </ng-template> 
                   </td>
                   <td> <span class="name">{{ticket.ticketTypeName}}</span> </td>
+                  <td> <span class="name">{{ticket.organizationName}}</span> </td>
                   <td> <span class="name">{{ticket.ticketModuleName}}</span> </td>
                   <td> <span class="name">{{ticket.fullname}}</span> </td>
                   <td> <span class="name">{{ticket.ticketDate}}</span> </td>                  
@@ -165,6 +180,10 @@
       </div> <!-- /.card -->
     </div> <!-- /.col-lg-8 -->
 
+
+
   </div>
 </div>
 <!-- /.orders -->
+
+
