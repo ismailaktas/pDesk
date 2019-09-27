@@ -58,6 +58,7 @@ switch($strMethod) {
         $tickets->description = $_POST["ticketResponse"];
         $tickets->subject = $_POST["ticketResponseSubject"];
         $tickets->status = $_POST["ticketStatus"];    
+        $tickets->ticketPriority = $_POST["ticketPriority"];    
         $tickets->organizationID = $_POST["oID"];  
         $tickets->createdBy = $_POST["uID"];  
         $tickets->assignUserID = $_POST["ticketAssign"]; 

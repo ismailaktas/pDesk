@@ -22,6 +22,7 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
   ticketSaveResult:string;
   ticketStats:any;
   ticketStatus: string = "1";
+  ticketPriority: string = "5";
   ticketTypes:any;
   ticketType:any = "1";
   ticketDetails:any;
@@ -130,6 +131,7 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
     fd.append("ticketResponseSubject", this.ticketResponseSubject);
     fd.append("ticketResponse", this.ticketResponse);
     fd.append("ticketStatus", this.ticketStatus);
+    fd.append("ticketPriority", this.ticketPriority);
     fd.append("ticketAssign", this.ticketAssign);
     fd.append("ticketType", this.ticketType);
     fd.append("ticketModule", this.ticketModule);    

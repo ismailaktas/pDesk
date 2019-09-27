@@ -18,6 +18,8 @@ class pDesk_tickets extends TableItem {
     public $deletedDate;
     public $ticketType;
     public $ticketModule;
+    public $ticketPriority;
+    public $ticketCost;
         
     // Counctructor
     function __construct($ID = NULL) {

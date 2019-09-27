@@ -115,6 +115,24 @@
 
           <div class="col-lg-12 ticketContent">
             <div class="row form-group">
+              <div class="col-12 col-md-1 marginTop15"><label for="select" class=" form-control-label">Öncelik</label>
+              </div>
+              <div class="col-12 col-md-4">
+                <mat-form-field>
+                  <mat-select [(ngModel)]="ticketPriority" name="ticketPriority" aria-required="true">
+                    <mat-option [value]="1">1</mat-option>
+                    <mat-option [value]="2">2</mat-option>
+                    <mat-option [value]="3">3</mat-option>
+                    <mat-option [value]="4">4</mat-option>
+                    <mat-option [value]="5">5</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>          
+
+          <div class="col-lg-12 ticketContent">
+            <div class="row form-group">
               <div class="col-12 col-md-1 marginTop15"><label for="select" class=" form-control-label">Atanan</label>
               </div>
               <div class="col-12 col-md-4">
