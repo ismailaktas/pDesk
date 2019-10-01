@@ -88,6 +88,32 @@
 
           <div class="col-lg-12 ticketContent">
             <div class="row form-group">
+              <div class="col-12 col-md-1 marginTop15"><label for="select" class=" form-control-label">Öncelik</label>
+              </div>
+              <div class="col-12 col-md-4">
+                <mat-form-field>
+                  <mat-select [(ngModel)]="ticketPriority" name="ticketPriority" aria-required="true">
+                    <mat-option [value]="1">1</mat-option>
+                    <mat-option [value]="2">2</mat-option>
+                    <mat-option [value]="3">3</mat-option>
+                    <mat-option [value]="4">4</mat-option>
+                    <mat-option [value]="5">5</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>       
+          
+          <div class="col-lg-12 ticketContent" *ngIf="loggedUser.userType == 1">
+            <div class="row form-group">
+              <div class="col-12 col-md-1"><label class=" form-control-label">Efor</label></div>
+              <div class="col-12 col-md-1"><input type="text" name="txtTicketCost" class="form-control" [(ngModel)]="ticketCost"></div>
+              <div class="col-12 col-md-2"><label class=" form-control-label" style="margin-left: -25px; margin-top: 10px;">Adam/Saat</label></div>
+            </div>
+          </div>          
+
+          <div class="col-lg-12 ticketContent">
+            <div class="row form-group">
               <div class="col-12 col-md-1"><label class="form-control-label">Doküman</label></div>
               <div class="col-12 col-md-6">
                   <div class="col-md-6 form-group">

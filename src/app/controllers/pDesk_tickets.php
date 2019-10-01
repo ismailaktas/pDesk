@@ -41,7 +41,10 @@ switch($strMethod) {
     case "getTickets":
         $userID  = $_GET['uID'];
         $organizationID = $_GET['oID'];
-        $result = $tickets->getTickets($organizationID, $userID);
+        $ticketStatus = $_GET['ticketStatus'];
+        $ticketType = $_GET['ticketType'];
+        
+        $result = $tickets->getTickets($organizationID, $userID, $ticketStatus, $ticketType);
         $result = $tickets->toJson;
         echo $result;
         break;  
@@ -58,12 +61,13 @@ switch($strMethod) {
         $tickets->description = $_POST["ticketResponse"];
         $tickets->subject = $_POST["ticketResponseSubject"];
         $tickets->status = $_POST["ticketStatus"];    
-        $tickets->ticketPriority = $_POST["ticketPriority"];    
         $tickets->organizationID = $_POST["oID"];  
         $tickets->createdBy = $_POST["uID"];  
         $tickets->assignUserID = $_POST["ticketAssign"]; 
         $tickets->ticketType = $_POST["ticketType"]; 
         $tickets->ticketModule = $_POST["ticketModule"]; 
+        $tickets->ticketPriority = $_POST["ticketPriority"]; 
+        $tickets->ticketCost = $_POST["ticketCost"]; 
         $tickets->createdDate = globalFunctions::convertStringtoDate(globalFunctions::getDateOrTime("dateTime"), "dateTime");
         $strID = $tickets->save();
 

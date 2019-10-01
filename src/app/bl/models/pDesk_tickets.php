@@ -37,9 +37,9 @@ class pDesk_tickets extends TableItem {
         }
     }
 
-    function getTickets($prmOrganizationID, $prmUserID)
+    function getTickets($prmOrganizationID, $prmUserID, $prmTicketStatus, $prmTicketType)
     {
-        return $this->executenonquery("call prcGetTickets($prmOrganizationID, $prmUserID);", true );
+        return $this->executenonquery("call prcGetTickets($prmOrganizationID, $prmUserID, $prmTicketStatus, $prmTicketType);", true );
     }    
 
     function getTicketsSearch($prmOrganizationID, $prmUserID, $prmKey)

@@ -39,6 +39,8 @@ export class TicketEditComponent implements OnInit, AfterViewInit {
   loggedUser:any;
   ticketModules:any
   ticketModule:any = "1";
+  ticketPriority:any;
+  ticketCost:any;
   isAuth:boolean = false;
   ticketParentID:any;
 
@@ -91,7 +93,12 @@ getTicketDetails(){
         this.ticketParentId = res[0].parentId;
         this.ticketType = res[0].ticketType;
         this.ticketModule = res[0].ticketModule;
-
+        if (res[0].ticketPriority != null) {
+          this.ticketPriority = parseInt(res[0].ticketPriority);
+        }
+        if (res[0].ticketCost != null) {
+          this.ticketCost = parseInt(res[0].ticketCost);
+        }        
         if( this.loggedUser.ID == res[0].ticketModule.userID ) {
           this.isAuth = true;
         }
@@ -137,7 +144,6 @@ replyTicket() {
     return false;
   }
 
-
   if (this.ticketParentId>0) {
     this.ticketModule = 0;
     this.ticketType = 0;
@@ -155,6 +161,9 @@ replyTicket() {
   fd.append("ticketAssign", this.ticketAssign);
   fd.append("ticketType", this.ticketType);
   fd.append("ticketModule", this.ticketModule);
+  fd.append("ticketPriority", this.ticketPriority);
+  fd.append("ticketCost", this.ticketCost);
+  
   if (this.selectedFile != null) {
     fd.append("ticketFile", this.selectedFile, this.selectedFile.name);
   }
