@@ -139,7 +139,9 @@ export class TicketDetailComponent implements OnInit, AfterViewInit {
     fd.append("ticketModule", this.ticketModule);    
     fd.append("ticketFile", this.fileToUpload);
     this.globalService.sendData('pDesk_tickets', fd).subscribe((res)=>{
-      this.ticketID = res;
+      if (this.ticketID == 0) {
+        this.ticketID = res;
+      }
       this.getTicketDetails();
       this.globalService.showMessage("İşlem başarıyla gerçekleşti", MessageType.info);
     });    

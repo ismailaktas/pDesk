@@ -27,7 +27,7 @@
           </div>
           <div class="col-lg-12 ticketDetailSubTitle">
             <div *ngIf="ticketDetail.isDeleted==0">
-              <span>Tarih: {{ticketDetail.ticketDate}} - Oluşturan: {{ticketDetail.fullname}} - Atanan: {{ticketDetail.assignedFullName}} - Tür: {{ticketDetail.ticketTypeName}} - Modül: {{ticketDetail.ticketModuleName}}</span> -
+              <span>Tarih: {{ticketDetail.ticketDate}} - Oluşturan: {{ticketDetail.fullname}} - Atanan: {{ticketDetail.assignedFullName}} - Tür: {{ticketDetail.ticketTypeName}} - Öncelik: {{ticketDetail.ticketPriority}} - Modül: {{ticketDetail.ticketModuleName}}</span> -
               <span id="{{ticketDetail.parentId == 0 ? 'dvStat' : ticketDetail.ID}}">Durum:
                 {{ticketDetail.statusName}}</span>
               <button *ngIf="ticketDetail.userID == loggedUser.ID || loggedUser.userType == 1" type="button" class="btn btn-dangerNew smallButton"
