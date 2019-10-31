@@ -24,7 +24,7 @@
 .popover-header {
     padding: .5rem .75rem;
     margin-bottom: 0;
-    font-size: 13px;
+    font-size: 11px;
     background-color: #233e5a !important;
     border-bottom: 1px solid #868686;
     border-top-left-radius: calc(.3rem - 1px);
@@ -36,7 +36,7 @@
     background-color: #f1fff1 !important;
     max-width: 500px !important;
     border: 1px solid #9a9ba0;
-    font-size: 13px;
+    font-size: 11px;
 }
 
 .subject{
@@ -63,7 +63,7 @@
 }
 
 .stat-text{
-    font-size: 14px;
+    font-size: 11px;
 }
 
 .organizationName {
@@ -76,7 +76,7 @@
     color: #269a1a;    
 }
 .ticketContent{
-    font-size: 13px;
+    font-size: 11px;
     color: #505056;
     margin-bottom: 10px;
     margin-top: 10px;    
@@ -96,9 +96,9 @@
     padding-left: 0px;    
 }
 .ticketDetailSubTitle{
-    font-style: italic;
-    font-size: 10px;
-    color: #afb4c3;
+    /*font-style: italic;*/
+    font-size: 9px;
+    color: #c2c9dc;;
 }
 
 .ngx-editor-textarea{
@@ -139,7 +139,7 @@
 
 .smallButton{
     padding-left: 5px;
-    font-size: 10px;
+    font-size: 9px;
     line-height: 1.5;
     border-radius: .2rem;
     margin-left: 10px;
@@ -150,7 +150,7 @@
 
 .mediumButton {
     padding-left: 10px;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1.5;
     border-radius: .2rem;
     padding-right: 10px;
@@ -162,6 +162,14 @@
     color: #fff;
     background-color: #d67e87;
     border-color: #d67e87;
+}
+
+.btn-danger {
+    font-size: 12px;
+}
+
+.btn-success {
+    font-size: 12px;
 }
 
 .right-panel{
@@ -189,18 +197,18 @@
 }
 
 .table-stats table td {
-    font-size: 12px !important;
+    font-size: 10px !important;
 }
 
 .table-stats table th .name, .table-stats table td .name {
-    font-size: 12px !important;
+    font-size: 10px !important;
     text-transform: none !important;
 }
 
 footer.site-footer .footer-inner {
     color: #518198;
     font-family: 'Open Sans';
-    font-size: 14px;
+    font-size: 11px;
     line-height: 1.5;
     padding: 10px !important;
 }
@@ -224,4 +232,17 @@ footer.site-footer .footer-inner {
     min-width: 150px;
     -webkit-box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
     box-shadow: 0 3px 12px rgba(0, 0, 0, 0.05);
+}
+
+.table-stats table th, .table-stats table td {
+    font-size: 10px !important;
+    text-transform: none !important;
+}
+
+.card-header{
+    font-size: 14px !important;
+}
+
+.input11px{
+    font-size: 11px !important;
 }
