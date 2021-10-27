@@ -9,7 +9,7 @@ constructor() { }
 
 appSettings = {
   appTitle: 'PDESK',
-  appApiUrl: 'http://support.eglencefabrikasi.com/controllers/',
+  appApiUrl: 'http://support.com/controllers/',
   appLoginCheckTime:  120000,
   uploadFolder: 'uploads',
 };
